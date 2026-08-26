@@ -52,7 +52,7 @@ export function FounderCard() {
         <div>
           <div className="relative overflow-hidden rounded-(--tm-radius-lg)">
             <Image
-              src="/founder/chris.webp"
+              src="/founder/chris-founder-2026.webp"
               alt="Chris Momchilov, founder of Teamulate"
               width={800}
               height={1000}
