@@ -48,5 +48,17 @@ export const contactSchema = z.object({
   message: z.string().trim().min(1, "Message is required.").max(5000),
 });
 
+/**
+ * Newsletter interest capture. Honest by design: no list is live yet, the
+ * form says so, and no email is sent until a lifecycle process exists
+ * (spec §19.1). Submissions are stored in the outbox only.
+ */
+export const newsletterSchema = z.object({
+  email: z.string().trim().toLowerCase().email("Enter a valid email."),
+  idempotencyKey: z.string().uuid("Invalid submission key."),
+  website_url_confirm: z.string().max(0).optional().or(z.literal("")),
+});
+
 export type DemoRequestInput = z.infer<typeof demoRequestSchema>;
 export type ContactInput = z.infer<typeof contactSchema>;
+export type NewsletterInput = z.infer<typeof newsletterSchema>;

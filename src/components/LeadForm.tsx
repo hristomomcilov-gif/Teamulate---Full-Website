@@ -212,7 +212,7 @@ export function LeadForm({ variant }: { variant: Variant }) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="min-h-11 w-full rounded-(--tm-radius-sm) bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-[#2f5ad0] disabled:opacity-60 sm:w-auto"
+        className="min-h-11 w-full rounded-full bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-[#4a38d8] disabled:opacity-60 sm:w-auto"
       >
         {status === "submitting" ? "Submitting…" : variant === "demo-request" ? "Request demonstration" : "Submit inquiry"}
       </button>

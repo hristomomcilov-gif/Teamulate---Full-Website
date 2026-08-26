@@ -93,9 +93,9 @@ export function ButtonLink({
   className?: string;
 }) {
   const base =
-    "inline-flex min-h-11 items-center justify-center rounded-(--tm-radius-sm) px-5 py-2.5 text-sm font-semibold transition-colors duration-200";
+    "inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200";
   const variants = {
-    primary: "bg-brand text-white hover:bg-[#2f5ad0]",
+    primary: "bg-brand text-white hover:bg-[#4a38d8]",
     secondary: "border border-line bg-surface text-ink hover:border-brand hover:text-brand",
     ghost: "text-brand hover:underline",
   } as const;

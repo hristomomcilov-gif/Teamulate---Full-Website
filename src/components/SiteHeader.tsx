@@ -47,8 +47,11 @@ export function SiteHeader() {
         Skip to main content
       </a>
       <nav ref={navRef} aria-label="Main" className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between gap-4 px-5 sm:px-8">
-        <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-ink" onClick={() => navClick("logo")}>
-          <span aria-hidden className="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-brand to-brand-purple" />
+        <Link
+          href="/"
+          className="text-xl font-extrabold uppercase tracking-[0.18em] text-brand"
+          onClick={() => navClick("logo")}
+        >
           Teamulate
         </Link>
 
@@ -111,20 +114,16 @@ export function SiteHeader() {
           </CtaLink>
         </div>
 
-        {/* Mobile: one menu button, clear Login, one CTA (spec §8.2) */}
+        {/* Mobile: one menu button; Login and the primary CTA live inside the drawer (spec §8.2) */}
         <div className="flex items-center gap-2 lg:hidden">
-          <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="px-3 text-xs">
-            See the team
-          </CtaLink>
           <button
             type="button"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-11 w-11 items-center justify-center rounded-md border border-line text-ink"
+            className="flex min-h-11 items-center justify-center rounded-full border border-line bg-surface px-4 text-sm font-semibold text-ink shadow-sm"
           >
-            <span aria-hidden>{mobileOpen ? "✕" : "☰"}</span>
+            {mobileOpen ? "Close" : "Menu"}
           </button>
         </div>
       </nav>
@@ -148,10 +147,13 @@ export function SiteHeader() {
                 ))}
               </div>
             ))}
-            <div className="border-t border-line pt-3">
+            <div className="space-y-2 border-t border-line pt-3">
               <Link href="/login/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
               </Link>
+              <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="w-full">
+                See the team in action
+              </CtaLink>
             </div>
           </div>
         </div>

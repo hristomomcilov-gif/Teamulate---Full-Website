@@ -490,7 +490,7 @@ export function DemoDashboard() {
         <Link
           href="/request-demo/"
           onClick={() => interact("demo-footer-cta")}
-          className="inline-flex min-h-11 items-center justify-center rounded-(--tm-radius-sm) bg-brand px-5 text-sm font-semibold text-white hover:bg-[#2f5ad0]"
+          className="inline-flex min-h-11 items-center justify-center rounded-full bg-brand px-5 text-sm font-semibold text-white hover:bg-[#4a38d8]"
         >
           Request live demonstration
         </Link>

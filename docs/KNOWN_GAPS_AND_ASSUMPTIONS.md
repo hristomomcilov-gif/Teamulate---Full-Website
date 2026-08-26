@@ -13,6 +13,16 @@ Marked per spec §1.3 — assumptions never silently become facts.
 | A5 | English (Canada/US) public copy, no locale prefix | Spec §6.1 | — | — |
 | A6 | Filesystem outbox (`.data/outbox/`) is acceptable until hosting decided | No infra provisioned | **Must** move to a durable store (DB/queue) before production traffic on serverless hosting | Chris + Phase 2 |
 
+## Founder design direction (2026-08-26)
+
+Chris provided a homepage design reference (mobile screenshot) and asked for the homepage to match its content and look. Changes applied on that authority (rank 2 in the source-of-truth hierarchy, above the master spec):
+
+- Hero H1 is now "Your AI Marketing Team" (spec §56 hero "A full marketing department. Without building one." moved to the footer tagline and final CTA, matching the reference).
+- Primary brand accent switched to violet (`--tm-violet-600: #5b47f0`), pill-shaped CTAs, lavender surfaces, larger card radii.
+- Added sections: "Chris Momchilov runs the department", 7-step Learn→Improve loop, "The system at a glance" (incl. "Up to 95% lower people-cost" — kept with the reference's methodology note and "Modeled, not a guarantee"; the full cost model must publish with the research hub), "What your team creates" gallery with generated mascot/product illustrations (decorative, labelled), dark "Simple pricing" section with channel envelopes, "What we can actually show" resources doors, light footer with newsletter interest capture ("No list yet" honest note).
+- **Open question for Chris:** the reference shows a larger roster with different names (Intel, Web, Ops, Cine, Lifecycle as separate seats). The build keeps the spec's canonical 11-agent roster (Scout·INSIGHT, Flow·SITE, Nexus·OPS, Socialite·NURTURE) styled per the reference. Confirm the final public roster naming; a Cine (video) seat is not in the spec's 11.
+- Reference's "working 24/7" phrasing softened to "working continuously" / "Always-on" per spec claim guardrails; confirm if literal "24/7" wording is wanted.
+
 ## Blockers requiring decisions from Chris (spec §66.2)
 
 1. HubSpot portal + credentials for the CRM handoff.

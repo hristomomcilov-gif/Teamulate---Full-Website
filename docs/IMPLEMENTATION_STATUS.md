@@ -1,6 +1,6 @@
 # Implementation Status
 
-**Last updated:** 2026-08-26 (Phase 0 + Phase 1 initial vertical slice)
+**Last updated:** 2026-08-26 (Phase 0 + Phase 1; homepage redesigned to founder-provided reference design — see `KNOWN_GAPS_AND_ASSUMPTIONS.md`, "Founder design direction")
 
 ## Phase 0 — Current-state audit and foundations
 

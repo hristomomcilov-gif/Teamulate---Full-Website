@@ -1,33 +1,26 @@
 import Link from "next/link";
-import { FOOTER_GROUPS, SITE } from "@/lib/site";
-import { COPY } from "@/content/copy";
-import { ButtonLink, Container } from "@/components/ui";
+import { FOOTER_GROUPS } from "@/lib/site";
+import { Container } from "@/components/ui";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-line bg-navy-950 text-white">
+    <footer className="border-t border-line bg-surface-muted">
       <Container className="py-14">
-        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <div className="max-w-xl">
-            <p className="flex items-center gap-2 text-lg font-bold">
-              <span aria-hidden className="inline-block h-5 w-5 rounded bg-gradient-to-br from-brand to-brand-purple" />
-              Teamulate
-            </p>
-            <p className="mt-2 text-sm text-white/70">{COPY.category}</p>
-          </div>
-          <ButtonLink href="/request-demo/" variant="primary">
-            See the team in action
-          </ButtonLink>
+        <div className="mb-10">
+          <p className="text-4xl font-extrabold uppercase tracking-[0.18em] text-brand sm:text-5xl">Teamulate</p>
+          <p className="mt-3 text-base text-ink">A full marketing department. Without building one.</p>
         </div>
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {FOOTER_GROUPS.map((group) => (
+
+        <div className="grid gap-10 md:grid-cols-3">
+          {FOOTER_GROUPS.filter((g) => g.label !== "Legal").map((group) => (
             <nav key={group.label} aria-label={`Footer ${group.label}`}>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-white/50">{group.label}</p>
-              <ul className="space-y-2">
+              <p className="mb-3 text-xs font-bold uppercase tracking-wide text-ink">{group.label}</p>
+              <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-sm text-white/80 hover:text-white hover:underline">
+                    <Link href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
                       {item.label}
                     </Link>
                   </li>
@@ -35,10 +28,22 @@ export function SiteFooter() {
               </ul>
             </nav>
           ))}
+          <div className="md:col-span-3 lg:col-span-1">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wide text-ink">Stay in the loop</p>
+            <NewsletterForm />
+          </div>
         </div>
-        <div className="mt-12 border-t border-white/10 pt-6 text-xs text-white/50">
+
+        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} Teamulate · {SITE.domain.replace("https://", "")}
+            © {year} Teamulate · Autonomous marketing department · Client login opens with onboarding.
+          </p>
+          <p className="flex gap-4">
+            {FOOTER_GROUPS.find((g) => g.label === "Legal")!.items.map((item) => (
+              <Link key={item.href} href={item.href} className="hover:text-brand hover:underline">
+                {item.label}
+              </Link>
+            ))}
           </p>
         </div>
       </Container>

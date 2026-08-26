@@ -5,6 +5,14 @@ export type AgentProfile = {
   name: string;
   role: string;
   type: AgentType;
+  /** Short uppercase discipline tag shown next to the name (e.g. HEAD, CONTENT). */
+  tag: string;
+  /** One-line card blurb for the homepage team section. */
+  blurb: string;
+  /** Skill chips shown on the homepage card. */
+  skills: string[];
+  /** Mascot illustration path under /public. */
+  image: string;
   mission: string;
   responsibilities: string[];
   typicalInputs: string[];
@@ -25,6 +33,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Strategos",
     role: "Head of Marketing / Orchestrator",
     type: "orchestrator",
+    tag: "HEAD",
+    blurb: "Sets the strategy, aligns the team, and drives results across the entire funnel.",
+    skills: ["Strategy", "Priorities", "Team Orchestration", "Performance"],
+    image: "/agents/agent-strategos.webp",
     mission: "Turn business goals into a prioritized, coordinated marketing operating plan.",
     responsibilities: [
       "Goal intake and prioritization",
@@ -48,6 +60,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Scout",
     role: "Intelligence & Product Marketing",
     type: "specialist",
+    tag: "INSIGHT",
+    blurb: "Surfaces the questions, competitors, and angles behind the next move.",
+    skills: ["Market Insight"],
+    image: "/agents/agent-scout.webp",
     mission: "Keep the department grounded in validated market, competitor and audience intelligence.",
     responsibilities: [
       "Market and competitor research",
@@ -70,6 +86,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Wordsmith",
     role: "Content, Social & Community",
     type: "specialist",
+    tag: "CONTENT",
+    blurb: "Creates high-impact content that educates, ranks, and converts.",
+    skills: ["Content Creation"],
+    image: "/agents/agent-wordsmith.webp",
     mission: "Produce clear, on-brand content that moves defined audiences to action.",
     responsibilities: [
       "Editorial planning",
@@ -92,6 +112,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Seeker",
     role: "Search & GEO",
     type: "specialist",
+    tag: "SEO/GEO",
+    blurb: "Finds opportunities, optimizes visibility, and brings the right traffic.",
+    skills: ["Search & Visibility"],
+    image: "/agents/agent-seeker.webp",
     mission: "Grow qualified visibility in traditional and AI-assisted search.",
     responsibilities: [
       "Opportunity mapping",
@@ -114,6 +138,10 @@ export const AGENTS: AgentProfile[] = [
     name: "GrowthTrack",
     role: "Demand Generation & Paid Growth",
     type: "specialist",
+    tag: "DEMAND",
+    blurb: "Launches campaigns that generate leads and accelerate growth.",
+    skills: ["Lead Generation"],
+    image: "/agents/agent-growthtrack.webp",
     mission: "Build and pace demand programs inside approved budgets and audiences.",
     responsibilities: [
       "Acquisition planning",
@@ -136,6 +164,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Pixel",
     role: "Creative Studio",
     type: "specialist",
+    tag: "DESIGN",
+    blurb: "Designs standout visuals that capture attention and drive action.",
+    skills: ["Visual Design"],
+    image: "/agents/agent-pixel.webp",
     mission: "Produce consistent, conversion-oriented creative across formats.",
     responsibilities: [
       "Design packages",
@@ -158,6 +190,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Flow",
     role: "Web & CRO",
     type: "specialist",
+    tag: "SITE",
+    blurb: "Ships landing pages and on-site experiments that convert.",
+    skills: ["Site & CRO"],
+    image: "/agents/agent-flow.webp",
     mission: "Turn traffic into qualified conversations through fast, clear web experiences.",
     responsibilities: [
       "Landing pages and forms",
@@ -180,6 +216,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Socialite",
     role: "Lifecycle & Customer Marketing",
     type: "specialist",
+    tag: "NURTURE",
+    blurb: "Runs sequences that keep the right people moving.",
+    skills: ["Lifecycle"],
+    image: "/agents/agent-socialite.webp",
     mission: "Move contacts through onboarding, nurture, retention and advocacy with consented communication.",
     responsibilities: [
       "Nurture and onboarding flows",
@@ -202,6 +242,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Nexus",
     role: "Marketing Ops & CRM",
     type: "specialist",
+    tag: "OPS",
+    blurb: "Keeps the stack connected so the department can run.",
+    skills: ["Operations"],
+    image: "/agents/agent-nexus.webp",
     mission: "Keep data, routing and tracking dependable so every other function can trust the system.",
     responsibilities: [
       "CRM schema and hygiene",
@@ -224,6 +268,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Metric",
     role: "Analytics & Attribution",
     type: "assurance",
+    tag: "ANALYTICS",
+    blurb: "Measures performance, uncovers insights, and proves what works.",
+    skills: ["Analytics"],
+    image: "/agents/agent-metric.webp",
     mission: "Independently validate what actually happened, with confidence and limitations stated.",
     responsibilities: [
       "Validated dashboards",
@@ -246,6 +294,10 @@ export const AGENTS: AgentProfile[] = [
     name: "Guardian",
     role: "QA, Governance & Brand Assurance",
     type: "assurance",
+    tag: "QA",
+    blurb: "Ensures quality, safeguards standards, and optimizes every process.",
+    skills: ["Quality Assurance"],
+    image: "/agents/agent-guardian.webp",
     mission: "Independently check brand, claims, facts, policy and release readiness before anything ships.",
     responsibilities: [
       "Pass / revise / block decisions",

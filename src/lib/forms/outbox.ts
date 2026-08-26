@@ -12,7 +12,7 @@ const OUTBOX_DIR = path.join(process.cwd(), ".data", "outbox");
 
 export type OutboxRecord = {
   id: string;
-  kind: "demo-request" | "contact";
+  kind: "demo-request" | "contact" | "newsletter";
   receivedAt: string;
   payload: Record<string, unknown>;
   attribution: {

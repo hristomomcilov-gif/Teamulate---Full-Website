@@ -1,49 +1,69 @@
 import type { Metadata } from "next";
-import { COPY } from "@/content/copy";
-import { AGENTS, TEAM_STRUCTURE_SENTENCE } from "@/content/agents";
+import Image from "next/image";
+import Link from "next/link";
+import { AGENTS } from "@/content/agents";
 import { PLANS, formatUsd } from "@/content/plans";
 import { absoluteUrl } from "@/lib/site";
-import { Card, Container, DemoBadge, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
+import { Container, Section, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
-import Link from "next/link";
+import { DashboardMockup } from "@/components/home/DashboardMockup";
+import { AssetGallery } from "@/components/home/AssetGallery";
 
 export const metadata: Metadata = {
-  title: "Teamulate | A Full Marketing Department Without Building One",
+  title: "Teamulate | Your AI Marketing Team",
   description:
-    "Teamulate builds and operates a dedicated autonomous marketing department inside the tools your B2B company already uses - with visible workflows, approvals and performance in one dashboard.",
+    "A complete marketing department built around your business, working continuously from one dashboard - with human oversight for the decisions that matter.",
   alternates: { canonical: absoluteUrl("/") },
 };
 
-const HOW_IT_WORKS_STEPS = [
-  { n: 1, title: "Learn your business", body: "Onboarding builds an approved business knowledge base: audience, positioning, claims and constraints." },
-  { n: 2, title: "Set goals and guardrails", body: "You define measurable goals, budget caps, approval owners and what always needs a human decision." },
-  { n: 3, title: "Strategos coordinates the team", body: "The AI Head of Marketing turns goals into briefs, tasks and dependencies across the department." },
-  { n: 4, title: "Specialists execute and Guardian checks", body: "Eight specialists produce the work; independent QA validates brand, claims and release readiness." },
-  { n: 5, title: "Dashboard shows results, decisions and next actions", body: "You see what is running, what changed, what needs your decision and what happens next." },
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex min-h-10 items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-bold text-ink shadow-sm">
+      {children}
+    </span>
+  );
+}
+
+function EyebrowPill({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mb-4 flex justify-center">
+      <span className="rounded-full bg-lavender px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand">
+        {children}
+      </span>
+    </p>
+  );
+}
+
+const LOOP_STEPS = [
+  { n: "01", title: "Learn", body: "Business, brand, and constraints first.", color: "bg-brand" },
+  { n: "02", title: "Research", body: "The brief behind the next asset.", color: "bg-brand-blue" },
+  { n: "03", title: "Plan", body: "Head of Marketing sets the rails.", color: "bg-positive" },
+  { n: "04", title: "Build", body: "Specialists draft inside those rails.", color: "bg-attention" },
+  { n: "05", title: "Launch", body: "The department publishes, launches, and spends - inside approvals.", color: "bg-brand" },
+  { n: "06", title: "Measure", body: "What your tools recorded. Empty is allowed.", color: "bg-brand-blue" },
+  { n: "07", title: "Improve", body: "The next pass uses what we can see.", color: "bg-navy-900" },
 ];
 
-const OUTPUT_CATEGORIES = [
-  "Research and strategy",
-  "Content and social media",
-  "SEO and GEO",
-  "Creative and video",
-  "Campaigns and demand generation",
-  "Email and lifecycle",
-  "Landing pages and CRO",
-  "CRM and marketing operations",
-  "Analytics and attribution",
+const OPERATING_TRAITS = [
+  { title: "Always on", body: "The department keeps moving." },
+  { title: "One goal", body: "One strategy. Aligned seats." },
+  { title: "Autonomous", body: "Agents run the routine work." },
+  { title: "Built to scale", body: "Add capacity as the plan grows." },
 ];
 
-const PROOF_SURFACES = [
-  "Goals and priority work",
-  "Campaigns and workflow status",
-  "Approval queue",
-  "Pipeline and performance",
-  "Next actions and risks",
+const GLANCE_STATS = [
+  { value: "11", label: "AI specialists" },
+  { value: "Always-on", label: "Operations" },
+  { value: "60+", label: "Recurring workflows" },
+  { value: "231", label: "Marketing functions mapped" },
 ];
 
-const STACK_CATEGORIES = ["CRM", "CMS / website", "Analytics", "Advertising", "Email / lifecycle", "Social", "Cloud files / knowledge", "Collaboration"];
+const PLAN_FEATURES: Record<string, string[]> = {
+  core: ["1 brand", "4 integrations", "8 workflows", "2 primary channels + email/site"],
+  growth: ["1 brand", "8 integrations", "20 workflows", "Up to 4 active channels"],
+  scale: ["1-2 business units", "12 integrations", "35 workflows", "Up to 6 active channels"],
+};
 
 const FAQ_ITEMS = [
   {
@@ -88,326 +108,431 @@ const FAQ_ITEMS = [
   },
 ];
 
-function HeroVisual() {
-  return (
-    <div aria-label="Product illustration: a goal moves through delegation, approval and execution to a measured result" className="rounded-(--tm-radius-lg) border border-line bg-navy-950 p-4 shadow-card sm:p-6">
-      <div className="mb-4 flex items-center justify-between gap-2">
-        <p className="text-xs font-semibold text-white/60">Teamulate dashboard</p>
-        <DemoBadge />
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-(--tm-radius-sm) bg-white/5 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/50">Goal</p>
-          <p className="mt-1 text-sm font-semibold text-white">Qualified opportunities for the new service line</p>
-          <div className="mt-2"><StatusChip tone="attention" label="At risk - landing page delayed" /></div>
-        </div>
-        <div className="rounded-(--tm-radius-sm) bg-white/5 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/50">Strategos delegates</p>
-          <ul className="mt-1 space-y-1 text-sm text-white/90">
-            <li>Flow → Landing page <span className="text-positive">✓ done</span></li>
-            <li>Guardian → QA preflight <span className="text-positive">✓ passed</span></li>
-            <li>GrowthTrack → Campaign build <span className="text-white/60">in progress</span></li>
-          </ul>
-        </div>
-        <div className="rounded-(--tm-radius-sm) bg-white/5 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/50">Awaiting your approval</p>
-          <p className="mt-1 text-sm font-semibold text-white">P3 · Launch campaign + USD 3,000 budget cap</p>
-          <div className="mt-2"><StatusChip tone="attention" label="Decision required" /></div>
-        </div>
-        <div className="rounded-(--tm-radius-sm) bg-white/5 p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/50">Live campaign result</p>
-          <p className="mt-1 text-sm font-semibold text-white">Webinar program · 41 qualified registrations</p>
-          <div className="mt-2"><StatusChip tone="positive" label="Live · measured" /></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function HomePage() {
+  const strategos = AGENTS.find((a) => a.slug === "strategos")!;
+  const teamAgents = AGENTS.filter((a) => a.slug !== "strategos");
+
   return (
     <>
-      {/* Section 1 - Hero */}
-      <Section className="pt-16 sm:pt-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <Eyebrow>Autonomous marketing department for growing B2B companies.</Eyebrow>
-            <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl xl:text-6xl">
-              {COPY.hero.headline}
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">{COPY.hero.subheadline}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <CtaLink href="/request-demo/" ctaId="hero-primary" kind="primary">
-                {COPY.hero.primaryCta}
-              </CtaLink>
-              <CtaLink href="/how-it-works/" ctaId="hero-secondary" kind="secondary">
-                {COPY.hero.secondaryCta}
-              </CtaLink>
-            </div>
-          </div>
-          <HeroVisual />
-        </div>
-      </Section>
-
-      {/* Section 2 - Problem / capacity gap */}
-      <Section muted>
-        <SectionHeading
-          eyebrow="The capacity gap"
-          title="Your marketing workload has outgrown your team."
-          lede="Three problems show up in almost every growing B2B company:"
-        />
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { title: "The backlog outgrows execution", body: "Campaigns, content, pages and reporting pile up faster than your team can ship them." },
-            { title: "Tools without an operator", body: "The stack is purchased but disconnected or underused - capability without capacity." },
-            { title: "Handoffs without a cadence", body: "Agencies, freelancers and internal staff each own a piece, with no single operating rhythm." },
-          ].map((item) => (
-            <Card key={item.title}>
-              <h3 className="text-base font-semibold text-ink">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.body}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      {/* Section 3 - Outcome stack */}
-      <Section>
-        <SectionHeading eyebrow="What you get" title="Capacity, connection and visibility" />
-        <div className="grid gap-6 md:grid-cols-3">
-          {COPY.benefits.map((benefit) => (
-            <Card key={benefit.title} className="border-t-4 border-t-brand">
-              <h3 className="text-lg font-semibold text-ink">{benefit.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{benefit.body}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      {/* Section 4 - How it works */}
-      <Section muted>
-        <SectionHeading eyebrow="How it works" title="From your goals to measured results in five steps" />
-        <ol className="grid gap-4 md:grid-cols-5">
-          {HOW_IT_WORKS_STEPS.map((step) => (
-            <li key={step.n} className="rounded-(--tm-radius-md) border border-line bg-surface p-5">
-              <span aria-hidden className="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
-                {step.n}
-              </span>
-              <h3 className="mt-3 text-sm font-semibold text-ink">{step.title}</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">{step.body}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-8">
-          <CtaLink href="/how-it-works/" ctaId="home-how-it-works" kind="secondary">
-            See the full operating model
-          </CtaLink>
-        </div>
-      </Section>
-
-      {/* Section 5 - Meet the department */}
-      <Section>
-        <SectionHeading
-          eyebrow="Meet the department"
-          title="One head. Eight specialists. Two independent assurance agents."
-          lede={TEAM_STRUCTURE_SENTENCE}
-        />
-        <div className="mb-6 rounded-(--tm-radius-md) border-2 border-brand bg-surface p-5 shadow-card">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+      {/* Hero */}
+      <Section muted className="pt-14 sm:pt-20">
+        <div className="mx-auto max-w-3xl text-center lg:max-w-none lg:text-left">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <p className="text-lg font-bold text-ink">Strategos</p>
-              <p className="text-sm text-ink-muted">Head of Marketing / Orchestrator - turns goals into briefs, delegation and cadence</p>
-            </div>
-            <StatusChip tone="info" label="Team lead" />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {AGENTS.filter((a) => a.slug !== "strategos").map((agent) => (
-            <div key={agent.slug} className="rounded-(--tm-radius-md) border border-line bg-surface p-4" style={{ borderTopColor: agent.accent, borderTopWidth: 3 }}>
-              <p className="text-sm font-bold text-ink">{agent.name}</p>
-              <p className="mt-0.5 text-xs text-ink-muted">{agent.role}</p>
-              <p className="mt-2 text-[11px] font-medium uppercase tracking-wide text-ink-muted">
-                {agent.type === "assurance" ? "Independent assurance" : "Execution specialist"}
+              <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl xl:text-6xl">
+                Your AI Marketing Team
+              </h1>
+              <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+                A complete marketing department built around your business, working continuously from one dashboard.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
+                <Pill>
+                  <span aria-hidden className="text-brand">◻</span> 11 Specialists
+                </Pill>
+                <Pill>
+                  <span aria-hidden className="text-brand">✓</span> 1 Dashboard
+                </Pill>
+                <Pill>
+                  <span aria-hidden className="text-brand">+</span> Always-on
+                </Pill>
+              </div>
+              <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row lg:items-start">
+                <CtaLink href="/request-demo/" ctaId="hero-primary" kind="primary" className="px-7 py-3 text-base">
+                  See the team in action →
+                </CtaLink>
+              </div>
+              <div className="mt-3 flex flex-col items-center gap-3 sm:flex-row lg:items-start">
+                <CtaLink href="/demo/dashboard/" ctaId="hero-demo" kind="secondary" variant="secondary">
+                  Demo dashboard
+                </CtaLink>
+                <CtaLink href="/how-it-works/" ctaId="hero-secondary" kind="secondary" variant="secondary">
+                  ▶ See how it works
+                </CtaLink>
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-ink-muted">
+                Teamulate is building and marketing Teamulate with the same AI-operated system it offers to clients.
               </p>
             </div>
-          ))}
-        </div>
-        <div className="mt-8">
-          <CtaLink href="/team/" ctaId="home-team" kind="secondary">
-            Meet your department
-          </CtaLink>
+            <DashboardMockup />
+          </div>
         </div>
       </Section>
 
-      {/* Section 6 - What the team creates */}
-      <Section muted>
-        <SectionHeading eyebrow="Output" title="What the team creates" />
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {OUTPUT_CATEGORIES.map((category) => (
-            <li key={category} className="flex items-center gap-2 rounded-(--tm-radius-sm) border border-line bg-surface px-4 py-3 text-sm font-medium text-ink">
-              <span aria-hidden className="text-brand">▸</span>
-              {category}
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* Section 7 - Dashboard proof */}
+      {/* The human above the agents */}
       <Section>
-        <SectionHeading eyebrow="Proof, not promises" title="See what is running, what changed and what happens next." />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ul className="space-y-3">
-            {PROOF_SURFACES.map((surface) => (
-              <li key={surface} className="flex items-center gap-3 rounded-(--tm-radius-sm) border border-line bg-surface px-4 py-3 text-sm font-medium text-ink">
-                <span aria-hidden className="text-positive">✓</span>
-                {surface}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">
+            The human above the agents
+          </p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Chris Momchilov runs the department.
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+            Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce.
+          </p>
+          <p className="mt-3 text-lg leading-relaxed text-ink-muted">
+            Deep AI. He sets the strategy. The agents execute the routine work - with his sign-off on the decisions
+            that matter.
+          </p>
+        </div>
+      </Section>
+
+      {/* How it works: the loop */}
+      <Section muted>
+        <div className="mx-auto max-w-2xl text-center">
+          <EyebrowPill>How it works</EyebrowPill>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Learn through <span className="text-brand">Improve</span>
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
+            Specialized agents run the work. Chris sets the strategy. The department executes.
+          </p>
+        </div>
+        <div className="relative mx-auto mt-10 max-w-2xl">
+          <div aria-hidden className="absolute bottom-6 left-[19px] top-6 border-l-2 border-dashed border-line" />
+          <ol className="space-y-3">
+            {LOOP_STEPS.map((step) => (
+              <li key={step.n} className="flex items-center gap-4">
+                <span className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-line bg-surface text-xs font-extrabold text-brand">
+                  {step.n}
+                </span>
+                <Link
+                  href="/how-it-works/"
+                  className="group flex min-w-0 flex-1 items-center gap-4 rounded-(--tm-radius-lg) border border-line bg-surface p-4 shadow-card transition-colors hover:border-brand"
+                >
+                  <span aria-hidden className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${step.color} text-lg font-bold text-white`}>
+                    {step.title.charAt(0)}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-ink">{step.title}</span>
+                    <span className="block text-sm text-ink-muted">{step.body}</span>
+                  </span>
+                  <span aria-hidden className="ml-auto text-ink-muted transition-transform group-hover:translate-x-0.5">›</span>
+                </Link>
               </li>
             ))}
-          </ul>
-          <Card className="flex flex-col justify-between bg-surface-muted">
-            <div>
-              <DemoBadge />
-              <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-                The interactive demo walks through one complete workflow with clearly labelled sample data: a goal at
-                risk, the work that unblocked it, an approval decision, and the measured result.
-              </p>
-            </div>
-            <div className="mt-6">
-              <CtaLink href="/demo/dashboard/" ctaId="home-demo" kind="primary">
-                Open the interactive dashboard demo
-              </CtaLink>
-            </div>
-          </Card>
+          </ol>
+          <p className="mt-4 rounded-full bg-lavender py-3 text-center text-sm font-bold text-brand">
+            ↻ Improve feeds the next Learn
+          </p>
         </div>
       </Section>
 
-      {/* Section 8 - Autonomy and control */}
-      <Section muted>
-        <SectionHeading eyebrow="Control" title="Autonomous where safe. Gated where it matters." />
-        <div className="grid gap-4 md:grid-cols-3">
-          <Card>
-            <StatusChip tone="positive" label="Moves automatically" />
-            <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              Routine monitoring, research, drafts and reversible internal work keep moving without waiting on anyone.
-            </p>
-          </Card>
-          <Card>
-            <StatusChip tone="info" label="Runs inside policy" />
-            <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              Approved routine external actions run inside pre-agreed content, audience and spend policies with QA checks.
-            </p>
-          </Card>
-          <Card>
-            <StatusChip tone="attention" label="Always human-decided" />
-            <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              Strategy, material spend, sensitive claims and irreversible actions always come to a named human owner.
-            </p>
-          </Card>
-        </div>
-        <div className="mt-8">
-          <CtaLink href="/security-governance/" ctaId="home-governance" kind="secondary">
-            See security &amp; governance
-          </CtaLink>
-        </div>
-      </Section>
-
-      {/* Section 9 - Existing stack */}
+      {/* Meet the team */}
       <Section>
-        <SectionHeading eyebrow="Your stack" title="Works inside the tools you already use" lede={COPY.stackDisclaimer} />
-        <ul className="flex flex-wrap gap-3">
-          {STACK_CATEGORIES.map((category) => (
-            <li key={category} className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink">
-              {category}
+        <div className="mx-auto max-w-2xl text-center">
+          <EyebrowPill>+ Meet the team</EyebrowPill>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Your autonomous marketing department
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
+            Specialized agents working together under one strategy. Always-on. Aligned. Governed.
+          </p>
+        </div>
+
+        {/* Team lead */}
+        <div className="relative mx-auto mt-10 max-w-3xl rounded-(--tm-radius-lg) border-2 border-brand bg-surface p-6 shadow-card sm:p-8">
+          <span className="absolute -top-3.5 left-6 rounded-full bg-brand px-4 py-1 text-xs font-bold uppercase tracking-wide text-white">
+            Team lead
+          </span>
+          <div className="flex flex-col items-center gap-6 sm:flex-row">
+            <Image
+              src={strategos.image}
+              alt="Strategos mascot: a white robot with a golden crown, purple cape and scepter"
+              width={512}
+              height={512}
+              priority
+              className="h-40 w-40 shrink-0 rounded-(--tm-radius-md) object-cover sm:h-48 sm:w-48"
+            />
+            <div className="text-center sm:text-left">
+              <p className="text-lg font-extrabold text-ink">
+                Strategos <span className="text-ink-muted">·</span> <span className="text-brand">{strategos.tag}</span>
+              </p>
+              <p className="mt-2 text-base leading-relaxed text-ink-muted">{strategos.blurb}</p>
+              <ul className="mt-4 flex flex-wrap justify-center gap-2 sm:justify-start">
+                {strategos.skills.map((skill) => (
+                  <li key={skill} className="rounded-full bg-lavender px-3 py-1 text-xs font-bold text-brand">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Specialists + assurance */}
+        <ul className="mx-auto mt-6 grid max-w-5xl gap-5 sm:grid-cols-2">
+          {teamAgents.map((agent) => (
+            <li key={agent.slug} className="flex items-center gap-5 rounded-(--tm-radius-lg) border border-line bg-surface p-5 shadow-card">
+              <Image
+                src={agent.image}
+                alt={`${agent.name} mascot robot`}
+                width={512}
+                height={512}
+                className="h-28 w-28 shrink-0 rounded-(--tm-radius-md) object-cover"
+              />
+              <div className="min-w-0">
+                <p className="text-base font-extrabold text-ink">
+                  {agent.name} <span className="text-ink-muted">·</span>{" "}
+                  <span className="text-brand">{agent.tag}</span>
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{agent.blurb}</p>
+                <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                  {agent.skills.map((skill) => (
+                    <li key={skill} className="rounded-full bg-lavender px-2.5 py-0.5 text-xs font-bold text-brand">
+                      {skill}
+                    </li>
+                  ))}
+                  {agent.type === "assurance" ? (
+                    <li className="rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-bold text-green-700">
+                      Independent assurance
+                    </li>
+                  ) : null}
+                </ul>
+              </div>
             </li>
           ))}
         </ul>
-      </Section>
 
-      {/* Section 10 - Plans preview */}
-      <Section muted>
-        <SectionHeading eyebrow="Plans" title="Transparent scope. Client-owned everything." />
-        <div className="grid gap-6 md:grid-cols-3">
-          {PLANS.map((plan) => (
-            <Card key={plan.key} className={plan.recommended ? "border-2 border-brand" : ""}>
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-ink">{plan.name}</h3>
-                {plan.recommended ? <StatusChip tone="info" label="Recommended" /> : null}
-              </div>
-              <p className="mt-3 text-2xl font-bold tabular-nums text-ink">
-                {plan.monthlyPrefix ? `${plan.monthlyPrefix} ` : ""}
-                {formatUsd(plan.monthlyUsd)}
-                <span className="text-sm font-medium text-ink-muted"> / month</span>
-              </p>
-              <p className="text-sm text-ink-muted">Setup {formatUsd(plan.setupUsd)}</p>
-              <ul className="mt-4 space-y-1.5 text-sm text-ink-muted">
-                <li>{plan.activeRecurringWorkflows} active recurring workflows</li>
-                <li>{plan.integrations} integrations</li>
-              </ul>
-            </Card>
+        {/* Operating traits */}
+        <div className="mx-auto mt-8 grid max-w-5xl gap-4 rounded-(--tm-radius-lg) border border-line bg-surface-muted p-6 text-center sm:grid-cols-2 lg:grid-cols-4">
+          {OPERATING_TRAITS.map((trait) => (
+            <div key={trait.title}>
+              <p className="text-sm font-extrabold uppercase tracking-wide text-brand">{trait.title}</p>
+              <p className="mt-1 text-sm text-ink-muted">{trait.body}</p>
+            </div>
           ))}
         </div>
-        <div className="mt-8">
-          <CtaLink href="/pricing/" ctaId="home-pricing" kind="secondary">
-            Compare plans and scope
+        <div className="mt-8 text-center">
+          <CtaLink href="/team/" ctaId="home-team" kind="secondary" variant="secondary">
+            Meet the full team →
           </CtaLink>
         </div>
       </Section>
 
-      {/* Section 11 - Teamulate runs Teamulate */}
-      <Section>
-        <SectionHeading eyebrow="Tenant 0" title="Teamulate runs Teamulate" lede={COPY.tenant0Message} />
-        <Card className="max-w-3xl">
-          <p className="text-sm leading-relaxed text-ink-muted">
-            Teamulate is its own first deployment: the same agents, workflows, approvals and dashboard that clients
-            receive are used to market Teamulate itself. We publish what the system actually does - activity, assets,
-            experiments and lessons - with facts, results and limitations labelled. We do not claim customer outcomes
-            before customers exist.
-          </p>
-          <p className="mt-3 text-sm font-medium text-ink">
-            A public Tenant 0 progress page is in preparation and will link from here once the first metrics are
-            approved for publication.
-          </p>
-        </Card>
-      </Section>
-
-      {/* Section 12 - Original research */}
+      {/* The contrast / system at a glance */}
       <Section muted>
-        <SectionHeading
-          eyebrow="Research"
-          title="Original research, built the slow way"
-          lede="Flagship reports publish as crawlable HTML with methodology, sources, updated dates and fact labels - no thin summaries."
-        />
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            { title: "Marketing Team Cost Benchmark - US & Canada 2026", desc: "What a real marketing department costs to build and run, with methodology." },
-            { title: "60 AI Marketing Workflows", desc: "A mapped catalog of recurring marketing workflows and their automation boundaries." },
-            { title: "Multi-Agent Marketing Architecture", desc: "How an 11-agent department is structured, governed and quality-assured." },
-          ].map((asset) => (
-            <Card key={asset.title}>
-              <h3 className="text-sm font-semibold text-ink">{asset.title}</h3>
-              <p className="mt-2 text-sm text-ink-muted">{asset.desc}</p>
-              <p className="mt-3"><StatusChip tone="neutral" label="Publishing soon - in factual review" /></p>
-            </Card>
-          ))}
+        <div className="mx-auto max-w-2xl text-center">
+          <EyebrowPill>The contrast</EyebrowPill>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">The system at a glance</h2>
+        </div>
+        <div className="mx-auto mt-10 max-w-3xl">
+          <div className="flex items-center justify-between gap-6 rounded-(--tm-radius-lg) bg-lavender p-6 sm:p-8">
+            <div>
+              <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 95%</p>
+              <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
+            </div>
+            <svg viewBox="0 0 120 60" className="h-14 w-28 shrink-0 sm:h-16 sm:w-32" aria-hidden>
+              <path d="M0,55 L30,45 L60,32 L90,18 L115,6" fill="none" stroke="var(--tm-violet-600)" strokeWidth="3" strokeLinecap="round" />
+              <circle cx="115" cy="6" r="4" fill="var(--tm-violet-600)" />
+            </svg>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-4">
+            {GLANCE_STATS.map((stat) => (
+              <div key={stat.label} className="rounded-(--tm-radius-lg) border border-line bg-surface p-5 shadow-card">
+                <p className="text-2xl font-extrabold tabular-nums text-ink sm:text-3xl">{stat.value}</p>
+                <p className="mt-1 text-sm text-ink-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 rounded-(--tm-radius-lg) border border-line bg-surface p-5 shadow-card">
+            <p className="text-2xl font-extrabold text-ink sm:text-3xl">12+ years</p>
+            <p className="mt-1 text-sm text-ink-muted">Marketing experience behind the system</p>
+          </div>
+          <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-ink-muted">
+            Cost comparison based on 2026 Robert Half national midpoints plus employer load for an 8-person North
+            American marketing department, against Teamulate plan fees. Software and ads excluded from people-cost
+            percentages. Modeled, not a guarantee. The full cost model publishes with the research hub.
+          </p>
         </div>
       </Section>
 
-      {/* Section 13 - FAQ */}
+      {/* What your team creates */}
       <Section>
-        <SectionHeading eyebrow="FAQ" title="Frequently asked questions" />
-        <FAQAccordion items={FAQ_ITEMS} />
+        <div className="mx-auto max-w-2xl text-center">
+          <EyebrowPill>What your team creates</EyebrowPill>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">What your team creates</h2>
+          <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
+            Ready-to-ship marketing assets that drive demand and accelerate growth.
+          </p>
+        </div>
+        <div className="mt-10">
+          <AssetGallery />
+        </div>
+        <div className="mx-auto mt-6 max-w-3xl rounded-(--tm-radius-lg) border border-line bg-surface p-6 shadow-card sm:p-8">
+          <p className="text-lg font-extrabold text-ink">✦ Custom assets, your way</p>
+          <p className="mt-1 text-sm text-ink-muted">Tailored to your brand, voice, and goals.</p>
+          <div className="mt-5">
+            <CtaLink href="/request-demo/" ctaId="home-assets-cta" kind="primary" className="w-full py-3 text-base sm:w-auto sm:px-8">
+              See the team in action →
+            </CtaLink>
+          </div>
+        </div>
       </Section>
 
-      {/* Section 14 - Final CTA */}
-      <section className="bg-navy-950 py-16 sm:py-20">
-        <Container className="text-center">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">A full marketing department. Without building one.</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-white/70">{COPY.thirtySecondExplanation}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <CtaLink href="/request-demo/" ctaId="home-final-primary" kind="primary">
-              See the team in action
+      {/* Pricing */}
+      <section className="relative overflow-hidden bg-[#0a0a0f] py-16 sm:py-24">
+        <div aria-hidden className="absolute -left-40 -top-64 h-[560px] w-[560px] rounded-full bg-brand opacity-90" />
+        <Container className="relative">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Simple pricing</h2>
+            <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
+              You pay a one-time setup and a monthly retainer.
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-white/60">
+              AWS, Grok Bot, martech, advertising, and premium third-party services are billed separately.
+            </p>
+          </div>
+          <div className="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-3">
+            {PLANS.map((plan) => (
+              <div
+                key={plan.key}
+                className={`rounded-(--tm-radius-lg) bg-surface p-6 sm:p-7 ${plan.recommended ? "ring-2 ring-brand" : ""}`}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-brand">
+                    <span aria-hidden className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-brand text-xs">
+                      {plan.name.charAt(0)}
+                    </span>
+                    {plan.name}
+                  </p>
+                  {plan.recommended ? (
+                    <span className="rounded-full bg-brand px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white">
+                      Most popular
+                    </span>
+                  ) : null}
+                </div>
+                <div className="mt-5 grid grid-cols-2 gap-4 border-b border-line pb-5">
+                  <div>
+                    <p className="inline-block rounded-full bg-lavender px-2.5 py-0.5 text-[11px] font-bold text-brand">
+                      One-time setup
+                    </p>
+                    <p className="mt-1.5 text-xl font-extrabold tabular-nums text-ink sm:text-2xl">
+                      US{formatUsd(plan.setupUsd)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="inline-block rounded-full bg-lavender px-2.5 py-0.5 text-[11px] font-bold text-brand">
+                      Monthly retainer
+                    </p>
+                    <p className="mt-1.5 text-xl font-extrabold tabular-nums text-ink sm:text-2xl">
+                      {plan.monthlyPrefix ? <span className="text-sm font-bold text-ink-muted">from </span> : null}
+                      US{formatUsd(plan.monthlyUsd)}
+                      <span className="text-sm font-medium text-ink-muted">/mo</span>
+                    </p>
+                  </div>
+                </div>
+                <ul className="mt-4 space-y-2">
+                  {PLAN_FEATURES[plan.key].map((feature) => (
+                    <li key={feature} className="flex items-center gap-2 text-sm font-medium text-ink">
+                      <span aria-hidden className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-brand-blue text-[9px] font-bold text-white">
+                        ✓
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <CtaLink href="/pricing/" ctaId="home-pricing" kind="secondary" variant="primary" className="px-8 py-3 text-base">
+              Compare plans and scope →
             </CtaLink>
-            <Link href="/contact/" className="inline-flex min-h-11 items-center justify-center rounded-(--tm-radius-sm) border border-white/30 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10">
-              Request a stack review
+          </div>
+        </Container>
+      </section>
+
+      {/* Resources: what we can actually show */}
+      <Section muted>
+        <div className="mx-auto max-w-2xl text-center">
+          <EyebrowPill>Resources</EyebrowPill>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">What we can actually show</h2>
+          <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
+            No invented articles. Three honest doors - not a magazine of fake proof.
+          </p>
+        </div>
+        <div className="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-3">
+          <div className="rounded-(--tm-radius-lg) border border-line bg-surface p-6 shadow-card">
+            <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
+              Guides
+            </p>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">Product, pillars, research hubs</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              One URL per intent. No daily blog slop. No invented proof.
+            </p>
+            <p className="mt-4"><StatusChip tone="neutral" label="Publishing soon" /></p>
+            <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
+              <div className="absolute -left-10 top-2 h-40 w-40 rounded-full bg-brand" />
+            </div>
+          </div>
+          <div className="rounded-(--tm-radius-lg) border border-line bg-surface p-6 shadow-card">
+            <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
+              About
+            </p>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">Founder-led. Human-accountable.</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              AI-operated seats. You stay on the gates. Chris Momchilov, Barrie.
+            </p>
+            <p className="mt-4"><StatusChip tone="neutral" label="Publishing soon" /></p>
+            <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
+              <div className="absolute -right-10 top-2 h-40 w-40 rounded-full bg-brand-blue" />
+            </div>
+          </div>
+          <Link
+            href="/demo/dashboard/"
+            className="group rounded-(--tm-radius-lg) border border-line bg-surface p-6 shadow-card transition-colors hover:border-brand"
+          >
+            <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
+              Demo
+            </p>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">One Tenant 0 workflow</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              Research through measure, labeled Demo data. No invented lift.
+            </p>
+            <p className="mt-4 text-sm font-bold text-brand group-hover:underline">Open the demo →</p>
+            <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
+              <div className="absolute left-1/2 top-3 h-44 w-44 -translate-x-1/2 rounded-full bg-positive" />
+            </div>
+          </Link>
+        </div>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <div className="mx-auto max-w-2xl text-center">
+          <EyebrowPill>FAQ</EyebrowPill>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Frequently asked questions</h2>
+        </div>
+        <div className="mx-auto mt-10 max-w-3xl">
+          <FAQAccordion items={FAQ_ITEMS} />
+        </div>
+      </Section>
+
+      {/* Final CTA */}
+      <section className="bg-brand py-16 sm:py-20">
+        <Container className="text-center">
+          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+            A full marketing department. Without building one.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-white/85">
+            The next step is a focused review of your goals, current stack and the recurring work you want to move
+            forward.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <CtaLink
+              href="/request-demo/"
+              ctaId="home-final-primary"
+              kind="primary"
+              className="bg-white px-8 py-3 text-base !text-brand hover:!bg-white/90"
+            >
+              See the team in action →
+            </CtaLink>
+            <Link
+              href="/demo/dashboard/"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/40 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+            >
+              Try the demo dashboard
             </Link>
           </div>
         </Container>

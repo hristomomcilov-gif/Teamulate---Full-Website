@@ -11,6 +11,9 @@
   --tm-navy-900: #10213f;
   --tm-blue-600: #3b6ef5;
   --tm-purple-600: #6437f5;
+  --tm-violet-600: #5b47f0;
+  --tm-lavender-50: #f5f4fb;
+  --tm-lavender-100: #eceafa;
   --tm-cyan-600: #19a9b8;
   --tm-green-600: #2da65a;
   --tm-orange-500: #f49a16;
@@ -30,7 +33,9 @@
 @theme inline {
   --color-navy-950: var(--tm-navy-950);
   --color-navy-900: var(--tm-navy-900);
-  --color-brand: var(--tm-blue-600);
+  /* Primary brand accent: violet, per founder-approved homepage design reference (2026-08-26). */
+  --color-brand: var(--tm-violet-600);
+  --color-brand-blue: var(--tm-blue-600);
   --color-brand-purple: var(--tm-purple-600);
   --color-brand-cyan: var(--tm-cyan-600);
   --color-positive: var(--tm-green-600);
@@ -38,7 +43,8 @@
   --color-accent-pink: var(--tm-pink-500);
   --color-critical: var(--tm-red-600);
   --color-surface: var(--tm-surface);
-  --color-surface-muted: var(--tm-surface-muted);
+  --color-surface-muted: var(--tm-lavender-50);
+  --color-lavender: var(--tm-lavender-100);
   --color-line: var(--tm-border);
   --color-ink: var(--tm-text);
   --color-ink-muted: var(--tm-text-muted);
