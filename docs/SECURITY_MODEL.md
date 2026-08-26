@@ -15,7 +15,7 @@
 
 ## Target-state controls (Phase 2+, binding)
 
-- Tenant isolation: `organization_id` on every tenant record + Postgres RLS; automated Org A / Org B isolation tests in CI; separate client-owned GrokBot/AWS accounts; no shared browser sessions or broad admin accounts across clients.
+- Tenant isolation: `organization_id` on every tenant record + Postgres RLS; automated Org A / Org B isolation tests in CI; isolated per-client agent environments on GrokBot infrastructure (included in the Teamulate subscription per founder decision 2026-08-26 — clients no longer provision AWS or GrokBot themselves); no shared browser sessions or broad admin accounts across clients.
 - Identity: MFA for privileged roles, least privilege, short-lived tokens, session rotation, re-auth for P4, capability-based permissions (spec §4.3) enforced at backend/database layer — hidden links and disabled buttons are not security controls.
 - Secrets: managed vault only; referenced by connection ID; masked in logs/UI; rotation policy; disconnect revokes tokens/webhooks.
 - Approval enforcement: risk tier assigned by policy; approval hash binds exact action; P3/P4 require valid server-side token at execution time; P2 requires policy + QA; spend/action limits enforced independently; bulk approval disabled for P3/P4.

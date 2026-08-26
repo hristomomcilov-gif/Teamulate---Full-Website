@@ -39,5 +39,5 @@ export const COPY = {
   securityDisclaimer:
     "Security controls are configured per client, integration, contract and risk profile. This page describes the Teamulate operating model and target architecture; it does not represent a certification or replace a client security review.",
   ownershipDisclaimer:
-    "AWS, Grok Bot, your martech subscriptions, advertising spend, enrichment/data products and other third-party vendor costs are client-owned and billed directly to you. Teamulate fees cover setup, orchestration, managed execution, maintenance, QA, support and human oversight.",
+    "Your martech subscriptions, advertising spend, enrichment/data products and other third-party vendor costs are client-owned and billed directly to you. The GrokBot-powered agent system is included in your Teamulate subscription - there is no separate infrastructure to buy or manage. Teamulate fees cover setup, orchestration, managed execution, maintenance, QA, support and human oversight.",
 } as const;

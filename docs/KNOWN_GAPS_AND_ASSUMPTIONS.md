@@ -23,6 +23,10 @@ Chris provided a homepage design reference (mobile screenshot) and asked for the
 - **Open question for Chris:** the reference shows a larger roster with different names (Intel, Web, Ops, Cine, Lifecycle as separate seats). The build keeps the spec's canonical 11-agent roster (Scout·INSIGHT, Flow·SITE, Nexus·OPS, Socialite·NURTURE) styled per the reference. Confirm the final public roster naming; a Cine (video) seat is not in the spec's 11.
 - Reference's "working 24/7" phrasing softened to "working continuously" / "Always-on" per spec claim guardrails; confirm if literal "24/7" wording is wanted.
 
+## Founder product decision (2026-08-26): AWS removed, GrokBot included in subscription
+
+Chris revised the infrastructure/cost model: clients no longer provision AWS, and GrokBot runs on its own computer with its own files and logins for clients, **included in the monthly Teamulate subscription** (not billed separately). This supersedes the master spec's §5.4/§14.2 wording ("Client owns AWS, GrokBot…"). All public copy updated accordingly (ownership disclaimer, homepage pricing note and FAQ, pricing page FAQ). Client-owned boundary now covers: martech subscriptions, advertising spend, data products, marketing accounts, data and assets. The security principles are unchanged: per-client environment isolation, scoped revocable access to client tools, no shared credentials across clients.
+
 ## Blockers requiring decisions from Chris (spec §66.2)
 
 1. HubSpot portal + credentials for the CRM handoff.

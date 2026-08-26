@@ -38,7 +38,7 @@ const PRICING_FAQ = [
   {
     question: "What do we pay third parties for?",
     answer:
-      "Your own vendor costs: AWS, GrokBot, your martech subscriptions, advertising spend and data products. They are your accounts, billed directly to you - which also means you keep them if we ever part ways.",
+      "Your own vendor costs: your martech subscriptions, advertising spend and data products. They are your accounts, billed directly to you - which also means you keep them if we ever part ways. The GrokBot agent system is included in your Teamulate subscription, so there is nothing extra to pay for the agents themselves.",
   },
   {
     question: "Is there an annual discount?",

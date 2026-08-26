@@ -85,7 +85,7 @@ const FAQ_ITEMS = [
   {
     question: "Who owns the accounts, data and assets?",
     answer:
-      "You do. Every client deployment is a client-owned environment: your AWS, your GrokBot, your martech subscriptions, your data and every asset produced. Teamulate receives scoped, revocable access.",
+      "You do. Every client deployment is a separate environment: your marketing accounts, your subscriptions, your data and every asset produced stay yours. The GrokBot agent system that runs the department is included in your subscription and operated by Teamulate, with scoped, revocable access to your tools.",
   },
   {
     question: "What happens if we need more than the plan allows?",
@@ -375,7 +375,8 @@ export default function HomePage() {
               You pay a one-time setup and a monthly retainer.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-white/60">
-              AWS, Grok Bot, martech, advertising, and premium third-party services are billed separately.
+              The GrokBot agent system is included. Martech, advertising, and premium third-party services are billed
+              separately.
             </p>
           </div>
           <div className="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-3">
