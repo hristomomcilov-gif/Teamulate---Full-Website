@@ -9,6 +9,7 @@ import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
 import { AssetGallery } from "@/components/home/AssetGallery";
+import { FounderCard } from "@/components/home/FounderCard";
 
 export const metadata: Metadata = {
   title: "Teamulate | Your AI Marketing Team",
@@ -160,21 +161,15 @@ export default function HomePage() {
 
       {/* The human above the agents */}
       <Section>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">
             The human above the agents
           </p>
           <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
             Chris Momchilov runs the department.
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-            Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce.
-          </p>
-          <p className="mt-3 text-lg leading-relaxed text-ink-muted">
-            Deep AI. He sets the strategy. The agents execute the routine work - with his sign-off on the decisions
-            that matter.
-          </p>
         </div>
+        <FounderCard />
       </Section>
 
       {/* How it works: the loop */}
