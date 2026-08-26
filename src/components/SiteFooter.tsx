@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FOOTER_GROUPS } from "@/lib/site";
 import { Container } from "@/components/ui";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { TeamulateLogo } from "@/components/BrandLogo";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -9,8 +10,8 @@ export function SiteFooter() {
     <footer className="border-t border-line bg-surface-muted">
       <Container className="py-14">
         <div className="mb-10">
-          <p className="text-4xl font-extrabold uppercase tracking-[0.18em] text-brand sm:text-5xl">Teamulate</p>
-          <p className="mt-3 text-base text-ink">A full marketing department. Without building one.</p>
+          <TeamulateLogo className="h-12 w-auto sm:h-14" />
+          <p className="mt-4 text-base text-ink">A full marketing department. Without building one.</p>
         </div>
 
         <div className="grid gap-10 md:grid-cols-3">

@@ -46,7 +46,7 @@
 1. HubSpot portal / credentials for CRM handoff (outbox fallback in place).
 2. Production domain confirmation (currently `https://teamulate.ca` assumed in `src/lib/site.ts` — see `KNOWN_GAPS_AND_ASSUMPTIONS.md`).
 3. Legal counsel review of `/privacy/` and `/terms/`.
-4. Final logo / wordmark (text wordmark used).
+4. ~~Final logo / wordmark~~ — resolved 2026-08-26: founder-provided SVG logo integrated (header, footer, favicon, apple icon; source at `public/brand/teamulate-logo.svg`, inline component `src/components/BrandLogo.tsx`).
 5. Decision on hosting provider (Vercel-compatible output; nothing provider-specific committed).
 6. Which Tenant 0 metrics may be public (Tenant 0 page deferred until then).
 

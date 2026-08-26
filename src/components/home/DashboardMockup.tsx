@@ -1,3 +1,5 @@
+import { TeamulateIcon } from "@/components/BrandLogo";
+
 const KPIS = ["Website Traffic", "Leads Generated", "Conversion Rate", "Meetings Booked", "Content Published"];
 
 const SIDEBAR = ["Dashboard", "Campaigns", "Content", "Leads", "SEO", "Social", "Reports", "Settings"];
@@ -15,7 +17,9 @@ export function DashboardMockup() {
         </p>
         <div className="flex">
           <div className="hidden w-36 shrink-0 bg-navy-950 p-3 sm:block">
-            <p className="px-2 pb-3 text-xs font-bold text-white">Teamulate</p>
+            <p className="flex items-center gap-1.5 px-2 pb-3 text-xs font-bold text-white">
+              <TeamulateIcon className="h-4 w-4" /> Teamulate
+            </p>
             <ul className="space-y-0.5">
               {SIDEBAR.map((item, i) => (
                 <li

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { HEADER_NAV } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 import { CtaLink } from "@/components/CtaLink";
+import { TeamulateLogo } from "@/components/BrandLogo";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -47,12 +48,8 @@ export function SiteHeader() {
         Skip to main content
       </a>
       <nav ref={navRef} aria-label="Main" className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between gap-4 px-5 sm:px-8">
-        <Link
-          href="/"
-          className="text-xl font-extrabold uppercase tracking-[0.18em] text-brand"
-          onClick={() => navClick("logo")}
-        >
-          Teamulate
+        <Link href="/" aria-label="Teamulate home" onClick={() => navClick("logo")}>
+          <TeamulateLogo className="h-8 w-auto sm:h-9" />
         </Link>
 
         {/* Desktop nav */}

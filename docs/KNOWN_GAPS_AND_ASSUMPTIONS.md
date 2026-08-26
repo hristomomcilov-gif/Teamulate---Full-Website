@@ -28,7 +28,7 @@ Chris provided a homepage design reference (mobile screenshot) and asked for the
 1. HubSpot portal + credentials for the CRM handoff.
 2. Hosting provider and CI/CD target.
 3. Legal counsel review of privacy/terms (placeholders are visibly labelled).
-4. Final logo/wordmark (text wordmark in use).
+4. ~~Final logo/wordmark~~ — resolved: founder-provided SVG integrated. Note: the logo gradient (#7A67D8 → #7058CF) is a softer purple than the UI brand violet (#5b47f0); confirm whether UI accents should be retuned to the logo palette.
 5. Final public navigation labels (spec-derived defaults in use).
 6. Which live Tenant 0 metrics may be public (Tenant 0 page deferred).
 7. Which research assets publish first (research hub deferred).
