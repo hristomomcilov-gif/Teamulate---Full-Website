@@ -1,7 +1,9 @@
 /**
  * Teamulate brand logo (founder-provided asset, 2026-08-26). Inline SVG so it
- * renders crisply at any size without image-loader configuration. Source file
- * preserved at public/brand/teamulate-logo.svg.
+ * renders crisply at any size without image-loader configuration. Original
+ * file preserved at public/brand/teamulate-logo.svg; the rendered gradient is
+ * retuned to the site brand violet (--tm-violet-600) per founder decision
+ * 2026-08-26 so logo and UI accents match.
  */
 
 const ICON = (
@@ -25,8 +27,8 @@ function GradientDefs() {
   return (
     <defs>
       <linearGradient id="tmLogoGradient" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#7A67D8" />
-        <stop offset="1" stopColor="#7058CF" />
+        <stop offset="0" stopColor="#6C59F4" />
+        <stop offset="1" stopColor="#5B47F0" />
       </linearGradient>
     </defs>
   );
@@ -35,7 +37,7 @@ function GradientDefs() {
 /** Full logo: icon + "Teamulate" wordmark. Set height via className (width scales). */
 export function TeamulateLogo({
   className = "h-8 w-auto",
-  wordmarkColor = "#131a3d",
+  wordmarkColor = "#0b1631",
 }: {
   className?: string;
   wordmarkColor?: string;
