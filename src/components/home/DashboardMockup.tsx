@@ -1,20 +1,24 @@
 import { TeamulateIcon } from "@/components/BrandLogo";
 
-const KPIS = ["Website Traffic", "Leads Generated", "Conversion Rate", "Meetings Booked", "Content Published"];
+const KPIS = [
+  { label: "Website Traffic", value: "12,480", delta: "+8.2%" },
+  { label: "Leads Generated", value: "164", delta: "+12%" },
+  { label: "Conversion Rate", value: "3.4%", delta: "+0.4pt" },
+  { label: "Meetings Booked", value: "26", delta: "+5" },
+  { label: "Content Published", value: "18", delta: "+3" },
+];
 
 const SIDEBAR = ["Dashboard", "Campaigns", "Content", "Leads", "SEO", "Social", "Reports", "Settings"];
 
 /**
- * Illustrative dashboard layout for the homepage hero. Honest by design:
- * a "Demo data" ribbon, em-dash values (no invented numbers) and a caption.
+ * Illustrative dashboard layout for the homepage hero. The visible caption
+ * below the mockup labels the numbers as sample data, not live customer
+ * metrics (spec §9.3 labelling requirement).
  */
 export function DashboardMockup() {
   return (
     <figure>
       <div className="overflow-hidden rounded-(--tm-radius-lg) border border-line bg-surface shadow-card">
-        <p className="bg-amber-300 py-1 text-center text-[10px] font-bold uppercase tracking-wide text-amber-950">
-          Demo data
-        </p>
         <div className="flex">
           <div className="hidden w-36 shrink-0 bg-navy-950 p-3 sm:block">
             <p className="flex items-center gap-1.5 px-2 pb-3 text-xs font-bold text-white">
@@ -45,10 +49,10 @@ export function DashboardMockup() {
             </div>
             <div className="mb-3 grid grid-cols-3 gap-1.5 sm:grid-cols-5">
               {KPIS.map((kpi) => (
-                <div key={kpi} className="rounded-md border border-line bg-surface-muted p-2">
-                  <p className="truncate text-[9px] font-medium text-ink-muted">{kpi}</p>
-                  <p className="mt-0.5 text-sm font-bold text-ink">—</p>
-                  <p className="text-[8px] text-ink-muted">vs last 30 days —</p>
+                <div key={kpi.label} className="rounded-md border border-line bg-surface-muted p-2">
+                  <p className="truncate text-[9px] font-medium text-ink-muted">{kpi.label}</p>
+                  <p className="mt-0.5 text-sm font-bold tabular-nums text-ink">{kpi.value}</p>
+                  <p className="text-[8px] font-semibold text-positive">{kpi.delta} vs last 30 days</p>
                 </div>
               ))}
             </div>
@@ -84,7 +88,7 @@ export function DashboardMockup() {
                   <span className="rounded-full bg-lavender px-1.5 py-0.5 text-[8px] font-semibold text-brand">In Progress</span>
                 </span>
                 <span className="truncate">LinkedIn, Email</span>
-                <span>—</span>
+                <span className="tabular-nums">32</span>
               </div>
             </div>
           </div>

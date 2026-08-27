@@ -43,7 +43,7 @@ export function TeamulateLogo({
   wordmarkColor?: string;
 }) {
   return (
-    <svg viewBox="45 50 906 207" className={className} role="img" aria-label="Teamulate">
+    <svg viewBox="45 48 914 211" className={className} role="img" aria-label="Teamulate">
       <GradientDefs />
       {ICON}
       <g transform="translate(310 0) scale(0.855 1)">

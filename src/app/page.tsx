@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex min-h-10 items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-bold text-ink shadow-sm">
+    <span className="inline-flex min-h-9 items-center gap-1.5 whitespace-nowrap rounded-full border border-line bg-surface px-3 text-xs font-bold text-ink shadow-sm sm:min-h-10 sm:px-4 sm:text-sm">
       {children}
     </span>
   );
@@ -120,34 +120,28 @@ export default function HomePage() {
         <div className="mx-auto max-w-3xl text-center lg:max-w-none lg:text-left">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl xl:text-6xl">
+              <h1 className="whitespace-nowrap text-[clamp(1.55rem,6.9vw,3.1rem)] font-extrabold leading-[1.05] tracking-tight text-ink">
                 Your AI Marketing Team
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-ink-muted">
                 A complete marketing department built around your business, working continuously from one dashboard.
               </p>
-              <div className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
-                <Pill>
-                  <span aria-hidden className="text-brand">◻</span> 11 Specialists
-                </Pill>
-                <Pill>
-                  <span aria-hidden className="text-brand">✓</span> 1 Dashboard
-                </Pill>
-                <Pill>
-                  <span aria-hidden className="text-brand">+</span> Always-on
-                </Pill>
+              <div className="mt-6 flex flex-nowrap items-center justify-center gap-1.5 sm:gap-2 lg:justify-start">
+                {["11 Agents", "1 Dashboard", "24/7"].map((label) => (
+                  <Pill key={label}>
+                    <span aria-hidden className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-lavender text-[9px] font-bold text-brand">
+                      ✓
+                    </span>
+                    {label}
+                  </Pill>
+                ))}
               </div>
-              <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row lg:items-start">
-                <CtaLink href="/request-demo/" ctaId="hero-primary" kind="primary" className="px-7 py-3 text-base">
+              <div className="mt-7 flex flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
+                <CtaLink href="/demo/dashboard/" ctaId="hero-primary" kind="primary" className="px-5 py-3 sm:px-7 sm:text-base">
                   See the team in action →
                 </CtaLink>
-              </div>
-              <div className="mt-3 flex flex-col items-center gap-3 sm:flex-row lg:items-start">
-                <CtaLink href="/demo/dashboard/" ctaId="hero-demo" kind="secondary" variant="secondary">
-                  Demo dashboard
-                </CtaLink>
-                <CtaLink href="/how-it-works/" ctaId="hero-secondary" kind="secondary" variant="secondary">
-                  ▶ See how it works
+                <CtaLink href="/request-demo/" ctaId="hero-book-demo" kind="secondary" variant="secondary" className="px-5 py-3 sm:px-7 sm:text-base">
+                  Book a Demo
                 </CtaLink>
               </div>
               <p className="mt-6 text-sm leading-relaxed text-ink-muted">
