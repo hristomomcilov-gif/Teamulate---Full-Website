@@ -18,14 +18,6 @@ export const metadata: Metadata = {
   alternates: { canonical: absoluteUrl("/") },
 };
 
-function Pill({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex min-h-9 items-center gap-1.5 whitespace-nowrap rounded-full border border-line bg-surface px-3 text-xs font-bold text-ink shadow-sm sm:min-h-10 sm:px-4 sm:text-sm">
-      {children}
-    </span>
-  );
-}
-
 function EyebrowPill({ children }: { children: React.ReactNode }) {
   return (
     <p className="mb-4 flex justify-center">
@@ -126,16 +118,14 @@ export default function HomePage() {
               <p className="mt-5 text-lg leading-relaxed text-ink-muted">
                 A complete marketing department built around your business, working continuously from one dashboard.
               </p>
-              <div className="mt-6 flex flex-nowrap items-center justify-center gap-1.5 sm:gap-2 lg:justify-start">
+              <ul className="mt-6 flex flex-nowrap items-center justify-center gap-4 sm:gap-6 lg:justify-start">
                 {["11 Agents", "1 Dashboard", "24/7"].map((label) => (
-                  <Pill key={label}>
-                    <span aria-hidden className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-lavender text-[9px] font-bold text-brand">
-                      ✓
-                    </span>
+                  <li key={label} className="flex items-center gap-1.5 whitespace-nowrap text-sm font-bold text-ink sm:text-base">
+                    <span aria-hidden className="text-sm font-extrabold text-brand">✓</span>
                     {label}
-                  </Pill>
+                  </li>
                 ))}
-              </div>
+              </ul>
               <div className="mt-7 flex flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
                 <CtaLink href="/demo/dashboard/" ctaId="hero-primary" kind="primary" className="px-5 py-3 sm:px-7 sm:text-base">
                   See the team in action →
