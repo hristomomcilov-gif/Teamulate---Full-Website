@@ -103,16 +103,15 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          {/* prefetch={false}: /login/ must never be prefetched — the auth-protected
-              /app/ is reached only by an explicit click on the login page itself. */}
-          <Link
+          {/* Plain anchor (no next/link): Login must be a full page load of
+              /login/index.html, never client-side routed or prefetched. */}
+          <a
             href="/login/"
-            prefetch={false}
             onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })}
             className="inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:underline"
           >
             Login
-          </Link>
+          </a>
           <CtaLink href="/request-demo/" ctaId="header-primary" kind="primary">
             See the team in action
           </CtaLink>
@@ -154,9 +153,9 @@ export function SiteHeader() {
               </div>
             ))}
             <div className="space-y-2 border-t border-line pt-3">
-              <Link href="/login/" prefetch={false} onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
+              <a href="/login/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
-              </Link>
+              </a>
               <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="w-full">
                 See the team in action
               </CtaLink>

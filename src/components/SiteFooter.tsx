@@ -22,14 +22,16 @@ export function SiteFooter() {
               <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.href}>
-                    {/* Login link never prefetches; /app/ auth starts only from an explicit click on /login/. */}
-                    <Link
-                      href={item.href}
-                      prefetch={item.href === "/login/" ? false : undefined}
-                      className="text-sm text-ink-muted hover:text-brand hover:underline"
-                    >
-                      {item.label}
-                    </Link>
+                    {item.href === "/login/" ? (
+                      // Plain anchor: Login is a full page load, never client-routed or prefetched.
+                      <a href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
