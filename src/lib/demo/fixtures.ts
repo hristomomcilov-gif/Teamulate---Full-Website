@@ -77,7 +77,7 @@ export type DemoWorkItem = {
 
 export const DEMO_WORK: DemoWorkItem[] = [
   { id: "task_1", title: "Publish technical-services campaign landing page", type: "Web/CRO", status: "awaiting_approval", owner: "Flow", due: "Aug 27", goalId: "goal_1", note: "Page built and QA-passed; publishing is bundled into the launch approval." },
-  { id: "task_2", title: "Webinar promotion campaign build", type: "Demand / paid", status: "awaiting_approval", owner: "GrowthTrack", due: "Aug 27", goalId: "goal_1", note: "Campaign drafted with USD 3,000 cap; awaiting launch approval." },
+  { id: "task_2", title: "Webinar promotion campaign build", type: "Demand / paid", status: "awaiting_approval", owner: "GrowthTrack", due: "Aug 27", goalId: "goal_1", note: "Campaign drafted with C$3,000 cap; awaiting launch approval." },
   { id: "task_3", title: "Refresh: 'Preventive maintenance guide' article", type: "SEO/GEO", status: "in_progress", owner: "Seeker", due: "Aug 29", goalId: "goal_2" },
   { id: "task_4", title: "Competitor positioning update - Q3", type: "Research", status: "qa_review", owner: "Scout", due: "Aug 28", goalId: "goal_1" },
   { id: "task_5", title: "Nurture flow for webinar registrants", type: "Lifecycle", status: "ready", owner: "Socialite", due: "Sep 2", goalId: "goal_1" },
@@ -125,8 +125,8 @@ export const DEMO_APPROVALS: DemoApproval[] = [
   {
     id: "apr_1",
     tier: "P3",
-    title: "Approve campaign launch and USD 3,000 budget cap",
-    summary: "Publish the QA-passed landing page and launch the webinar promotion campaign with a hard USD 3,000 spend cap.",
+    title: "Approve campaign launch and C$3,000 budget cap",
+    summary: "Publish the QA-passed landing page and launch the webinar promotion campaign with a hard C$3,000 spend cap.",
     requestedBy: "GrowthTrack (via Strategos)",
     status: "pending",
     dueAt: "Aug 27, 4:00 PM",

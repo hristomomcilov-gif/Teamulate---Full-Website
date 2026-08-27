@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
 import { AGENTS } from "@/content/agents";
-import { PLANS, formatUsd } from "@/content/plans";
+import { PLANS, formatCad } from "@/content/plans";
 import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
@@ -208,7 +208,7 @@ export default function ProductPage() {
               <h3 className="text-base font-bold text-ink">{plan.name}</h3>
               <p className="mt-1 text-sm tabular-nums text-ink-muted">
                 {plan.monthlyPrefix ? "From " : ""}
-                {formatUsd(plan.monthlyUsd)}/mo · setup {formatUsd(plan.setupUsd)}
+                {formatCad(plan.monthlyCad)}/mo · setup {formatCad(plan.setupCad)}
               </p>
               <p className="mt-3 text-sm text-ink-muted">{plan.bestFor}</p>
             </Card>

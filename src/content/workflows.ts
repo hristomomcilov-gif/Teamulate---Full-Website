@@ -113,8 +113,8 @@ export const PLAN_ENTITLEMENTS = [
   {
     key: "core" as PlanKey,
     name: "Core",
-    monthly: "US$5,000/mo",
-    setup: "US$7,500 setup",
+    monthly: "C$5,000/mo",
+    setup: "C$7,500 setup",
     activeCap: 8,
     eligible: 25,
     idea: "The owned-channel engine: research, content, SEO/GEO, social, email, monitoring and reporting.",
@@ -123,8 +123,8 @@ export const PLAN_ENTITLEMENTS = [
   {
     key: "growth" as PlanKey,
     name: "Growth",
-    monthly: "US$7,500/mo",
-    setup: "US$12,500 setup",
+    monthly: "C$7,500/mo",
+    setup: "C$12,500 setup",
     activeCap: 20,
     eligible: 47,
     recommended: true,
@@ -134,8 +134,8 @@ export const PLAN_ENTITLEMENTS = [
   {
     key: "scale" as PlanKey,
     name: "Scale",
-    monthly: "From US$12,000/mo",
-    setup: "US$20,000 setup",
+    monthly: "From C$12,000/mo",
+    setup: "C$20,000 setup",
     activeCap: 35,
     eligible: 60,
     idea: "Customer lifecycle plus advanced and conditional modules on top of the full demand engine.",

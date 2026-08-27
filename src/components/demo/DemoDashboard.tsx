@@ -270,7 +270,7 @@ export function DemoDashboard() {
               </div>
               <div className="rounded-md bg-surface-muted p-3">
                 <dt className="text-xs font-semibold text-ink-muted">Budget cap</dt>
-                <dd className="mt-0.5 font-semibold tabular-nums text-ink">USD {DEMO_CAMPAIGN.spendCapUsd.toLocaleString("en-US")}</dd>
+                <dd className="mt-0.5 font-semibold tabular-nums text-ink">C${DEMO_CAMPAIGN.spendCapUsd.toLocaleString("en-CA")}</dd>
               </div>
               <div className="rounded-md bg-surface-muted p-3">
                 <dt className="text-xs font-semibold text-ink-muted">Primary KPI</dt>

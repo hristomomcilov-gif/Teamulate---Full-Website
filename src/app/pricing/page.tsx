@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
-import { ALL_PLANS_SHARE, PLANS, SETUP_FEE_COVERS, formatUsd } from "@/content/plans";
+import { ALL_PLANS_SHARE, PLANS, SETUP_FEE_COVERS, formatCad } from "@/content/plans";
 import { absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
@@ -42,7 +42,7 @@ const PRICING_FAQ = [
   },
   {
     question: "Is there an annual discount?",
-    answer: "Not at this time. Pricing is monthly, in USD, with the setup fee due at the start of onboarding.",
+    answer: "Not at this time. Pricing is monthly, in CAD, with the setup fee due at the start of onboarding.",
   },
 ];
 
@@ -73,10 +73,10 @@ export default function PricingPage() {
                 </div>
                 <p className="mt-4 text-3xl font-bold tabular-nums text-ink">
                   {plan.monthlyPrefix ? `${plan.monthlyPrefix} ` : ""}
-                  {formatUsd(plan.monthlyUsd)}
+                  {formatCad(plan.monthlyCad)}
                   <span className="text-sm font-medium text-ink-muted"> / month</span>
                 </p>
-                <p className="mt-1 text-sm tabular-nums text-ink-muted">Setup: {formatUsd(plan.setupUsd)}</p>
+                <p className="mt-1 text-sm tabular-nums text-ink-muted">Setup: {formatCad(plan.setupCad)}</p>
                 <ul className="mt-5 space-y-2 border-t border-line pt-5 text-sm text-ink">
                   <li className="flex justify-between gap-2">
                     <span className="text-ink-muted">Active recurring workflows</span>
@@ -102,7 +102,7 @@ export default function PricingPage() {
             </InViewEvent>
           ))}
         </div>
-        <p className="mt-6 text-sm text-ink-muted">All prices in USD.</p>
+        <p className="mt-6 text-sm text-ink-muted">All prices in CAD.</p>
       </Section>
 
       <Section muted>

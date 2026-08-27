@@ -27,6 +27,10 @@ Chris provided a homepage design reference (mobile screenshot) and asked for the
 
 Chris revised the infrastructure/cost model: clients no longer provision AWS, and GrokBot runs on its own computer with its own files and logins for clients, **included in the monthly Teamulate subscription** (not billed separately). This supersedes the master spec's §5.4/§14.2 wording ("Client owns AWS, GrokBot…"). All public copy updated accordingly (ownership disclaimer, homepage pricing note and FAQ, pricing page FAQ). Client-owned boundary now covers: martech subscriptions, advertising spend, data products, marketing accounts, data and assets. The security principles are unchanged: per-client environment isolation, scoped revocable access to client tools, no shared credentials across clients.
 
+## Founder pricing decision (2026-08-27 evening): CAD lock
+
+Public pricing switched from USD to CAD with the SAME numerals (no FX conversion, no ~C$ equivalents): Core C$7,500 + C$5,000/mo; Growth C$12,500 + C$7,500/mo (Most Popular); Scale C$20,000 + from C$12,000/mo. Public savings claim is 90% (homepage/marketing cards). The cost research page keeps the honest math: C$60,000/yr vs Canada 10-role C$875,210 ≈ 93.1%; lean 4-FTE C$363,934 ≈ 83.5% as a secondary research row; US 10-role benchmark shown as context without a cross-currency percentage. Existing disclosure (2026 salary benchmarks, software/ads excluded, no 1:1 output promise) retained.
+
 ## Blockers requiring decisions from Chris (spec §66.2)
 
 1. HubSpot portal + credentials for the CRM handoff.

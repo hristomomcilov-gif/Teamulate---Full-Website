@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { AGENTS } from "@/content/agents";
-import { PLANS, formatUsd } from "@/content/plans";
+import { PLANS, formatCad } from "@/content/plans";
 import { absoluteUrl } from "@/lib/site";
 import { Container, Section, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
@@ -298,7 +298,7 @@ export default function HomePage() {
         <div className="mx-auto mt-10 max-w-3xl">
           <div className="flex items-center justify-between gap-6 rounded-(--tm-radius-lg) bg-lavender p-6 sm:p-8">
             <div>
-              <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 95%</p>
+              <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 90%</p>
               <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
             </div>
             <svg viewBox="0 0 120 60" className="h-14 w-28 shrink-0 sm:h-16 sm:w-32" aria-hidden>
@@ -392,7 +392,7 @@ export default function HomePage() {
                       One-time setup
                     </p>
                     <p className="mt-1.5 text-xl font-extrabold tabular-nums text-ink sm:text-2xl">
-                      US{formatUsd(plan.setupUsd)}
+                      {formatCad(plan.setupCad)}
                     </p>
                   </div>
                   <div>
@@ -401,7 +401,7 @@ export default function HomePage() {
                     </p>
                     <p className="mt-1.5 text-xl font-extrabold tabular-nums text-ink sm:text-2xl">
                       {plan.monthlyPrefix ? <span className="text-sm font-bold text-ink-muted">from </span> : null}
-                      US{formatUsd(plan.monthlyUsd)}
+                      {formatCad(plan.monthlyCad)}
                       <span className="text-sm font-medium text-ink-muted">/mo</span>
                     </p>
                   </div>

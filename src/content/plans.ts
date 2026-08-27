@@ -1,13 +1,14 @@
 /**
- * Plan data per spec §14.1 (project fact — cannot change without a decision
- * from Chris). Default currency USD; no annual discount; Scale uses "From"
- * because complexity varies.
+ * Plan data (project fact — cannot change without a decision from Chris).
+ * Currency locked to CAD on 27 Aug 2026 with the SAME numerals (no FX
+ * conversion). No annual discount; Scale uses "From" because complexity
+ * varies.
  */
 export type Plan = {
   key: "core" | "growth" | "scale";
   name: string;
-  setupUsd: number;
-  monthlyUsd: number;
+  setupCad: number;
+  monthlyCad: number;
   monthlyPrefix?: "From";
   activeRecurringWorkflows: number;
   integrations: number;
@@ -19,8 +20,8 @@ export const PLANS: Plan[] = [
   {
     key: "core",
     name: "Core",
-    setupUsd: 7500,
-    monthlyUsd: 5000,
+    setupCad: 7500,
+    monthlyCad: 5000,
     activeRecurringWorkflows: 8,
     integrations: 4,
     bestFor: "Teams that need dependable recurring execution on a focused channel mix.",
@@ -28,8 +29,8 @@ export const PLANS: Plan[] = [
   {
     key: "growth",
     name: "Growth",
-    setupUsd: 12500,
-    monthlyUsd: 7500,
+    setupCad: 12500,
+    monthlyCad: 7500,
     activeRecurringWorkflows: 20,
     integrations: 8,
     recommended: true,
@@ -38,8 +39,8 @@ export const PLANS: Plan[] = [
   {
     key: "scale",
     name: "Scale",
-    setupUsd: 20000,
-    monthlyUsd: 12000,
+    setupCad: 20000,
+    monthlyCad: 12000,
     monthlyPrefix: "From",
     activeRecurringWorkflows: 35,
     integrations: 12,
@@ -65,10 +66,6 @@ export const SETUP_FEE_COVERS = [
   "Staging runs, QA and go-live acceptance",
 ];
 
-export function formatUsd(amount: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(amount);
+export function formatCad(amount: number): string {
+  return `C$${amount.toLocaleString("en-CA", { maximumFractionDigits: 0 })}`;
 }

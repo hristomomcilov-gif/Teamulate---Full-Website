@@ -103,37 +103,43 @@ export default function MarketingTeamCostPage() {
           <SectionHeading eyebrow="The comparison" title="Loaded people-cost vs a Teamulate Core plan" />
           <div className="overflow-x-auto rounded-(--tm-radius-md) border border-line bg-surface">
             <table className="w-full min-w-[560px] text-left text-sm">
-              <caption className="sr-only">People-cost of a 10-role department versus a Teamulate Core plan, US and Canada</caption>
+              <caption className="sr-only">Canadian people-cost benchmarks versus a Teamulate Core plan (research math)</caption>
               <thead>
                 <tr className="border-b border-line bg-surface-muted">
-                  <th scope="col" className="px-4 py-3 font-semibold text-ink">&nbsp;</th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-ink">United States</th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-ink">Canada</th>
+                  <th scope="col" className="px-4 py-3 font-semibold text-ink">Research math (Canada)</th>
+                  <th scope="col" className="px-4 py-3 font-semibold text-ink">Per year</th>
+                  <th scope="col" className="px-4 py-3 font-semibold text-ink">Vs Teamulate Core</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-line">
-                  <th scope="row" className="px-4 py-3 font-semibold text-ink">10-role loaded people-cost / year</th>
-                  <td className="px-4 py-3 tabular-nums text-ink">~US$1,094,367</td>
-                  <td className="px-4 py-3 tabular-nums text-ink">~C$875,210</td>
+                  <th scope="row" className="px-4 py-3 font-semibold text-ink">Teamulate Core retainer</th>
+                  <td className="px-4 py-3 tabular-nums text-ink">C$5,000/mo × 12 = C$60,000</td>
+                  <td className="px-4 py-3 text-ink-muted">—</td>
                 </tr>
                 <tr className="border-b border-line">
-                  <th scope="row" className="px-4 py-3 font-semibold text-ink">Teamulate Core / year</th>
-                  <td className="px-4 py-3 tabular-nums text-ink">US$5,000/mo = US$60,000</td>
-                  <td className="px-4 py-3 tabular-nums text-ink">~C$6,900/mo = ~C$82,800</td>
+                  <th scope="row" className="px-4 py-3 font-semibold text-ink">10-role loaded people-cost</th>
+                  <td className="px-4 py-3 tabular-nums text-ink">~C$875,210</td>
+                  <td className="px-4 py-3 font-bold tabular-nums text-brand">≈93.1% lower</td>
                 </tr>
                 <tr>
-                  <th scope="row" className="px-4 py-3 font-semibold text-ink">People-cost difference</th>
-                  <td className="px-4 py-3 font-bold tabular-nums text-brand">about 94.5% lower</td>
-                  <td className="px-4 py-3 font-bold tabular-nums text-brand">about 90.5% lower</td>
+                  <th scope="row" className="px-4 py-3 font-semibold text-ink">Lean 4-FTE loaded people-cost (secondary)</th>
+                  <td className="px-4 py-3 tabular-nums text-ink">~C$363,934</td>
+                  <td className="px-4 py-3 font-bold tabular-nums text-brand">≈83.5% lower recurring</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-            Core also carries a one-time setup of US$7,500. Growth (US$12,500 setup + US$7,500/mo) and Scale
-            (US$20,000 setup + from US$12,000/mo) sit above it in capacity. The percentages compare people-cost only -
-            they are not a claim of one-to-one output.
+            The table above is the research math. In marketing copy Teamulate uses a rounded public claim of{" "}
+            <strong className="text-ink">90% lower people-cost</strong> against the 10-role department. The US 10-role
+            benchmark (~US$1,094,367) is shown for context only; we do not compute a cross-currency percentage against
+            the CAD-priced plan.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+            Core also carries a one-time setup of C$7,500. Growth (C$12,500 setup + C$7,500/mo) and Scale (C$20,000
+            setup + from C$12,000/mo) sit above it in capacity. The percentages compare people-cost only - they are
+            not a claim of one-to-one output.
           </p>
         </div>
       </Section>
