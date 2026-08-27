@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
-import { COMPANY_SIZE_RANGES, JOB_ROLES, TEAM_SIZE_RANGES } from "@/lib/forms/schemas";
-import { COPY } from "@/content/copy";
+import { COMPANY_SIZE_RANGES, JOB_ROLES, TEAM_SIZE_RANGES, contactSchema, demoRequestSchema } from "@/lib/forms/schemas";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 type Variant = "demo-request" | "contact";
 
@@ -42,13 +42,17 @@ function Field({
   );
 }
 
+/**
+ * Static-hosting fallback (Apache, no Node runtime): the form validates in
+ * the browser and opens a prefilled email to CONTACT_EMAIL instead of
+ * POSTing to an API. The server pipeline is preserved in
+ * src/server-reference/ for when Node hosting returns.
+ */
 export function LeadForm({ variant }: { variant: Variant }) {
   const pathname = usePathname() ?? "";
-  const [status, setStatus] = useState<"idle" | "submitting" | "accepted" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "accepted">("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [serverMessage, setServerMessage] = useState<string | null>(null);
   const startedRef = useRef(false);
-  const idempotencyKey = useMemo(() => crypto.randomUUID(), []);
 
   useEffect(() => {
     trackEvent("form_viewed", { route: pathname });
@@ -61,56 +65,82 @@ export function LeadForm({ variant }: { variant: Variant }) {
     }
   };
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
     setErrors({});
-    setServerMessage(null);
 
     const formData = new FormData(e.currentTarget);
     const payload: Record<string, unknown> = Object.fromEntries(formData.entries());
     payload.consent = formData.get("consent") === "on";
-    payload.idempotencyKey = idempotencyKey;
+    payload.idempotencyKey = crypto.randomUUID();
+
+    // Honeypot: silently pretend success.
+    if (typeof payload.website_url_confirm === "string" && payload.website_url_confirm.length > 0) {
+      setStatus("accepted");
+      return;
+    }
+
+    const schema = variant === "demo-request" ? demoRequestSchema : contactSchema;
+    const parsed = schema.safeParse(payload);
+    if (!parsed.success) {
+      const fieldErrors: FieldErrors = {};
+      for (const issue of parsed.error.issues) {
+        const field = issue.path.join(".") || "form";
+        if (!fieldErrors[field]) fieldErrors[field] = issue.message;
+        trackEvent("form_validation_error", { route: pathname, field, errorCode: "validation_error" });
+      }
+      setErrors(fieldErrors);
+      return;
+    }
 
     trackEvent("form_submitted", { route: pathname });
 
-    try {
-      // Trailing slash matches the canonical URL form (ADR-003) and avoids a 308 redirect.
-      const endpoint =
-        variant === "demo-request" ? "/api/v1/public/demo-requests/" : "/api/v1/public/contact/";
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-landing-path": pathname },
-        body: JSON.stringify(payload),
-      });
-
-      if (res.status === 202) {
-        setStatus("accepted");
-        trackEvent("form_accepted", { route: pathname });
-        return;
-      }
-
-      const body = (await res.json().catch(() => null)) as
-        | { error?: { code?: string; message?: string; details?: { fieldErrors?: FieldErrors } } }
-        | null;
-      const fieldErrors = body?.error?.details?.fieldErrors ?? {};
-      setErrors(fieldErrors);
-      setServerMessage(body?.error?.message ?? "Something went wrong. Please try again.");
-      setStatus("error");
-      for (const field of Object.keys(fieldErrors)) {
-        trackEvent("form_validation_error", { route: pathname, field, errorCode: body?.error?.code ?? "unknown" });
-      }
-    } catch {
-      setServerMessage("We could not reach the server. Please check your connection and try again.");
-      setStatus("error");
+    const data = parsed.data as Record<string, unknown>;
+    const subject =
+      variant === "demo-request"
+        ? `Demo request - ${data.company ?? ""}`
+        : `Contact - ${data.company ?? ""}`;
+    const lines: string[] = [
+      `Name: ${data.firstName} ${data.lastName}`,
+      `Work email: ${data.email}`,
+      `Company: ${data.company}`,
+    ];
+    if (variant === "demo-request") {
+      lines.push(
+        `Website: ${data.companyWebsite}`,
+        `Role: ${data.jobRole}`,
+        `Company size: ${data.companySize}`,
+        `Marketing team size: ${data.marketingTeamSize}`,
+        `Country / region: ${data.country}`,
+        `Primary challenge: ${data.primaryChallenge}`,
+      );
+      if (data.currentStack) lines.push(`Current stack: ${data.currentStack}`);
+    } else {
+      lines.push(`Message: ${data.message}`);
     }
+    lines.push("", `Sent from ${pathname} on teamulate.ca`);
+
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+    window.location.href = mailto;
+    setStatus("accepted");
+    trackEvent("form_accepted", { route: pathname });
   }
 
   if (status === "accepted") {
     return (
       <div role="status" className="rounded-(--tm-radius-md) border border-green-200 bg-green-50 p-6">
-        <p className="text-base font-semibold text-green-900">Request received</p>
-        <p className="mt-2 text-sm leading-relaxed text-green-900/80">{COPY.formConfirmation}</p>
+        <p className="text-base font-semibold text-green-900">Almost done - send the email draft</p>
+        <p className="mt-2 text-sm leading-relaxed text-green-900/80">
+          Your email app should have opened with your request prefilled. Press send and we will take it from there
+          with a focused review of your goals, current stack and the recurring work you want to move forward.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-green-900/80">
+          Nothing opened? Email us directly at{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold underline">
+            {CONTACT_EMAIL}
+          </a>
+          .
+        </p>
       </div>
     );
   }
@@ -203,21 +233,15 @@ export function LeadForm({ variant }: { variant: Variant }) {
         ) : null}
       </div>
 
-      {serverMessage ? (
-        <p role="alert" className="rounded-(--tm-radius-sm) border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
-          {serverMessage}
-        </p>
-      ) : null}
-
       <button
         type="submit"
-        disabled={status === "submitting"}
-        className="min-h-11 w-full rounded-full bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-[#4a38d8] disabled:opacity-60 sm:w-auto"
+        className="min-h-11 w-full rounded-full bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-[#4a38d8] sm:w-auto"
       >
-        {status === "submitting" ? "Submitting…" : variant === "demo-request" ? "Request demonstration" : "Submit inquiry"}
+        {variant === "demo-request" ? "Request demonstration" : "Submit inquiry"}
       </button>
       <p className="text-xs text-ink-muted">
-        We never ask for passwords, API keys or confidential data in this form.
+        Submitting opens a prefilled email to {CONTACT_EMAIL}. We never ask for passwords, API keys or confidential
+        data in this form.
       </p>
     </form>
   );

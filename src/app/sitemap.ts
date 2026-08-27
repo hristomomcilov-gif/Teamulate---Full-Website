@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SITEMAP_ROUTES, absoluteUrl } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return SITEMAP_ROUTES.map((route) => ({
     url: absoluteUrl(route),

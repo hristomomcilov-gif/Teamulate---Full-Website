@@ -5,6 +5,7 @@ import { SITE, absoluteUrl } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PageViewTracker } from "@/components/PageViewTracker";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <GoogleAnalytics />
         <PageViewTracker />
         <SiteHeader />
         <main id="main-content" className="flex-1">

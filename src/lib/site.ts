@@ -3,6 +3,8 @@
  * (spec §6.1). Domain assumption A1 is documented in
  * docs/KNOWN_GAPS_AND_ASSUMPTIONS.md.
  */
+export const CONTACT_EMAIL = "contact@teamulate.ca";
+
 export const SITE = {
   name: "Teamulate",
   domain: "https://teamulate.ca",

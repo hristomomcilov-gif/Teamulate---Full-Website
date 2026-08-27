@@ -1,25 +1,20 @@
 import type { NextConfig } from "next";
 
-const securityHeaders = [
-  { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-Frame-Options", value: "DENY" },
-  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-];
-
+/**
+ * Static export configuration for Apache hosting (SuperHosting, teamulate.ca).
+ * - output "export" emits plain HTML/CSS/JS into `out/` — no Node required.
+ * - trailingSlash keeps canonical /route/ URLs and maps to route/index.html,
+ *   which Apache serves natively.
+ * - Images are unoptimized because the Next image optimizer needs a server;
+ *   all site images are pre-sized WebP files, so this is acceptable.
+ * - Security headers (previously set here) must be configured in Apache
+ *   (.htaccess) instead: X-Content-Type-Options, X-Frame-Options,
+ *   Referrer-Policy, Permissions-Policy, and X-Robots-Tag noindex for /demo/.
+ */
 const nextConfig: NextConfig = {
-  // Canonical trailing-slash URLs per ADR-003 (spec route registry form).
+  output: "export",
   trailingSlash: true,
-  async headers() {
-    return [
-      { source: "/:path*", headers: securityHeaders },
-      // Demo, app and admin surfaces must never be indexed (spec §18.4).
-      {
-        source: "/demo/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
-    ];
-  },
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

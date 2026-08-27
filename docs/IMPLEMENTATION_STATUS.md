@@ -1,6 +1,17 @@
 # Implementation Status
 
-**Last updated:** 2026-08-26 (Phase 0 + Phase 1; homepage redesigned to founder-provided reference design — see `KNOWN_GAPS_AND_ASSUMPTIONS.md`, "Founder design direction")
+**Last updated:** 2026-08-27 — **LIVE-approved static export for teamulate.ca** (Apache/SuperHosting, no Node). Chris approved go-live from this branch; Skipper deploys `teamulate-live-export.zip` via SFTP.
+
+## Static-export deployment mode (2026-08-27)
+
+- `next.config.ts`: `output: "export"`, `trailingSlash: true`, `images.unoptimized: true`. The export in `out/` (zipped as `teamulate-live-export.zip`) drops onto the Apache document root; shop/demo folders on the live host are untouched by this repo.
+- **Works fully static:** all 13 public routes, the interactive demo dashboard (client-side fixtures), robots.txt, sitemap.xml, favicon/apple icon, GA4.
+- **Cannot run without Node (documented, preserved in `src/server-reference/`):** the form POST pipeline (API routes, server validation, outbox, idempotency, rate limiting, CRM adapter seam). Lead/contact/newsletter forms now validate client-side and open a prefilled `mailto:contact@teamulate.ca` draft instead; no route 404s.
+- **GA4:** official gtag with Measurement ID `G-N9TCF45QX6` in the root layout — applies only to this repo's marketing/demo routes; `/preview/` and shop paths are separate deployments and never receive the tag.
+- **Apache to-do (server-side, not in repo to avoid touching shared docroot config):** security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) and `X-Robots-Tag: noindex` for `/demo/` — previously set via Next headers, now ignored in export mode.
+- **27 Aug content lock verified:** 11 agents only (Strategos head + Scout, Wordsmith, Seeker, GrowthTrack, Pixel, Flow, Socialite, Nexus, Metric, Guardian); no AWS references; GrokBot included in subscription; prices Core US$7,500 + US$5,000/mo, Growth US$12,500 + US$7,500/mo, Scale US$20,000 + US$12,000/mo.
+
+Previous status: Phase 0 + Phase 1 complete; homepage redesigned to founder-provided reference design — see `KNOWN_GAPS_AND_ASSUMPTIONS.md`, "Founder design direction".
 
 ## Phase 0 — Current-state audit and foundations
 
