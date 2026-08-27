@@ -22,34 +22,14 @@ export type NavItem = { label: string; href: string; description?: string };
 export type NavGroup = { label: string; items: NavItem[] };
 
 /**
- * Only routes with final approved content appear in navigation
- * (phased routing rule, spec §6.2). Deferred routes are tracked in
- * docs/ROUTE_INVENTORY.md and are intentionally absent here.
+ * Header nav locked by Chris/Skipper (27 Aug): lean top bar only.
+ * The six SEO pages live in the footer "Guides" column, never the header.
  */
 export const HEADER_NAV: NavGroup[] = [
-  {
-    label: "Product",
-    items: [
-      {
-        label: "Autonomous Marketing Department",
-        href: "/autonomous-ai-marketing-department/",
-        description: "What the product is and what you receive",
-      },
-      { label: "How It Works", href: "/how-it-works/", description: "The end-to-end operating model" },
-      { label: "The 11-Agent Team", href: "/team/", description: "One head, eight specialists, two assurance agents" },
-      { label: "Workflow Library", href: "/workflows/", description: "The 18 named workflows" },
-      { label: "Dashboard", href: "/dashboard/", description: "Proof and control in one place" },
-      { label: "Security & Governance", href: "/security-governance/", description: "Approvals, permissions and audit" },
-    ],
-  },
-  {
-    label: "Pricing",
-    items: [{ label: "Plans & scope", href: "/pricing/", description: "Core, Growth and Scale" }],
-  },
-  {
-    label: "Company",
-    items: [{ label: "Contact", href: "/contact/", description: "Talk to Teamulate" }],
-  },
+  { label: "How it works", items: [{ label: "How it works", href: "/how-it-works/" }] },
+  { label: "Team", items: [{ label: "Team", href: "/team/" }] },
+  { label: "Pricing", items: [{ label: "Pricing", href: "/pricing/" }] },
+  { label: "Demo", items: [{ label: "Demo", href: "/demo/dashboard/" }] },
 ];
 
 export const FOOTER_GROUPS: NavGroup[] = [
@@ -64,9 +44,11 @@ export const FOOTER_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Learn",
+    label: "Guides",
     items: [
+      { label: "Autonomous marketing department", href: "/autonomous-ai-marketing-department/" },
       { label: "What is an AI marketing team?", href: "/ai-marketing-team/" },
+      { label: "The 18 named workflows", href: "/workflows/" },
       { label: "AI vs marketing automation", href: "/ai-marketing-automation/" },
       { label: "Marketing team cost 2026", href: "/research/marketing-team-cost-2026/" },
       { label: "Compare your options", href: "/compare/ai-vs-agency-vs-fractional-vs-inhouse/" },

@@ -6,6 +6,7 @@ import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 export const metadata: Metadata = {
   title: "The Autonomous AI Marketing Department",
@@ -252,6 +253,7 @@ export default function ProductPage() {
           </div>
         </div>
       </Section>
+      <RelatedGuides current="/autonomous-ai-marketing-department/" />
     </>
   );
 }

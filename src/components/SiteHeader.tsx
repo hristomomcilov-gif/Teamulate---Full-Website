@@ -130,7 +130,9 @@ export function SiteHeader() {
           <div className="mx-auto max-w-[1240px] space-y-4 px-5 py-4">
             {HEADER_NAV.map((group) => (
               <div key={group.label}>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">{group.label}</p>
+                {group.items.length > 1 ? (
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">{group.label}</p>
+                ) : null}
                 {group.items.map((item) => (
                   <Link
                     key={item.href}

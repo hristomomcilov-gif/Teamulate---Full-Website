@@ -4,6 +4,7 @@ import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 export const metadata: Metadata = {
   title: "AI Marketing Automation vs an AI Marketing Department",
@@ -191,6 +192,7 @@ export default function AiMarketingAutomationPage() {
           </div>
         </div>
       </Section>
+      <RelatedGuides current="/ai-marketing-automation/" />
     </>
   );
 }

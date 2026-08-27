@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 export const metadata: Metadata = {
   title: "What a Marketing Team Costs in 2026 - US & Canada",
@@ -196,6 +197,7 @@ export default function MarketingTeamCostPage() {
           </Link>
         </p>
       </Section>
+      <RelatedGuides current="/research/marketing-team-cost-2026/" />
     </>
   );
 }

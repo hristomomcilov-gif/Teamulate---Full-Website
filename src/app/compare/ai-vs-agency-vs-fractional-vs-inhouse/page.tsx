@@ -4,6 +4,7 @@ import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 export const metadata: Metadata = {
   title: "AI Department vs Agency vs Fractional vs In-House",
@@ -210,6 +211,7 @@ export default function ComparePage() {
           </div>
         </div>
       </Section>
+      <RelatedGuides current="/compare/ai-vs-agency-vs-fractional-vs-inhouse/" />
     </>
   );
 }

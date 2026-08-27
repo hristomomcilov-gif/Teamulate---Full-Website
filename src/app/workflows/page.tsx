@@ -4,6 +4,7 @@ import { WORKFLOW_GROUPS, WORKFLOW_TITLE_COUNT } from "@/content/workflows";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 export const metadata: Metadata = {
   title: "The 18 Named Marketing Workflows",
@@ -129,6 +130,7 @@ export default function WorkflowsPage() {
           </div>
         </div>
       </Section>
+      <RelatedGuides current="/workflows/" />
     </>
   );
 }
