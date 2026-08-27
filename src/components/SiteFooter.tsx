@@ -22,16 +22,14 @@ export function SiteFooter() {
               <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.href}>
-                    {item.href.startsWith("/app") ? (
-                      // Plain anchor: /app/ is the Apache-protected dashboard outside the Next router.
-                      <a href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
-                        {item.label}
-                      </Link>
-                    )}
+                    {/* Login link never prefetches; /app/ auth starts only from an explicit click on /login/. */}
+                    <Link
+                      href={item.href}
+                      prefetch={item.href === "/login/" ? false : undefined}
+                      className="text-sm text-ink-muted hover:text-brand hover:underline"
+                    >
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

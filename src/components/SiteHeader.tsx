@@ -103,14 +103,16 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          {/* Plain anchor: /app/ is the Apache Basic Auth-protected client dashboard, outside the Next router. */}
-          <a
-            href="/app/"
+          {/* prefetch={false}: /login/ must never be prefetched — the auth-protected
+              /app/ is reached only by an explicit click on the login page itself. */}
+          <Link
+            href="/login/"
+            prefetch={false}
             onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })}
             className="inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:underline"
           >
             Login
-          </a>
+          </Link>
           <CtaLink href="/request-demo/" ctaId="header-primary" kind="primary">
             See the team in action
           </CtaLink>
@@ -152,9 +154,9 @@ export function SiteHeader() {
               </div>
             ))}
             <div className="space-y-2 border-t border-line pt-3">
-              <a href="/app/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
+              <Link href="/login/" prefetch={false} onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
-              </a>
+              </Link>
               <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="w-full">
                 See the team in action
               </CtaLink>

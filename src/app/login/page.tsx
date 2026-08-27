@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Card, Eyebrow, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Client Login",
@@ -7,28 +8,41 @@ export const metadata: Metadata = {
 };
 
 /**
- * The client dashboard lives at /app/ behind Apache Basic Auth (realm
- * Teamulate). SuperHosting already 302-redirects /login variants to /app/;
- * this page persists the same behavior inside the static export: meta
- * refresh + script redirect + a visible fallback link. No login form here.
+ * Public login page - deliberately NO automatic redirect and NO prefetchable
+ * link to /app/. The Apache Basic Auth prompt on /app/ (realm Teamulate)
+ * must start only from an explicit user click, so the dashboard is reached
+ * via a form GET submit. Never 302 /login to /app/ and never put
+ * href="/app/" in the site chrome: prefetching it triggers the auth popup
+ * on unrelated pages.
  */
 export default function LoginPage() {
   return (
-    <>
-      {/* Browsers honor meta refresh in body; Apache-level 302 covers the rest. */}
-      <meta httpEquiv="refresh" content="0;url=/app/" />
-      <script dangerouslySetInnerHTML={{ __html: 'window.location.replace("/app/");' }} />
-      <div className="mx-auto max-w-md px-5 py-24 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">Client login</p>
-        <h1 className="mt-2 text-2xl font-bold text-ink">Taking you to the client dashboard…</h1>
-        <p className="mt-3 text-sm text-ink-muted">
-          If nothing happens,{" "}
-          <a href="/app/" className="font-semibold text-brand underline">
-            continue to the dashboard
-          </a>
-          . You will be asked for your Teamulate access credentials.
-        </p>
+    <Section className="pt-16">
+      <div className="mx-auto max-w-md">
+        <Eyebrow>Client login</Eyebrow>
+        <h1 className="text-3xl font-bold tracking-tight text-ink">Sign in to your dashboard</h1>
+        <Card className="mt-6">
+          <p className="text-sm leading-relaxed text-ink-muted">
+            The client dashboard is protected. After you continue, your browser will ask for your Teamulate access
+            credentials - use the details provided during onboarding.
+          </p>
+          <form action="/app/" method="get" className="mt-5">
+            <button
+              type="submit"
+              className="min-h-11 w-full rounded-full bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-[#4a38d8]"
+            >
+              Continue to the client dashboard
+            </button>
+          </form>
+          <p className="mt-4 text-xs leading-relaxed text-ink-muted">
+            No credentials yet? Access is provisioned during onboarding -{" "}
+            <a href="/contact/" className="font-medium text-brand underline">
+              contact us
+            </a>
+            .
+          </p>
+        </Card>
       </div>
-    </>
+    </Section>
   );
 }
