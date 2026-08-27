@@ -22,9 +22,16 @@ export function SiteFooter() {
               <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
-                      {item.label}
-                    </Link>
+                    {item.href.startsWith("/app") ? (
+                      // Plain anchor: /app/ is the Apache-protected dashboard outside the Next router.
+                      <a href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -38,7 +45,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} Teamulate · Autonomous marketing department · Client login opens with onboarding.
+            © {year} Teamulate · Autonomous marketing department
           </p>
           <p className="flex gap-4">
             {FOOTER_GROUPS.find((g) => g.label === "Legal")!.items.map((item) => (

@@ -103,9 +103,14 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <CtaLink href="/login/" ctaId="header-login" kind="login" variant="ghost">
+          {/* Plain anchor: /app/ is the Apache Basic Auth-protected client dashboard, outside the Next router. */}
+          <a
+            href="/app/"
+            onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })}
+            className="inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:underline"
+          >
             Login
-          </CtaLink>
+          </a>
           <CtaLink href="/request-demo/" ctaId="header-primary" kind="primary">
             See the team in action
           </CtaLink>
@@ -147,9 +152,9 @@ export function SiteHeader() {
               </div>
             ))}
             <div className="space-y-2 border-t border-line pt-3">
-              <Link href="/login/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
+              <a href="/app/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
-              </Link>
+              </a>
               <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="w-full">
                 See the team in action
               </CtaLink>
