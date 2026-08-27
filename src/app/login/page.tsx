@@ -31,7 +31,7 @@ export default function LoginPage() {
               type="submit"
               className="min-h-11 w-full rounded-full bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-[#4a38d8]"
             >
-              Continue to the client dashboard
+              Sign in
             </button>
           </form>
           <p className="mt-4 text-xs leading-relaxed text-ink-muted">
