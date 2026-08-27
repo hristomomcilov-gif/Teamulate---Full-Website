@@ -120,7 +120,7 @@ export default function AiMarketingTeamPage() {
         <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ink-muted">
           What the seats actually run day to day is public:{" "}
           <Link href="/workflows/" className="font-semibold text-brand underline">
-            the 18 named workflows
+            the workflow library
           </Link>{" "}
           across research, pages, social, video, outreach and measurement.
         </p>

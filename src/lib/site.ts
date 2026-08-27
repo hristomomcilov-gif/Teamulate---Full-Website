@@ -48,7 +48,7 @@ export const FOOTER_GROUPS: NavGroup[] = [
     items: [
       { label: "Autonomous Marketing Department", href: "/autonomous-ai-marketing-department/" },
       { label: "What is an AI marketing team?", href: "/ai-marketing-team/" },
-      { label: "The 18 named workflows", href: "/workflows/" },
+      { label: "Workflow library", href: "/workflows/" },
       { label: "AI vs marketing automation", href: "/ai-marketing-automation/" },
       { label: "Marketing team cost 2026", href: "/research/marketing-team-cost-2026/" },
       { label: "Compare your options", href: "/compare/ai-vs-agency-vs-fractional-vs-inhouse/" },

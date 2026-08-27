@@ -23,7 +23,7 @@ const FAQ_ITEMS = [
   {
     question: "Does Teamulate guarantee better ROI than the alternatives?",
     answer:
-      "No. Nobody honest can guarantee marketing ROI, and we do not. What we can show is the cost structure (published in our 2026 cost research), the named seats, the 18 named workflows, and a dashboard where you see the work and its results with limitations stated.",
+      "No. Nobody honest can guarantee marketing ROI, and we do not. What we can show is the cost structure (published in our 2026 cost research), the named seats, the 60-workflow eligible library with plan activation caps, and a dashboard where you see the work and its results with limitations stated.",
   },
   {
     question: "Can Teamulate work alongside an agency or fractional leader?",
@@ -54,7 +54,7 @@ const ROWS: Row[] = [
   },
   {
     label: "Capacity shape",
-    teamulate: "Recurring execution across research, pages, social, video, outreach and measurement (18 named workflows)",
+    teamulate: "Recurring execution across research, content, SEO/GEO, social, lifecycle, paid and measurement - a 60-workflow eligible library, activating 8, 20 or 35 by plan",
     inhouse: "As many functions as you can afford to staff",
     agency: "Deep in the agency's specialty, thinner elsewhere",
     fractional: "Strategy and direction; execution stays with you",

@@ -27,7 +27,7 @@ There were no pre-existing routes, so no `keep`, `revise`, `merge`, `redirect` o
 |---|---|---|
 | `/ai-marketing-team/` | create | Definition pillar; FAQ schema; 11 named seats |
 | `/ai-marketing-automation/` | create | MOFU contrast (TM-09 lock); comparison table; FAQ schema |
-| `/workflows/` | create | 18 named titles in 6 groups mapped to the 11 seats; ItemList + FAQ schema |
+| `/workflows/` | create | Entitlement Matrix v1.0 (27 Aug): 60 eligible workflows W01-W60, activate 8/20/35 by plan; ItemList + FAQ schema |
 | `/research/marketing-team-cost-2026/` | create | Honest cost page from 21 Aug 2026 master research; Article schema; author Chris Momchilov, Barrie |
 | `/compare/ai-vs-agency-vs-fractional-vs-inhouse/` | create | Four-option comparison, no fake metrics; FAQ schema |
 

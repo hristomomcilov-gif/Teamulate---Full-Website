@@ -173,7 +173,7 @@ export default function MarketingTeamCostPage() {
           <div>
             <h2 className="text-2xl font-bold text-ink">What the alternative looks like</h2>
             <p className="mt-2 max-w-xl text-ink-muted">
-              Eleven named seats, eighteen named workflows, one dashboard - see how the department compares with
+              Eleven named seats, a 60-workflow eligible library, one dashboard - see how the department compares with
               hiring, agencies and fractional help.
             </p>
           </div>
@@ -193,7 +193,7 @@ export default function MarketingTeamCostPage() {
           </Link>{" "}
           ·{" "}
           <Link href="/workflows/" className="font-semibold text-brand underline">
-            The 18 named workflows
+            The workflow library
           </Link>
         </p>
       </Section>

@@ -4,7 +4,7 @@ import { Container } from "@/components/ui";
 const GUIDES: { href: string; label: string }[] = [
   { href: "/autonomous-ai-marketing-department/", label: "The autonomous marketing department" },
   { href: "/ai-marketing-team/", label: "What is an AI marketing team?" },
-  { href: "/workflows/", label: "The 18 named workflows" },
+  { href: "/workflows/", label: "Workflow library" },
   { href: "/ai-marketing-automation/", label: "AI vs marketing automation" },
   { href: "/research/marketing-team-cost-2026/", label: "Marketing team cost 2026" },
   { href: "/compare/ai-vs-agency-vs-fractional-vs-inhouse/", label: "Compare your options" },

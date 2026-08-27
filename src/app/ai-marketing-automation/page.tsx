@@ -135,7 +135,7 @@ export default function AiMarketingAutomationPage() {
           Teamulate is not an ESP replacement and not a zap tool. Your stack stays; the department produces the work
           that flows through it. See exactly what it drafts in{" "}
           <Link href="/workflows/" className="font-semibold text-brand underline">
-            the 18 named workflows
+            the workflow library
           </Link>
           .
         </p>

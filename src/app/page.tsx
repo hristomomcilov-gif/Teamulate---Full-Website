@@ -48,7 +48,7 @@ const OPERATING_TRAITS = [
 const GLANCE_STATS = [
   { value: "11", label: "AI specialists" },
   { value: "Always-on", label: "Operations" },
-  { value: "18", label: "Named workflows" },
+  { value: "60", label: "Eligible library workflows" },
   { value: "231", label: "Marketing functions mapped" },
 ];
 
@@ -448,7 +448,7 @@ export default function HomePage() {
             <ul className="mt-4 space-y-1.5 text-sm font-semibold text-brand">
               <li><Link href="/autonomous-ai-marketing-department/" className="hover:underline">Autonomous Marketing Department →</Link></li>
               <li><Link href="/ai-marketing-team/" className="hover:underline">What is an AI marketing team? →</Link></li>
-              <li><Link href="/workflows/" className="hover:underline">The 18 named workflows →</Link></li>
+              <li><Link href="/workflows/" className="hover:underline">Workflow library →</Link></li>
               <li><Link href="/ai-marketing-automation/" className="hover:underline">AI vs marketing automation →</Link></li>
               <li><Link href="/research/marketing-team-cost-2026/" className="hover:underline">Marketing team cost 2026 →</Link></li>
               <li><Link href="/compare/ai-vs-agency-vs-fractional-vs-inhouse/" className="hover:underline">Compare your options →</Link></li>
