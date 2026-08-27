@@ -39,9 +39,13 @@ function ShieldIcon({ className = "h-6 w-6" }: { className?: string }) {
 }
 
 const STEPS = [
-  { icon: PersonIcon, title: "1 Human", caption: "Chris" },
-  { icon: SparkleIcon, title: "AI-Native Company", caption: "Agents run the routine work" },
-  { icon: GroupIcon, title: "Same Model", caption: "We deploy for you" },
+  {
+    icon: PersonIcon,
+    title: "A Human (Chris)",
+    caption: "Researches your company dynamics/goals; configures your AI setup",
+  },
+  { icon: SparkleIcon, title: "AI Agents", caption: "Routines and campaigns execution" },
+  { icon: GroupIcon, title: "Outcome for AI Visibility", caption: "The new marketing medium" },
 ];
 
 export function FounderCard() {
@@ -62,8 +66,8 @@ export function FounderCard() {
               <SparkleIcon className="h-4.5 w-4.5" />
             </span>
           </div>
-          <p className="mt-4 text-xl font-bold text-ink">Chris Momchilov</p>
-          <p className="mt-1 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-ink-muted">
+          <p className="mt-4 text-center text-xl font-bold text-ink">Chris Momchilov</p>
+          <p className="mt-1 flex items-center justify-center gap-2 text-center text-xs font-bold uppercase tracking-[0.18em] text-ink-muted">
             Founder <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
           </p>
         </div>
@@ -107,9 +111,9 @@ export function FounderCard() {
               <ShieldIcon className="h-5.5 w-5.5" />
             </span>
             <div>
-              <p className="text-sm font-bold text-ink">Our first customer is Teamulate.</p>
+              <p className="text-sm font-bold text-ink">We are our own first customer.</p>
               <p className="mt-0.5 text-sm leading-relaxed text-ink-muted">
-                The same AI team we give our customers runs our own marketing.
+                To prove you our work is worth it.
               </p>
             </div>
           </div>
@@ -121,7 +125,7 @@ export function FounderCard() {
                 &ldquo;
               </span>
               <p className="max-w-sm text-left text-base font-semibold leading-relaxed text-ink sm:text-center">
-                Small human teams will achieve big things with very capable AI teams.
+                One-man success has never been more accessible. I&apos;m here to help you grow.
               </p>
             </blockquote>
             <figcaption className="mt-2 text-sm font-bold text-brand">— Chris</figcaption>
