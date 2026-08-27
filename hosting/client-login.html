@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Client Login | Teamulate</title>
+  <style>
+    :root { --ink:#141414; --muted:#5b5750; --bg:#f6f4ef; --brand:#5b3df5; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+    .top { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; }
+    .top a { color:var(--brand); text-decoration:none; font-weight:600; }
+    .wrap { min-height:calc(100vh - 64px); display:flex; align-items:center; justify-content:center; padding:24px; }
+    .card { width:100%; max-width:400px; background:#fff; border-radius:20px; padding:28px; box-shadow:0 8px 32px rgba(0,0,0,.06); }
+    h1 { font-size:1.6rem; margin:0 0 8px; }
+    .lead { color:var(--muted); margin:0 0 20px; line-height:1.45; }
+    label { display:block; font-size:.85rem; font-weight:600; margin:0 0 6px; }
+    input { width:100%; min-height:48px; border:1px solid #ddd6cb; border-radius:12px; padding:0 14px; font-size:1rem; margin-bottom:14px; }
+    button { width:100%; min-height:48px; border:0; border-radius:999px; background:var(--brand); color:#fff; font-weight:600; font-size:1rem; cursor:pointer; }
+    .err { color:#b42318; font-size:.9rem; min-height:1.3em; margin:0 0 10px; }
+  </style>
+</head>
+<body>
+  <div class="top"><a href="/">Teamulate</a><a href="/">Back</a></div>
+  <div class="wrap">
+    <div class="card">
+      <h1>Sign in</h1>
+      <p class="lead">Enter the username and password you received at onboarding.</p>
+      <p class="err" id="err"></p>
+      <form method="post" action="/auth/login.php" autocomplete="on">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" required />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button type="submit">Sign in</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    if (/[?&]err=1/.test(location.search)) {
+      document.getElementById('err').textContent = 'Wrong username or password.';
+    }
+  </script>
+</body>
+</html>

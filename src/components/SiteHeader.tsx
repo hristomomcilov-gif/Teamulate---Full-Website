@@ -103,10 +103,10 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          {/* Plain anchor (no next/link): Login must be a full page load of
-              /login/index.html, never client-side routed or prefetched. */}
+          {/* Plain anchor to the live field form (matches production wiring;
+              /login-intercept.js additionally guards against client routing). */}
           <a
-            href="/login/"
+            href="/client-login.html"
             onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })}
             className="inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:underline"
           >
@@ -153,7 +153,7 @@ export function SiteHeader() {
               </div>
             ))}
             <div className="space-y-2 border-t border-line pt-3">
-              <a href="/login/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
+              <a href="/client-login.html" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
               </a>
               <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="w-full">

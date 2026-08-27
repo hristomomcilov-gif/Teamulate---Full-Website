@@ -42,3 +42,8 @@ next-env.d.ts
 
 # Local form outbox (never commit submissions)
 .data/
+
+# Live auth secrets - never commit (hosting/README.md)
+auth/.secret
+hosting/auth/.secret
+**/.htpasswd

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SITE, absoluteUrl } from "@/lib/site";
+import Script from "next/script";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PageViewTracker } from "@/components/PageViewTracker";
@@ -51,6 +52,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* Capture-phase guard: any Login/Client-login anchor goes to the live
+            field form as a full page load - Next client routing can never
+            reopen an old cached login card (matches production wiring). */}
+        <Script src="/login-intercept.js" strategy="beforeInteractive" />
         <GoogleAnalytics />
         <PageViewTracker />
         <SiteHeader />

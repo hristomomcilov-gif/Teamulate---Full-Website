@@ -1,0 +1,4 @@
+# Public marketing site. Do not password this folder.
+# Full-page /login goes to the field form. Do not send it to /app/.
+RewriteEngine On
+RewriteRule ^login/?$ /client-login.html [R=302,L]
