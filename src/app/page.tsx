@@ -446,7 +446,7 @@ export default function HomePage() {
               One URL per intent. No daily blog slop. No invented proof.
             </p>
             <ul className="mt-4 space-y-1.5 text-sm font-semibold text-brand">
-              <li><Link href="/autonomous-ai-marketing-department/" className="hover:underline">The autonomous marketing department →</Link></li>
+              <li><Link href="/autonomous-ai-marketing-department/" className="hover:underline">Autonomous Marketing Department →</Link></li>
               <li><Link href="/ai-marketing-team/" className="hover:underline">What is an AI marketing team? →</Link></li>
               <li><Link href="/workflows/" className="hover:underline">The 18 named workflows →</Link></li>
               <li><Link href="/ai-marketing-automation/" className="hover:underline">AI vs marketing automation →</Link></li>

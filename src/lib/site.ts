@@ -36,7 +36,6 @@ export const FOOTER_GROUPS: NavGroup[] = [
   {
     label: "Product",
     items: [
-      { label: "Autonomous Marketing Department", href: "/autonomous-ai-marketing-department/" },
       { label: "How It Works", href: "/how-it-works/" },
       { label: "The 11-Agent Team", href: "/team/" },
       { label: "Dashboard", href: "/dashboard/" },
@@ -44,9 +43,10 @@ export const FOOTER_GROUPS: NavGroup[] = [
     ],
   },
   {
+    // The Guides column is the SEO door (locked order and English labels, 27 Aug).
     label: "Guides",
     items: [
-      { label: "Autonomous marketing department", href: "/autonomous-ai-marketing-department/" },
+      { label: "Autonomous Marketing Department", href: "/autonomous-ai-marketing-department/" },
       { label: "What is an AI marketing team?", href: "/ai-marketing-team/" },
       { label: "The 18 named workflows", href: "/workflows/" },
       { label: "AI vs marketing automation", href: "/ai-marketing-automation/" },
