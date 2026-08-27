@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
 import { AGENTS } from "@/content/agents";
 import { PLANS, formatUsd } from "@/content/plans";
-import { absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -65,15 +65,20 @@ export default function ProductPage() {
         <div className="max-w-3xl">
           <Eyebrow>{COPY.category}</Eyebrow>
           <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            A managed autonomous marketing department, operating inside your tools
+            The autonomous AI marketing department
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">{COPY.thirtySecondExplanation}</p>
+          <p className="mt-5 text-lg leading-relaxed text-ink">{ENTITY_LINE}</p>
+          <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+            This is the department, not another zap tool: eleven named seats draft new work - research, pages, social,
+            video, outreach and measurement - under one strategy, with independent QA and human sign-off on the
+            decisions that matter. {COPY.hero.headline}
+          </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CtaLink href="/request-demo/" ctaId="product-hero-primary" kind="primary">
-              See the team in action
+            <CtaLink href="/team/" ctaId="product-hero-primary" kind="primary">
+              Meet the 11 seats
             </CtaLink>
-            <CtaLink href="/contact/" ctaId="product-hero-secondary" kind="secondary">
-              Request a stack review
+            <CtaLink href="/how-it-works/" ctaId="product-hero-secondary" kind="secondary">
+              See how it works
             </CtaLink>
           </div>
         </div>

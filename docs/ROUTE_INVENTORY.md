@@ -21,14 +21,21 @@ There were no pre-existing routes, so no `keep`, `revise`, `merge`, `redirect` o
 | `/privacy/` | create | footer | yes | Placeholder pending legal review (labelled) |
 | `/terms/` | create | footer | yes | Placeholder pending legal review (labelled) |
 
+## SEO launch pages (created 2026-08-27, indexable, in sitemap)
+
+| Route | Status | Notes |
+|---|---|---|
+| `/ai-marketing-team/` | create | Definition pillar; FAQ schema; 11 named seats |
+| `/ai-marketing-automation/` | create | MOFU contrast (TM-09 lock); comparison table; FAQ schema |
+| `/workflows/` | create | 18 named titles in 6 groups mapped to the 11 seats; ItemList + FAQ schema |
+| `/research/marketing-team-cost-2026/` | create | Honest cost page from 21 Aug 2026 master research; Article schema; author Chris Momchilov, Barrie |
+| `/compare/ai-vs-agency-vs-fractional-vs-inhouse/` | create | Four-option comparison, no fake metrics; FAQ schema |
+
 ## Public routes — P1/P2 (deferred, feature-gated, not in nav or sitemap)
 
 | Route | Status | Blocking gate |
 |---|---|---|
-| `/ai-marketing-team/` | absent | Final approved pillar content |
 | `/ai-agents-for-marketing/` | absent | Final approved pillar content |
-| `/ai-marketing-automation/` | absent | Final approved pillar content |
-| `/workflows/` | absent | Workflow library content |
 | `/integrations/` + provider pages | absent | Tested connector or documented manual path (spec §16.1) |
 | `/industries/` + vertical pages | absent | Non-generic vertical content (spec §17 warning) |
 | `/compare/ai-vs-agency-vs-fractional-vs-inhouse/` | absent | Approved comparison content |

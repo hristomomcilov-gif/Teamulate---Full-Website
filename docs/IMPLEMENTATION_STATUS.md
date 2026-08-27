@@ -11,6 +11,10 @@
 - **Apache to-do (server-side, not in repo to avoid touching shared docroot config):** security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) and `X-Robots-Tag: noindex` for `/demo/` — previously set via Next headers, now ignored in export mode.
 - **27 Aug content lock verified:** 11 agents only (Strategos head + Scout, Wordsmith, Seeker, GrowthTrack, Pixel, Flow, Socialite, Nexus, Metric, Guardian); no AWS references; GrokBot included in subscription; prices Core US$7,500 + US$5,000/mo, Growth US$12,500 + US$7,500/mo, Scale US$20,000 + US$12,000/mo.
 
+## SEO launch pages (2026-08-27, second export)
+
+Six indexable routes shipped in the live visual system per Chief of Staff brief: `/autonomous-ai-marketing-department/` (beachhead rework with verbatim entity line + direct answer), `/ai-marketing-team/`, `/workflows/` (18 named titles, 6 groups, ItemList + FAQ schema), `/ai-marketing-automation/` (TM-09 contrast), `/research/marketing-team-cost-2026/` (Article schema, author Chris Momchilov, Barrie; 10 RH roles, ~US$1,094,367 / ~C$875,210 loaded; Core ≈94.5% / ≈90.5% lower people-cost; Scout/Socialite/Guardian excluded as no RH line; full disclosure block), `/compare/ai-vs-agency-vs-fractional-vs-inhouse/`. Locked entity line rendered site-wide via footer. Homepage "60+ workflows" corrected to "18 named workflows". Robots now also disallows `/preview/`; sitemap includes the six URLs and excludes preview/demo/app/admin/api/login. No Offer schema on cost/compare pages.
+
 Previous status: Phase 0 + Phase 1 complete; homepage redesigned to founder-provided reference design — see `KNOWN_GAPS_AND_ASSUMPTIONS.md`, "Founder design direction".
 
 ## Phase 0 — Current-state audit and foundations

@@ -48,7 +48,7 @@ const OPERATING_TRAITS = [
 const GLANCE_STATS = [
   { value: "11", label: "AI specialists" },
   { value: "Always-on", label: "Operations" },
-  { value: "60+", label: "Recurring workflows" },
+  { value: "18", label: "Named workflows" },
   { value: "231", label: "Marketing functions mapped" },
 ];
 
@@ -319,9 +319,13 @@ export default function HomePage() {
             <p className="mt-1 text-sm text-ink-muted">Marketing experience behind the system</p>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-ink-muted">
-            Cost comparison based on 2026 Robert Half national midpoints plus employer load for an 8-person North
+            Cost comparison based on 2026 Robert Half national midpoints plus employer load for a 10-role North
             American marketing department, against Teamulate plan fees. Software and ads excluded from people-cost
-            percentages. Modeled, not a guarantee. The full cost model publishes with the research hub.
+            percentages. Modeled, not a guarantee.{" "}
+            <Link href="/research/marketing-team-cost-2026/" className="font-semibold text-brand underline">
+              Read the full cost research
+            </Link>
+            .
           </p>
         </div>
       </Section>
@@ -441,7 +445,11 @@ export default function HomePage() {
             <p className="mt-2 text-sm leading-relaxed text-ink-muted">
               One URL per intent. No daily blog slop. No invented proof.
             </p>
-            <p className="mt-4"><StatusChip tone="neutral" label="Publishing soon" /></p>
+            <ul className="mt-4 space-y-1.5 text-sm font-semibold text-brand">
+              <li><Link href="/ai-marketing-team/" className="hover:underline">What is an AI marketing team? →</Link></li>
+              <li><Link href="/workflows/" className="hover:underline">The 18 named workflows →</Link></li>
+              <li><Link href="/research/marketing-team-cost-2026/" className="hover:underline">Marketing team cost 2026 →</Link></li>
+            </ul>
             <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
               <div className="absolute -left-10 top-2 h-40 w-40 rounded-full bg-brand" />
             </div>

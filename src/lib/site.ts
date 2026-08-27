@@ -37,6 +37,7 @@ export const HEADER_NAV: NavGroup[] = [
       },
       { label: "How It Works", href: "/how-it-works/", description: "The end-to-end operating model" },
       { label: "The 11-Agent Team", href: "/team/", description: "One head, eight specialists, two assurance agents" },
+      { label: "Workflow Library", href: "/workflows/", description: "The 18 named workflows" },
       { label: "Dashboard", href: "/dashboard/", description: "Proof and control in one place" },
       { label: "Security & Governance", href: "/security-governance/", description: "Approvals, permissions and audit" },
     ],
@@ -63,6 +64,15 @@ export const FOOTER_GROUPS: NavGroup[] = [
     ],
   },
   {
+    label: "Learn",
+    items: [
+      { label: "What is an AI marketing team?", href: "/ai-marketing-team/" },
+      { label: "AI vs marketing automation", href: "/ai-marketing-automation/" },
+      { label: "Marketing team cost 2026", href: "/research/marketing-team-cost-2026/" },
+      { label: "Compare your options", href: "/compare/ai-vs-agency-vs-fractional-vs-inhouse/" },
+    ],
+  },
+  {
     label: "Plans",
     items: [
       { label: "Pricing", href: "/pricing/" },
@@ -86,10 +96,15 @@ export const FOOTER_GROUPS: NavGroup[] = [
   },
 ];
 
-/** Routes included in the XML sitemap. Demo, app, admin and api are excluded. */
+/** Routes included in the XML sitemap. Preview, demo, app, admin, api and login are excluded. */
 export const SITEMAP_ROUTES = [
   "/",
   "/autonomous-ai-marketing-department/",
+  "/ai-marketing-team/",
+  "/ai-marketing-automation/",
+  "/workflows/",
+  "/research/marketing-team-cost-2026/",
+  "/compare/ai-vs-agency-vs-fractional-vs-inhouse/",
   "/how-it-works/",
   "/team/",
   "/dashboard/",
@@ -100,3 +115,7 @@ export const SITEMAP_ROUTES = [
   "/privacy/",
   "/terms/",
 ] as const;
+
+/** Locked entity line (27 Aug) - rendered verbatim on every page via the footer. */
+export const ENTITY_LINE =
+  "Teamulate is an autonomous AI marketing department for B2B companies. The department runs the work. Strategos is Head of Marketing. Chris Momchilov is the founder above Teamulate.";
