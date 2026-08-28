@@ -48,7 +48,7 @@ const OPERATING_TRAITS = [
 
 const GLANCE_STATS = [
   { value: "11", label: "AI specialists" },
-  { value: "Always-on", label: "Operations" },
+  { value: "24/7", label: "Operations" },
   { value: "60", label: "Eligible library workflows" },
   { value: "231", label: "Marketing functions mapped" },
 ];
