@@ -477,9 +477,9 @@ export default function HomePage() {
             <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
               Demo
             </p>
-            <h3 className="mt-3 text-lg font-extrabold text-ink">One Tenant 0 workflow</h3>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">One sample workflow</h3>
             <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-              Research through measure, labeled Demo data. No invented lift.
+              Follow a demo workflow from research through measurement, labeled Demo data. No invented lift.
             </p>
             <p className="mt-4 text-sm font-bold text-brand group-hover:underline">Open the demo →</p>
             <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">

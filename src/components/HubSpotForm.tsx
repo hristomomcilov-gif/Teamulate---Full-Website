@@ -137,6 +137,9 @@ export function HubSpotForm({
     const email = value("email").toLowerCase();
     if (!EMAIL_RE.test(email)) nextErrors.email = "Enter a valid work email.";
 
+    if (variant === "newsletter" && data.get("consent") !== "on") {
+      nextErrors.consent = "Please confirm you want to receive future updates.";
+    }
     if (variant !== "newsletter") {
       requireText("firstname", "First name is required.");
       requireText("lastname", "Last name is required.");
@@ -163,6 +166,9 @@ export function HubSpotForm({
       const v = value(name);
       if (v) fields.push({ name, value: v });
     };
+    if (variant === "newsletter") {
+      fields.push({ name: "consent", value: "true" });
+    }
     if (variant !== "newsletter") {
       push("firstname");
       push("lastname");
@@ -224,6 +230,15 @@ export function HubSpotForm({
         {errors.email ? (
           <p role="alert" className="mt-2 text-xs font-medium text-critical">
             {errors.email}
+          </p>
+        ) : null}
+        <label className="mt-2.5 flex items-start gap-2 text-xs text-ink-muted">
+          <input type="checkbox" name="consent" className="mt-0.5 h-3.5 w-3.5 rounded border-line accent-[#5b47f0]" />
+          <span>I agree that Teamulate may store my email and contact me about future updates.</span>
+        </label>
+        {errors.consent ? (
+          <p role="alert" className="mt-1 text-xs font-medium text-critical">
+            {errors.consent}
           </p>
         ) : null}
         {status === "error" ? (

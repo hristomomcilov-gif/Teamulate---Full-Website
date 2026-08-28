@@ -39,10 +39,13 @@ export default function PrivacyPage() {
             </p>
           </section>
           <section>
-            <h2 className="text-lg font-semibold">Analytics</h2>
+            <h2 className="text-lg font-semibold">Analytics and cookies</h2>
             <p className="mt-2 text-ink-muted">
-              We measure page and interaction events in aggregate. We do not send form contents, email addresses or
-              other personal details to analytics tooling. The site does not set non-essential cookies at this time.
+              The marketing pages of this website use Google Analytics 4 (measurement ID G-N9TCF45QX6), which sets
+              analytics cookies to measure page views and interactions in aggregate. This applies to the marketing
+              pages only - not to the client dashboard or unrelated demo sites hosted on this domain. We do not send
+              form contents, email addresses or other personal details to analytics tooling. You can block analytics
+              cookies with your browser settings or an opt-out extension; the site works without them.
             </p>
           </section>
           <section>
