@@ -1,6 +1,6 @@
 /**
  * Demo-profile sample from the live /app/ Marketing Dashboard.
- * Filled 27 Aug 2026 for the demo user. Already labelled sample.
+ * Filled 27 Aug 2026 for the demo user (Tenant 0).
  * Do not invent metrics, ROI, customer names, or zero-fill gaps.
  */
 import { AGENTS } from "@/content/agents";
@@ -40,7 +40,6 @@ export type DemoKpi = {
   label: string;
   display: string;
   note?: string;
-  sample?: boolean;
 };
 
 /**
@@ -53,7 +52,6 @@ export const DEMO_KPIS: DemoKpi[] = [
     label: "Website Traffic",
     display: "286,400",
     note: "sessions this week",
-    sample: true,
   },
   { id: "leads", label: "Leads", display: "6,840" },
   { id: "conversion", label: "Conversion", display: "2.39%" },
@@ -61,11 +59,42 @@ export const DEMO_KPIS: DemoKpi[] = [
   { id: "content", label: "Content", display: "67" },
 ];
 
-/** Funnel stages that exist in the sample. No extra stages, no zeros. */
+/**
+ * Funnel stages from the live /app/ sample. Rates are stage-to-prior as shown
+ * on the product (Leads / Visitors, MQLs / Leads, Meetings / MQLs).
+ */
 export const DEMO_FUNNEL = [
-  { stage: "Sessions", value: 286_400, display: "286,400" },
-  { stage: "Leads", value: 6_840, display: "6,840" },
-  { stage: "Meetings", value: 412, display: "412" },
+  { stage: "Visitors", value: 286_400, display: "286,400" },
+  { stage: "Leads", value: 6_840, display: "6,840", rate: "2.39%" },
+  { stage: "MQLs", value: 1_710, display: "1,710", rate: "25.0%" },
+  { stage: "Meetings", value: 412, display: "412", rate: "24.1%" },
+] as const;
+
+/**
+ * Exact Performance Overview paths from /app/index.html for Aug 24–30.
+ * Rising then plateauing. Do not invent a different shape or daily totals.
+ */
+export const DEMO_PERFORMANCE_CHART = {
+  trafficPath: "M48 118 C 140 92, 200 104, 232 98 S 320 70, 368 62 S 500 68, 600 48",
+  leadsPath: "M48 132 C 140 118, 210 124, 248 110 S 340 78, 400 64 S 520 58, 600 42",
+  trafficColor: "#2f6bff",
+  leadsColor: "#8fb0ff",
+  trafficLabel: "Website Traffic",
+  leadsLabel: "Leads Generated",
+  leftAxis: ["50K", "25K", "0"] as const,
+  rightAxis: ["1.2K", "0.6K", "0"] as const,
+  xLabels: ["Aug 24", "25", "26", "27", "28", "29", "30"] as const,
+};
+
+/**
+ * Channel mix from the live /app/ sample. Sums to 100 — not invented.
+ */
+export const DEMO_CHANNEL_MIX = [
+  { channel: "Organic Search", percent: 38, color: "#2f6bff" },
+  { channel: "Paid", percent: 24, color: "#5b8cff" },
+  { channel: "Social", percent: 16, color: "#8fb0ff" },
+  { channel: "Email", percent: 12, color: "#b7c9f0" },
+  { channel: "Events", percent: 10, color: "#d4def5" },
 ] as const;
 
 /**
@@ -94,12 +123,10 @@ export const DEMO_AGENTS = AGENTS.map((agent) => ({
   tag: agent.tag,
 }));
 
-/** Views with no sample rows/series stay omitted — never empty-zeroed. */
+/** Views with no sample rows stay omitted — never empty-zeroed. */
 export const DEMO_OMITTED = {
-  channelMix: "Channel mix is not in this sample.",
   campaigns: "No campaigns in this sample window.",
   recommendations: "No recommendations in this sample.",
-  dailySeries: "Daily series is not in this sample. Week total only.",
   social: "No social metrics in this sample.",
   seoExtra: "No ranking or Search Console series in this sample.",
   settings: "Account settings are not part of this public sample.",
