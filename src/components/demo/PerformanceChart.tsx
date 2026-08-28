@@ -18,7 +18,7 @@ export function PerformanceChart({
   return (
     <svg
       viewBox="0 0 648 168"
-      className={compact ? "h-28 w-full" : "h-52 w-full"}
+      className={compact ? "h-36 w-full" : "h-52 w-full"}
       role="img"
       aria-label={`${DEMO_PERFORMANCE_CHART.trafficLabel} and ${DEMO_PERFORMANCE_CHART.leadsLabel}, ${DEMO_PROFILE.period.label}`}
     >
