@@ -61,7 +61,7 @@ export function GlanceCostContrast() {
       {inHouse.map((seat) => (
         <Seat key={`${seat.x}-${seat.y}`} x={seat.x} y={seat.y} />
       ))}
-      <Seat x="148" y="48" scale={1.35} />
+      <Seat x={148} y={48} scale={1.35} />
       {agents.map(([x, y]) => (
         <AgentNode key={`${x}-${y}`} x={x} y={y} />
       ))}
