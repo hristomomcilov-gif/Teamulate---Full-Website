@@ -57,7 +57,7 @@ export function DashboardMockup() {
               ))}
             </div>
 
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="grid gap-2">
               <div className="rounded-md border border-line bg-surface p-2.5">
                 <div className="mb-1 flex items-center justify-between gap-1">
                   <p className="text-[10px] font-semibold text-ink">Performance Overview</p>
@@ -66,7 +66,7 @@ export function DashboardMockup() {
                   </span>
                 </div>
                 <PerformanceLegend />
-                <PerformanceChart compact />
+                <PerformanceChart />
               </div>
 
               <div className="rounded-md border border-line bg-surface p-2.5">

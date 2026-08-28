@@ -7,18 +7,14 @@ const Y_TICKS = [40, 90, 140];
  * Exact /app/ Performance Overview curves. Same path on the homepage hero
  * and /demo/dashboard/ — only the rendered size changes.
  */
-export function PerformanceChart({
-  compact = false,
-}: {
-  compact?: boolean;
-}) {
+export function PerformanceChart() {
   const { trafficPath, leadsPath, trafficColor, leadsColor, leftAxis, rightAxis, xLabels } =
     DEMO_PERFORMANCE_CHART;
 
   return (
     <svg
       viewBox="0 0 648 168"
-      className={compact ? "h-36 w-full" : "h-52 w-full"}
+      className="h-auto w-full"
       role="img"
       aria-label={`${DEMO_PERFORMANCE_CHART.trafficLabel} and ${DEMO_PERFORMANCE_CHART.leadsLabel}, ${DEMO_PROFILE.period.label}`}
     >
