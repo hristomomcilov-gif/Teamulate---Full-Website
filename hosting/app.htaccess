@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /app/
+RewriteRule ^serve\.php$ - [F]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)$ /auth/serve.php?path=$1 [L,QSA]
+RewriteRule ^$ /auth/serve.php?path=index.html [L]
+Header set X-Robots-Tag "noindex, nofollow"
+Options -Indexes
+<Files ".htpasswd">
+  Require all denied
+</Files>
+<Files "metrics.json">
+  Header set Cache-Control "no-store"
+</Files>
