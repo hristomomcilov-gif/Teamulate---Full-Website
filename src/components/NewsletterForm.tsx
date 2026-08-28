@@ -10,7 +10,7 @@ export function NewsletterForm() {
       formId="75437d08-8527-461c-8169-9cb6f12e4d79"
       variant="newsletter"
       submitLabel="Subscribe"
-      successMessage="You're on the list. We'll email you when there's a Teamulate update."
+      successMessage="You're signed up for the newsletter."
     />
   );
 }
