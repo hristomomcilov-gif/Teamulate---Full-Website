@@ -35,7 +35,7 @@ export default function RequestDemoPage() {
           </p>
         </div>
         <Card>
-          <HubSpotForm formId="10fb9f2d-fdae-47db-8ce8-f986de3a5e08" submitLabel="Request demonstration" />
+          <HubSpotForm formId="10fb9f2d-fdae-47db-8ce8-f986de3a5e08" variant="demo" submitLabel="Request demonstration" />
           <p className="mt-4 text-xs text-ink-muted">
             We never ask for passwords, API keys or confidential data in this form.
           </p>

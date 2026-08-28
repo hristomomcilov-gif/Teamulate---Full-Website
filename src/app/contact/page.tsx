@@ -31,6 +31,7 @@ export default function ContactPage() {
         <Card>
           <HubSpotForm
             formId="ebf145a0-8999-4d1d-ab8c-2cfd3610b888"
+            variant="contact"
             submitLabel="Submit inquiry"
             successMessage="Thank you. We have received your message and a human who can answer will get back to you."
           />
