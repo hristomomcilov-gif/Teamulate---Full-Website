@@ -33,7 +33,7 @@ Public pricing switched from USD to CAD with the SAME numerals (no FX conversion
 
 ## Blockers requiring decisions from Chris (spec §66.2)
 
-1. HubSpot portal + credentials for the CRM handoff.
+1. ~~HubSpot portal + credentials~~ - resolved 2026-08-28: HubSpot embedded forms live on request-demo, contact and footer newsletter (portal 247113907, na2).
 2. Hosting provider and CI/CD target.
 3. Legal counsel review of privacy/terms (placeholders are visibly labelled).
 4. ~~Final logo/wordmark~~ — resolved: founder-provided SVG integrated. Note: the logo gradient (#7A67D8 → #7058CF) is a softer purple than the UI brand violet (#5b47f0); confirm whether UI accents should be retuned to the logo palette.

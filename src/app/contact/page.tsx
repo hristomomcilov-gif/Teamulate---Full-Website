@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section } from "@/components/ui";
-import { LeadForm } from "@/components/LeadForm";
+import { HubSpotForm } from "@/components/HubSpotForm";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -29,7 +29,14 @@ export default function ContactPage() {
           </p>
         </div>
         <Card>
-          <LeadForm variant="contact" />
+          <HubSpotForm
+            formId="ebf145a0-8999-4d1d-ab8c-2cfd3610b888"
+            submitLabel="Submit inquiry"
+            successMessage="Thank you. We have received your message and a human who can answer will get back to you."
+          />
+          <p className="mt-4 text-xs text-ink-muted">
+            We never ask for passwords, API keys or confidential data in this form.
+          </p>
         </Card>
       </div>
     </Section>

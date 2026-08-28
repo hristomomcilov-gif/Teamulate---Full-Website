@@ -9,10 +9,10 @@ verbatim when the site returns to Node-capable hosting (Phase 2+).
 
 While the static export is live:
 
-- Lead / contact / newsletter forms use a client-side `mailto:` fallback to
-  `contact@teamulate.ca` (see `src/components/LeadForm.tsx` and
-  `NewsletterForm.tsx`). No POST endpoint exists.
-- The server outbox, idempotency, rate limiting and CRM adapter pipeline are
-  offline. Submissions arrive as email instead.
-- Form analytics events (`form_submitted` / `form_accepted`) still fire via
-  GA4 on the client.
+- Lead / contact / newsletter forms are **HubSpot embeds** (portal 247113907,
+  region na2; see `src/components/HubSpotForm.tsx`), restyled to the site
+  tokens via `.tm-hs-form` CSS in `globals.css`. Submissions go straight to
+  HubSpot - the earlier `mailto:` fallback is retired (28 Aug 2026).
+- The server outbox, idempotency, rate limiting and CRM adapter pipeline
+  remain offline; if a Node backend returns, these routes can complement or
+  replace the embeds.

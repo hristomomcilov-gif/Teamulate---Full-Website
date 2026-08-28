@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 import { Card, Eyebrow, Section } from "@/components/ui";
-import { LeadForm } from "@/components/LeadForm";
+import { HubSpotForm } from "@/components/HubSpotForm";
 
 export const metadata: Metadata = {
   title: "Request a Demonstration",
@@ -35,7 +35,10 @@ export default function RequestDemoPage() {
           </p>
         </div>
         <Card>
-          <LeadForm variant="demo-request" />
+          <HubSpotForm formId="10fb9f2d-fdae-47db-8ce8-f986de3a5e08" submitLabel="Request demonstration" />
+          <p className="mt-4 text-xs text-ink-muted">
+            We never ask for passwords, API keys or confidential data in this form.
+          </p>
         </Card>
       </div>
     </Section>
