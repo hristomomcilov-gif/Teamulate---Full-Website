@@ -7,7 +7,7 @@ import { DemoDashboard } from "@/components/demo/DemoDashboard";
 export const metadata: Metadata = {
   title: "Interactive Dashboard Demo",
   description:
-    "Explore the Teamulate client dashboard with clearly labelled sample data: one complete workflow, one approval decision, one measured result.",
+    "Explore the Teamulate Marketing Dashboard with the demo-profile sample for 24–30 Aug 2026. Labelled sample data, not a customer account.",
   robots: { index: false, follow: false },
 };
 
@@ -23,9 +23,8 @@ export default function DemoDashboardPage() {
             The dashboard, with sample data
           </h1>
           <p className="mt-3 text-base leading-relaxed text-ink-muted">
-            This is a guided sample for a fictional company, Northstar Technical Services. In 2-4 minutes you can see a
-            goal at risk, the work that unblocked it, make an approval decision yourself and watch the system react.
-            Nothing here touches any real account.
+            This is the Teamulate Marketing Dashboard using the demo-profile sample filled 27 Aug 2026
+            (week of Aug 24–30). Every number is labelled sample. Nothing here is a live customer account.
           </p>
         </div>
         <DemoDashboard />
