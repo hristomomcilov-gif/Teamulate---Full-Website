@@ -11,6 +11,7 @@ import { DashboardMockup } from "@/components/home/DashboardMockup";
 import { AssetGallery } from "@/components/home/AssetGallery";
 import { FounderCard } from "@/components/home/FounderCard";
 import { LoopStepIcon, type LoopIconName } from "@/components/home/LoopStepIcon";
+import { PlanIcon } from "@/components/PlanIcon";
 
 export const metadata: Metadata = {
   title: "Teamulate | Your AI Marketing Team",
@@ -379,9 +380,7 @@ export default function HomePage() {
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-brand">
-                    <span aria-hidden className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-brand text-xs">
-                      {plan.name.charAt(0)}
-                    </span>
+                    <PlanIcon planKey={plan.key} />
                     {plan.name}
                   </p>
                   {plan.recommended ? (
