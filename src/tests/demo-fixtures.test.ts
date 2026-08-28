@@ -23,6 +23,13 @@ describe("demo fixtures (live /app/ sample profile)", () => {
     expect(blob).not.toMatch(/Northstar/i);
   });
 
+  it("does not keep the retired hero mock numbers", () => {
+    const blob = JSON.stringify(DEMO_KPIS);
+    expect(blob).not.toContain("12,480");
+    expect(blob).not.toContain("164");
+    expect(blob).not.toContain("3.4%");
+  });
+
   it("keeps the exact /app/ demo-profile KPI numbers", () => {
     expect(DEMO_KPIS.map((k) => [k.id, k.display])).toEqual([
       ["traffic", "286,400"],
