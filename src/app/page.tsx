@@ -10,6 +10,7 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
 import { AssetGallery } from "@/components/home/AssetGallery";
 import { FounderCard } from "@/components/home/FounderCard";
+import { GlanceCostContrast } from "@/components/home/GlanceCostContrast";
 import { LoopStepIcon, type LoopIconName } from "@/components/home/LoopStepIcon";
 import { PlanIcon } from "@/components/PlanIcon";
 
@@ -301,15 +302,12 @@ export default function HomePage() {
           <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">The system at a glance</h2>
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
-          <div className="flex items-center justify-between gap-6 rounded-(--tm-radius-lg) bg-lavender p-6 sm:p-8">
-            <div>
+          <div className="flex flex-col gap-4 rounded-(--tm-radius-lg) bg-lavender p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-8">
+            <div className="min-w-0">
               <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 90%</p>
               <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
             </div>
-            <svg viewBox="0 0 120 60" className="h-14 w-28 shrink-0 sm:h-16 sm:w-32" aria-hidden>
-              <path d="M0,55 L30,45 L60,32 L90,18 L115,6" fill="none" stroke="var(--tm-violet-600)" strokeWidth="3" strokeLinecap="round" />
-              <circle cx="115" cy="6" r="4" fill="var(--tm-violet-600)" />
-            </svg>
+            <GlanceCostContrast />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
             {GLANCE_STATS.map((stat) => (
