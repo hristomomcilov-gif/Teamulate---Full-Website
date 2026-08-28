@@ -10,6 +10,7 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
 import { AssetGallery } from "@/components/home/AssetGallery";
 import { FounderCard } from "@/components/home/FounderCard";
+import { LoopStepIcon, type LoopIconName } from "@/components/home/LoopStepIcon";
 
 export const metadata: Metadata = {
   title: "Teamulate | Your AI Marketing Team",
@@ -28,14 +29,14 @@ function EyebrowPill({ children }: { children: React.ReactNode }) {
   );
 }
 
-const LOOP_STEPS = [
-  { n: "01", title: "Learn", body: "Business, brand, and constraints first.", color: "bg-brand" },
-  { n: "02", title: "Research", body: "The brief behind the next asset.", color: "bg-brand-blue" },
-  { n: "03", title: "Plan", body: "Head of Marketing sets the rails.", color: "bg-positive" },
-  { n: "04", title: "Build", body: "Specialists draft inside those rails.", color: "bg-attention" },
-  { n: "05", title: "Launch", body: "The department publishes, launches, and spends - inside approvals.", color: "bg-brand" },
-  { n: "06", title: "Measure", body: "What your tools recorded. Empty is allowed.", color: "bg-brand-blue" },
-  { n: "07", title: "Improve", body: "The next pass uses what we can see.", color: "bg-navy-900" },
+const LOOP_STEPS: { n: string; title: string; body: string; color: string; icon: LoopIconName }[] = [
+  { n: "01", title: "Learn", body: "Business, brand, and constraints first.", color: "bg-brand", icon: "learn" },
+  { n: "02", title: "Research", body: "The brief behind the next asset.", color: "bg-brand-blue", icon: "research" },
+  { n: "03", title: "Plan", body: "Head of Marketing sets the rails.", color: "bg-positive", icon: "plan" },
+  { n: "04", title: "Build", body: "Specialists draft inside those rails.", color: "bg-attention", icon: "build" },
+  { n: "05", title: "Launch", body: "The department publishes, launches, and spends - inside approvals.", color: "bg-brand", icon: "launch" },
+  { n: "06", title: "Measure", body: "What your tools recorded. Empty is allowed.", color: "bg-brand-blue", icon: "measure" },
+  { n: "07", title: "Improve", body: "The next pass uses what we can see.", color: "bg-positive", icon: "improve" },
 ];
 
 const OPERATING_TRAITS = [
@@ -179,8 +180,11 @@ export default function HomePage() {
                   href="/how-it-works/"
                   className="group flex min-w-0 flex-1 items-center gap-4 rounded-(--tm-radius-lg) border border-line bg-surface p-4 shadow-card transition-colors hover:border-brand"
                 >
-                  <span aria-hidden className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${step.color} text-lg font-bold text-white`}>
-                    {step.title.charAt(0)}
+                  <span
+                    aria-hidden
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white ${step.color}`}
+                  >
+                    <LoopStepIcon name={step.icon} />
                   </span>
                   <span className="min-w-0">
                     <span className="block text-base font-bold text-ink">{step.title}</span>
