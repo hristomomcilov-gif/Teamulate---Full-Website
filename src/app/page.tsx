@@ -10,7 +10,6 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
 import { AssetGallery } from "@/components/home/AssetGallery";
 import { FounderCard } from "@/components/home/FounderCard";
-import { GlanceCostContrast } from "@/components/home/GlanceCostContrast";
 import { LoopStepIcon, type LoopIconName } from "@/components/home/LoopStepIcon";
 import { PlanIcon } from "@/components/PlanIcon";
 
@@ -307,7 +306,13 @@ export default function HomePage() {
               <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 90%</p>
               <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
             </div>
-            <GlanceCostContrast />
+            <Image
+              src="/assets/glance-90-coins-arrow.png"
+              alt=""
+              width={1536}
+              height={1024}
+              className="mx-auto h-auto w-[13.5rem] shrink-0 object-contain sm:mx-0 sm:w-[15.5rem]"
+            />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
             {GLANCE_STATS.map((stat) => (
