@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { WorkflowDemo } from "@/components/WorkflowDemo";
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "The Teamulate operating model end to end: business context, goal intake, planning, parallel execution, independent assurance, approvals, controlled execution, measurement and learning.",
   alternates: { canonical: absoluteUrl("/how-it-works/") },
+  ...marketingShareMetadata,
 };
 
 const STAGES = [

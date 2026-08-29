@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "Marketing automation runs rules on a path someone already designed. Named AI seats draft new work. Where automation ends, a department begins - and where Teamulate fits.",
   alternates: { canonical: absoluteUrl("/ai-marketing-automation/") },
   robots: { index: true, follow: true },
+  ...marketingShareMetadata,
 };
 
 const FAQ_ITEMS = [

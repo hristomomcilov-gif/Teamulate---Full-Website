@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Eyebrow, Section, StatusChip } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How Teamulate collects, uses and protects information.",
   alternates: { canonical: absoluteUrl("/privacy/") },
+  ...marketingShareMetadata,
 };
 
 export default function PrivacyPage() {

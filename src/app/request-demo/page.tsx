@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section } from "@/components/ui";
 import { HubSpotForm } from "@/components/HubSpotForm";
 
@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description:
     "See the Teamulate autonomous marketing department in action: a focused review of your goals, current stack and the recurring work you want to move forward.",
   alternates: { canonical: absoluteUrl("/request-demo/") },
+  ...marketingShareMetadata,
 };
 
 export default function RequestDemoPage() {

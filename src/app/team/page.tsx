@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AGENTS, TEAM_STRUCTURE_SENTENCE } from "@/content/agents";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "One AI Head of Marketing, eight execution specialists and two independent assurance agents - one coordinated department with clear responsibilities, collaboration paths and outputs.",
   alternates: { canonical: absoluteUrl("/team/") },
+  ...marketingShareMetadata,
 };
 
 function AgentDetail({ slug }: { slug: string }) {

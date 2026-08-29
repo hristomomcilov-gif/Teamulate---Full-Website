@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Eyebrow, Section, StatusChip } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
   description: "Terms of use for the Teamulate website.",
   alternates: { canonical: absoluteUrl("/terms/") },
+  ...marketingShareMetadata,
 };
 
 export default function TermsPage() {
