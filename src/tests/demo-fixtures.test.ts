@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   DEMO_AGENTS,
   DEMO_CHANNEL_MIX,
+  DEMO_CHANNEL_ROWS,
   DEMO_FUNNEL,
   DEMO_KPIS,
   DEMO_NAV,
@@ -85,11 +86,27 @@ describe("demo fixtures (live /app/ sample profile)", () => {
     expect(DEMO_CHANNEL_MIX.reduce((sum, row) => sum + row.percent, 0)).toBe(100);
   });
 
-  it("does not claim the daily series or channel mix are omitted", () => {
+  it("does not claim filled Tenant 0 series are omitted", () => {
     const omitted = JSON.stringify(DEMO_OMITTED);
     expect(omitted).not.toMatch(/Daily series/i);
     expect(omitted).not.toMatch(/Channel mix/i);
     expect(omitted).not.toMatch(/Week total only/i);
+    expect(omitted).not.toMatch(/No campaigns/i);
+    expect(omitted).not.toMatch(/No social metrics/i);
+    expect(omitted).not.toMatch(/Search Console/i);
+    expect(omitted).not.toMatch(/No recommendations/i);
+    expect(DEMO_OMITTED.settings).toMatch(/not part of this public sample/i);
+  });
+
+  it("splits the week traffic total by the /app/ channel mix", () => {
+    expect(DEMO_CHANNEL_ROWS.map((row) => [row.channel, row.sessions])).toEqual([
+      ["Organic Search", 108_832],
+      ["Paid", 68_736],
+      ["Social", 45_824],
+      ["Email", 34_368],
+      ["Events", 28_640],
+    ]);
+    expect(DEMO_CHANNEL_ROWS.reduce((sum, row) => sum + row.sessions, 0)).toBe(286_400);
   });
 
   it("matches the live /app/ sidebar order", () => {

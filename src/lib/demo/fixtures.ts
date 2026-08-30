@@ -88,6 +88,7 @@ export const DEMO_PERFORMANCE_CHART = {
 
 /**
  * Channel mix from the live /app/ sample. Sums to 100 — not invented.
+ * Session counts are the same week total (286,400) split by those percents.
  */
 export const DEMO_CHANNEL_MIX = [
   { channel: "Organic Search", percent: 38, color: "#2f6bff" },
@@ -96,6 +97,21 @@ export const DEMO_CHANNEL_MIX = [
   { channel: "Email", percent: 12, color: "#b7c9f0" },
   { channel: "Events", percent: 10, color: "#d4def5" },
 ] as const;
+
+const TRAFFIC_TOTAL = 286_400;
+
+export const DEMO_CHANNEL_ROWS = DEMO_CHANNEL_MIX.map((row) => {
+  const sessions = (TRAFFIC_TOTAL * row.percent) / 100;
+  return {
+    ...row,
+    sessions,
+    sessionsDisplay: sessions.toLocaleString("en-CA"),
+  };
+});
+
+export const DEMO_ORGANIC = DEMO_CHANNEL_ROWS.find((row) => row.channel === "Organic Search")!;
+export const DEMO_SOCIAL = DEMO_CHANNEL_ROWS.find((row) => row.channel === "Social")!;
+export const DEMO_PAID = DEMO_CHANNEL_ROWS.find((row) => row.channel === "Paid")!;
 
 /**
  * Product agent codes as shown on /app/ (Strategos/T-Head, Seeker/T-Search,
@@ -123,11 +139,7 @@ export const DEMO_AGENTS = AGENTS.map((agent) => ({
   tag: agent.tag,
 }));
 
-/** Views with no sample rows stay omitted — never empty-zeroed. */
+/** Only settings stay gated on the public demo. No real account PII. */
 export const DEMO_OMITTED = {
-  campaigns: "No campaigns in this sample window.",
-  recommendations: "No recommendations in this sample.",
-  social: "No social metrics in this sample.",
-  seoExtra: "No ranking or Search Console series in this sample.",
   settings: "Account settings are not part of this public sample.",
 } as const;

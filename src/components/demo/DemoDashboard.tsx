@@ -8,13 +8,24 @@ import { PerformanceChart, PerformanceLegend } from "@/components/demo/Performan
 import { trackEvent } from "@/lib/analytics";
 import {
   DEMO_AGENTS,
+  DEMO_CHANNEL_ROWS,
   DEMO_FUNNEL,
   DEMO_KPIS,
   DEMO_NAV,
   DEMO_OMITTED,
+  DEMO_ORGANIC,
   DEMO_PROFILE,
+  DEMO_SOCIAL,
   type DemoNavItem,
 } from "@/lib/demo/fixtures";
+
+function SampleChip() {
+  return (
+    <span className="rounded-full border border-line px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink-muted">
+      {DEMO_PROFILE.sampleLabel}
+    </span>
+  );
+}
 
 function Panel({
   title,
@@ -31,7 +42,7 @@ function Panel({
     <section className={`rounded-(--tm-radius-md) border border-line bg-surface p-4 shadow-card sm:p-5 ${className}`}>
       <div className="mb-3 flex items-center justify-between gap-2">
         <h3 className="text-sm font-bold text-ink">{title}</h3>
-        {trailing}
+        {trailing ?? <SampleChip />}
       </div>
       {children}
     </section>
@@ -58,7 +69,10 @@ function PerformanceOverview() {
     <Panel
       title="Performance Overview"
       trailing={
-        <span className="rounded-full border border-line px-2 py-0.5 text-[10px] font-semibold text-ink-muted">7D</span>
+        <span className="flex items-center gap-1.5">
+          <span className="rounded-full border border-line px-2 py-0.5 text-[10px] font-semibold text-ink-muted">7D</span>
+          <SampleChip />
+        </span>
       }
     >
       <PerformanceLegend />
@@ -73,6 +87,33 @@ function ChannelPerformance() {
   return (
     <Panel title="Channel Performance">
       <ChannelDonut />
+    </Panel>
+  );
+}
+
+function ChannelTable() {
+  return (
+    <Panel title="Channel mix">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[22rem] text-left text-xs">
+          <thead>
+            <tr className="border-b border-line text-[11px] font-semibold uppercase tracking-wide text-ink-muted">
+              <th className="pb-2 pr-3 font-semibold">Channel</th>
+              <th className="pb-2 pr-3 font-semibold">Share</th>
+              <th className="pb-2 font-semibold">Sessions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {DEMO_CHANNEL_ROWS.map((row) => (
+              <tr key={row.channel} className="border-b border-line/70 last:border-0">
+                <td className="py-2.5 pr-3 font-medium text-ink">{row.channel}</td>
+                <td className="py-2.5 pr-3 tabular-nums text-ink">{row.percent}%</td>
+                <td className="py-2.5 tabular-nums font-semibold text-ink">{row.sessionsDisplay}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Panel>
   );
 }
@@ -104,39 +145,12 @@ function LeadFunnel() {
   );
 }
 
-function ActiveCampaigns() {
+function AgentActivity({ names }: { names?: string[] }) {
+  const rows = names ? DEMO_AGENTS.filter((agent) => names.includes(agent.name)) : DEMO_AGENTS;
   return (
-    <Panel title="Active Campaigns">
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[28rem] text-left text-xs">
-          <thead>
-            <tr className="border-b border-line text-[11px] font-semibold uppercase tracking-wide text-ink-muted">
-              <th className="pb-2 pr-3 font-semibold">Campaign</th>
-              <th className="pb-2 pr-3 font-semibold">Status</th>
-              <th className="pb-2 pr-3 font-semibold">Channel</th>
-              <th className="pb-2 font-semibold">Leads</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <p className="mt-4 text-xs leading-relaxed text-ink-muted">{DEMO_OMITTED.campaigns}</p>
-    </Panel>
-  );
-}
-
-function AiRecommendations() {
-  return (
-    <Panel title="AI Recommendations">
-      <p className="text-xs leading-relaxed text-ink-muted">{DEMO_OMITTED.recommendations}</p>
-    </Panel>
-  );
-}
-
-function AgentActivity() {
-  return (
-    <Panel title="Agent Activity">
+    <Panel title="Active team members">
       <ul className="grid gap-2 sm:grid-cols-2">
-        {DEMO_AGENTS.map((agent) => (
+        {rows.map((agent) => (
           <li
             key={agent.name}
             className="flex items-start justify-between gap-3 rounded-md border border-line bg-surface-muted px-3 py-2.5"
@@ -155,11 +169,25 @@ function AgentActivity() {
   );
 }
 
-function OmittedNote({ text }: { text: string }) {
+function SliceCard({
+  label,
+  percent,
+  sessions,
+  note,
+}: {
+  label: string;
+  percent: number;
+  sessions: string;
+  note: string;
+}) {
   return (
-    <Panel title="This view">
-      <p className="text-sm leading-relaxed text-ink-muted">{text}</p>
-    </Panel>
+    <div className="rounded-(--tm-radius-md) border border-line bg-surface p-3 sm:p-4">
+      <p className="text-[11px] font-medium text-ink-muted">{label}</p>
+      <p className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-ink">{sessions}</p>
+      <p className="mt-1.5 text-[11px] text-ink-muted">
+        {percent}% of {DEMO_KPIS.find((k) => k.id === "traffic")!.display} sessions · {note}
+      </p>
+    </div>
   );
 }
 
@@ -175,20 +203,23 @@ function ViewBody({ nav }: { nav: DemoNavItem }) {
           </div>
           <div className="grid gap-4 lg:grid-cols-2">
             <LeadFunnel />
-            <ActiveCampaigns />
+            <ChannelTable />
           </div>
-          <div className="grid gap-4 lg:grid-cols-2">
-            <AiRecommendations />
-            <AgentActivity />
-          </div>
+          <AgentActivity />
         </div>
       );
     case "Campaigns":
-      return <ActiveCampaigns />;
+      return (
+        <div className="space-y-4">
+          <ChannelTable />
+          <ChannelPerformance />
+        </div>
+      );
     case "Content":
       return (
         <div className="space-y-4">
           <KpiGrid ids={["content"]} />
+          <AgentActivity names={["Wordsmith", "Pixel", "Flow"]} />
         </div>
       );
     case "Leads":
@@ -198,24 +229,58 @@ function ViewBody({ nav }: { nav: DemoNavItem }) {
           <LeadFunnel />
         </div>
       );
-    case "SEO":
+    case "SEO": {
+      const traffic = DEMO_KPIS.find((k) => k.id === "traffic")!;
       return (
         <div className="space-y-4">
-          <KpiGrid ids={["traffic"]} />
-          <OmittedNote text={DEMO_OMITTED.seoExtra} />
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-(--tm-radius-md) border border-line bg-surface p-3 sm:p-4">
+              <p className="truncate text-[11px] font-medium text-ink-muted">{traffic.label}</p>
+              <p className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-ink">{traffic.display}</p>
+              {traffic.note ? <p className="mt-1.5 text-[11px] text-ink-muted">{traffic.note}</p> : null}
+            </div>
+            <SliceCard
+              label="Organic Search"
+              percent={DEMO_ORGANIC.percent}
+              sessions={DEMO_ORGANIC.sessionsDisplay}
+              note="channel mix"
+            />
+          </div>
+          <PerformanceOverview />
+          <AgentActivity names={["Seeker"]} />
         </div>
       );
+    }
     case "Social":
-      return <OmittedNote text={DEMO_OMITTED.social} />;
+      return (
+        <div className="space-y-4">
+          <SliceCard
+            label="Social"
+            percent={DEMO_SOCIAL.percent}
+            sessions={DEMO_SOCIAL.sessionsDisplay}
+            note="channel mix"
+          />
+          <ChannelPerformance />
+          <AgentActivity names={["Socialite", "Wordsmith"]} />
+        </div>
+      );
     case "Reports":
       return (
         <div className="space-y-4">
           <KpiGrid />
           <PerformanceOverview />
+          <div className="grid gap-4 lg:grid-cols-2">
+            <LeadFunnel />
+            <ChannelPerformance />
+          </div>
         </div>
       );
     case "Settings":
-      return <OmittedNote text={DEMO_OMITTED.settings} />;
+      return (
+        <Panel title="This view" trailing={null}>
+          <p className="text-sm leading-relaxed text-ink-muted">{DEMO_OMITTED.settings}</p>
+        </Panel>
+      );
     default:
       return null;
   }
@@ -288,7 +353,9 @@ export function DemoDashboard() {
             </button>
             <div>
               <p className="text-base font-bold text-ink">{DEMO_PROFILE.productTitle}</p>
-              <p className="text-[11px] text-ink-muted">{DEMO_PROFILE.period.label}</p>
+              <p className="text-[11px] text-ink-muted">
+                {DEMO_PROFILE.period.label} · Sample
+              </p>
             </div>
           </div>
           <p className="flex items-center gap-2 text-xs font-medium text-ink-muted">
