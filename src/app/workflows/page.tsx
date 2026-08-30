@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import {
   COMMON_CORE_STARTER,
   CORE_LIBRARY,
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     "Teamulate plans sell operating capacity: a 60-workflow eligible library, with Core activating up to 8, Growth up to 20 and Scale up to 35 simultaneously active recurring workflows. All 11 seats on every plan.",
   alternates: { canonical: absoluteUrl("/workflows/") },
   robots: { index: true, follow: true },
+  ...marketingShareMetadata,
 };
 
 const FAQ_ITEMS = [

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "The Teamulate operating model for control: P0-P4 approvals, client-owned environments, least-privilege access, independent QA and measurement, audit trails, rollback and kill switches.",
   alternates: { canonical: absoluteUrl("/security-governance/") },
+  ...marketingShareMetadata,
 };
 
 const P_TIERS = [

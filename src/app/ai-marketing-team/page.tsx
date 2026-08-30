@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AGENTS } from "@/content/agents";
-import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     "An AI marketing team is a set of named, accountable AI seats working under one strategy - not a pile of unnamed agents. Here is how Teamulate structures its 11-seat department.",
   alternates: { canonical: absoluteUrl("/ai-marketing-team/") },
   robots: { index: true, follow: true },
+  ...marketingShareMetadata,
 };
 
 const FAQ_ITEMS = [

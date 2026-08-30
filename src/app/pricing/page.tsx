@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
 import { ALL_PLANS_SHARE, PLANS, SETUP_FEE_COVERS, formatCad } from "@/content/plans";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "Transparent Teamulate plans: Core, Growth and Scale. Setup and monthly fees, workflow and integration envelopes, and a clear boundary on client-owned third-party costs.",
   alternates: { canonical: absoluteUrl("/pricing/") },
+  ...marketingShareMetadata,
 };
 
 const PRICING_FAQ = [

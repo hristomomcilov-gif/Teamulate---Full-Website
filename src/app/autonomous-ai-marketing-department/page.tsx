@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
 import { AGENTS } from "@/content/agents";
 import { PLANS, formatCad } from "@/content/plans";
-import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "What Teamulate is, who it is for, what it includes, how it works, what it connects to, what stays human-controlled and what your team receives.",
   alternates: { canonical: absoluteUrl("/autonomous-ai-marketing-department/") },
+  ...marketingShareMetadata,
 };
 
 const WHAT_YOU_RECEIVE = [

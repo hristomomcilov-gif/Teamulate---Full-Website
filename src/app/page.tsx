@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AGENTS } from "@/content/agents";
 import { PLANS, formatCad } from "@/content/plans";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Container, Section, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description:
     "A complete marketing department built around your business, working continuously from one dashboard - with human oversight for the decisions that matter.",
   alternates: { canonical: absoluteUrl("/") },
+  ...marketingShareMetadata,
 };
 
 function EyebrowPill({ children }: { children: React.ReactNode }) {

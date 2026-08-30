@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "Four ways to get marketing done in 2026 - an 11-seat AI department, hiring in-house, an agency retainer, or fractional help - compared honestly, without invented metrics.",
   alternates: { canonical: absoluteUrl("/compare/ai-vs-agency-vs-fractional-vs-inhouse/") },
   robots: { index: true, follow: true },
+  ...marketingShareMetadata,
 };
 
 const FAQ_ITEMS = [

@@ -18,6 +18,33 @@ export function absoluteUrl(path: string): string {
   return `${SITE.domain}${normalized}`;
 }
 
+/** 1200×630 share graphic. Public marketing routes must point at this exact URL. */
+export const MARKETING_SHARE_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;
+
+export const MARKETING_SHARE_IMAGE = {
+  url: MARKETING_SHARE_IMAGE_URL,
+  secureUrl: MARKETING_SHARE_IMAGE_URL,
+  width: 1200,
+  height: 630,
+  type: "image/png",
+} as const;
+
+/**
+ * Open Graph + Twitter tags for public marketing routes.
+ * Do not spread onto /app/, login, dashboard, or shop paths.
+ */
+export const marketingShareMetadata = {
+  openGraph: {
+    siteName: SITE.name,
+    type: "website" as const,
+    images: [MARKETING_SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    images: [MARKETING_SHARE_IMAGE_URL],
+  },
+};
+
 export type NavItem = { label: string; href: string; description?: string };
 export type NavGroup = { label: string; items: NavItem[] };
 

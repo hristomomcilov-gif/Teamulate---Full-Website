@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ENTITY_LINE, absoluteUrl } from "@/lib/site";
+import { ENTITY_LINE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { RelatedGuides } from "@/components/RelatedGuides";
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: absoluteUrl("/research/marketing-team-cost-2026/") },
   robots: { index: true, follow: true },
   authors: [{ name: "Chris Momchilov" }],
+  ...marketingShareMetadata,
 };
 
 const RH_ROLES = [
