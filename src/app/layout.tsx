@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SITE, absoluteUrl } from "@/lib/site";
 import Script from "next/script";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteChrome } from "@/components/SiteChrome";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
@@ -58,11 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="/login-intercept.js" strategy="beforeInteractive" />
         <GoogleAnalytics />
         <PageViewTracker />
-        <SiteHeader />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

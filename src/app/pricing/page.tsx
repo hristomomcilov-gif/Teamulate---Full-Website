@@ -6,6 +6,7 @@ import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { InViewEvent } from "@/components/InViewEvent";
+import { PlanIcon } from "@/components/PlanIcon";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -68,7 +69,10 @@ export default function PricingPage() {
             <InViewEvent key={plan.key} event="pricing_plan_viewed" props={{ plan: plan.key, route: "/pricing/" }}>
               <Card className={`h-full ${plan.recommended ? "border-2 border-brand" : ""}`}>
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-bold text-ink">{plan.name}</h2>
+                  <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
+                    <PlanIcon planKey={plan.key} />
+                    {plan.name}
+                  </h2>
                   {plan.recommended ? <StatusChip tone="info" label="Recommended" /> : null}
                 </div>
                 <p className="mt-4 text-3xl font-bold tabular-nums text-ink">

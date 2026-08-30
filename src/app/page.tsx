@@ -10,6 +10,8 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
 import { AssetGallery } from "@/components/home/AssetGallery";
 import { FounderCard } from "@/components/home/FounderCard";
+import { LoopStepIcon, type LoopIconName } from "@/components/home/LoopStepIcon";
+import { PlanIcon } from "@/components/PlanIcon";
 
 export const metadata: Metadata = {
   title: "Teamulate | Your AI Marketing Team",
@@ -28,14 +30,14 @@ function EyebrowPill({ children }: { children: React.ReactNode }) {
   );
 }
 
-const LOOP_STEPS = [
-  { n: "01", title: "Learn", body: "Business, brand, and constraints first.", color: "bg-brand" },
-  { n: "02", title: "Research", body: "The brief behind the next asset.", color: "bg-brand-blue" },
-  { n: "03", title: "Plan", body: "Head of Marketing sets the rails.", color: "bg-positive" },
-  { n: "04", title: "Build", body: "Specialists draft inside those rails.", color: "bg-attention" },
-  { n: "05", title: "Launch", body: "The department publishes, launches, and spends - inside approvals.", color: "bg-brand" },
-  { n: "06", title: "Measure", body: "What your tools recorded. Empty is allowed.", color: "bg-brand-blue" },
-  { n: "07", title: "Improve", body: "The next pass uses what we can see.", color: "bg-navy-900" },
+const LOOP_STEPS: { n: string; title: string; body: string; color: string; icon: LoopIconName }[] = [
+  { n: "01", title: "Learn", body: "Business, brand, and constraints first.", color: "bg-brand", icon: "learn" },
+  { n: "02", title: "Research", body: "The brief behind the next asset.", color: "bg-brand-blue", icon: "research" },
+  { n: "03", title: "Plan", body: "Head of Marketing sets the rails.", color: "bg-positive", icon: "plan" },
+  { n: "04", title: "Build", body: "Specialists draft inside those rails.", color: "bg-attention", icon: "build" },
+  { n: "05", title: "Launch", body: "The department publishes, launches, and spends - inside approvals.", color: "bg-brand", icon: "launch" },
+  { n: "06", title: "Measure", body: "What your tools recorded. Empty is allowed.", color: "bg-brand-blue", icon: "measure" },
+  { n: "07", title: "Improve", body: "The next pass uses what we can see.", color: "bg-positive", icon: "improve" },
 ];
 
 const OPERATING_TRAITS = [
@@ -47,7 +49,7 @@ const OPERATING_TRAITS = [
 
 const GLANCE_STATS = [
   { value: "11", label: "AI specialists" },
-  { value: "Always-on", label: "Operations" },
+  { value: "24/7", label: "Operations" },
   { value: "60", label: "Eligible library workflows" },
   { value: "231", label: "Marketing functions mapped" },
 ];
@@ -179,8 +181,11 @@ export default function HomePage() {
                   href="/how-it-works/"
                   className="group flex min-w-0 flex-1 items-center gap-4 rounded-(--tm-radius-lg) border border-line bg-surface p-4 shadow-card transition-colors hover:border-brand"
                 >
-                  <span aria-hidden className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${step.color} text-lg font-bold text-white`}>
-                    {step.title.charAt(0)}
+                  <span
+                    aria-hidden
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white ${step.color}`}
+                  >
+                    <LoopStepIcon name={step.icon} />
                   </span>
                   <span className="min-w-0">
                     <span className="block text-base font-bold text-ink">{step.title}</span>
@@ -296,15 +301,18 @@ export default function HomePage() {
           <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">The system at a glance</h2>
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
-          <div className="flex items-center justify-between gap-6 rounded-(--tm-radius-lg) bg-lavender p-6 sm:p-8">
-            <div>
+          <div className="flex flex-col gap-4 rounded-(--tm-radius-lg) bg-lavender p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-8">
+            <div className="min-w-0">
               <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 90%</p>
               <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
             </div>
-            <svg viewBox="0 0 120 60" className="h-14 w-28 shrink-0 sm:h-16 sm:w-32" aria-hidden>
-              <path d="M0,55 L30,45 L60,32 L90,18 L115,6" fill="none" stroke="var(--tm-violet-600)" strokeWidth="3" strokeLinecap="round" />
-              <circle cx="115" cy="6" r="4" fill="var(--tm-violet-600)" />
-            </svg>
+            <Image
+              src="/assets/glance-90-coins-arrow.png"
+              alt=""
+              width={1536}
+              height={1024}
+              className="mx-auto h-auto w-[13.5rem] shrink-0 object-contain sm:mx-0 sm:w-[15.5rem]"
+            />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
             {GLANCE_STATS.map((stat) => (
@@ -375,9 +383,7 @@ export default function HomePage() {
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-brand">
-                    <span aria-hidden className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-brand text-xs">
-                      {plan.name.charAt(0)}
-                    </span>
+                    <PlanIcon planKey={plan.key} />
                     {plan.name}
                   </p>
                   {plan.recommended ? (

@@ -85,7 +85,7 @@ export default function DashboardProductPage() {
         <div className="rounded-(--tm-radius-lg) bg-navy-950 px-6 py-12 text-center sm:px-12">
           <h2 className="text-2xl font-bold text-white sm:text-3xl">Try it with sample data right now</h2>
           <p className="mx-auto mt-3 max-w-xl text-white/70">
-            The interactive demo takes 2-4 minutes: one complete workflow, one approval decision, one measured result.
+            Open the Marketing Dashboard with the demo-profile sample for 24–30 Aug 2026. Labelled sample, not a customer account.
           </p>
           <div className="mt-6">
             <CtaLink href="/demo/dashboard/" ctaId="dashboard-final-demo" kind="primary">
