@@ -18,8 +18,8 @@ export default function ContactPage() {
           <Eyebrow>Contact</Eyebrow>
           <h1 className="text-4xl font-bold tracking-tight text-ink">Talk to Teamulate</h1>
           <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-            Product questions, a stack review, security requirements or something else - send it here and it reaches a
-            human who can answer.
+            Product questions, a stack review, security requirements or something else - send it here and it reaches
+            Skipper 🤖.
           </p>
           <p className="mt-6 text-sm text-ink-muted">
             Looking for a product demonstration?{" "}
@@ -34,7 +34,7 @@ export default function ContactPage() {
             formId="ebf145a0-8999-4d1d-ab8c-2cfd3610b888"
             variant="contact"
             submitLabel="Submit inquiry"
-            successMessage="Thank you. We have received your message and a human who can answer will get back to you."
+            successMessage="Thank you. We have received your message and Skipper will get back to you 🤖"
           />
           <p className="mt-4 text-xs text-ink-muted">
             We never ask for passwords, API keys or confidential data in this form.
