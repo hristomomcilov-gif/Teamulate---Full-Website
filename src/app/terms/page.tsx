@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
-import { Eyebrow, Section, StatusChip } from "@/components/ui";
+import { Eyebrow, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
@@ -15,9 +15,6 @@ export default function TermsPage() {
       <div className="mx-auto max-w-[780px]">
         <Eyebrow>Legal</Eyebrow>
         <h1 className="text-3xl font-bold tracking-tight text-ink">Terms of Use</h1>
-        <div className="mt-3">
-          <StatusChip tone="attention" label="Interim terms - final version pending legal counsel review" />
-        </div>
         <div className="mt-8 space-y-6 text-[15px] leading-relaxed text-ink">
           <p className="text-ink-muted">
             These interim terms govern use of the Teamulate public website. Complete terms reviewed by qualified legal

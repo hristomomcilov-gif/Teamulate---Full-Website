@@ -93,7 +93,7 @@ export const FOOTER_GROUPS: NavGroup[] = [
     items: [
       { label: "Contact", href: "/contact/" },
       { label: "Request a demonstration", href: "/request-demo/" },
-      { label: "Client login", href: "/client-login.html" },
+      { label: "Client login", href: "/app/" },
     ],
   },
   {

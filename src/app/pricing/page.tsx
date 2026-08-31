@@ -28,11 +28,6 @@ const PRICING_FAQ = [
       "One connected system with scoped access - for example your CRM, CMS, analytics, an ad platform or your email tool. Each connection shows its scopes, health and dependent workflows in the dashboard.",
   },
   {
-    question: "Why is Scale priced 'from'?",
-    answer:
-      "Scale deployments vary in segments, regions, products and compliance context, so the final monthly fee is confirmed after a scope review. Core and Growth base prices are exactly as listed.",
-  },
-  {
     question: "Are there hidden usage charges?",
     answer:
       "No. When you approach a plan limit the dashboard tells you, and you decide: reprioritize existing workflows or change scope. Nothing is charged silently.",
@@ -77,7 +72,6 @@ export default function PricingPage() {
                   {plan.recommended ? <StatusChip tone="info" label="Recommended" /> : null}
                 </div>
                 <p className="mt-4 text-3xl font-bold tabular-nums text-ink">
-                  {plan.monthlyPrefix ? `${plan.monthlyPrefix} ` : ""}
                   {formatCad(plan.monthlyCad)}
                   <span className="text-sm font-medium text-ink-muted"> / month</span>
                 </p>

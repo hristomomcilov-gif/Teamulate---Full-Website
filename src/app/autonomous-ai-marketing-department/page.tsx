@@ -208,7 +208,6 @@ export default function ProductPage() {
             <Card key={plan.key}>
               <h3 className="text-base font-bold text-ink">{plan.name}</h3>
               <p className="mt-1 text-sm tabular-nums text-ink-muted">
-                {plan.monthlyPrefix ? "From " : ""}
                 {formatCad(plan.monthlyCad)}/mo · setup {formatCad(plan.setupCad)}
               </p>
               <p className="mt-3 text-sm text-ink-muted">{plan.bestFor}</p>

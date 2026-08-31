@@ -76,7 +76,7 @@ const ROWS: Row[] = [
   },
   {
     label: "Cost structure",
-    teamulate: "Setup + flat retainer (Core C$7,500 + C$5,000/mo; Growth C$12,500 + C$7,500/mo; Scale C$20,000 + from C$12,000/mo). GrokBot included",
+    teamulate: "Setup + flat retainer (Core C$7,500 + C$5,000/mo; Growth C$12,500 + C$7,500/mo; Scale C$20,000 + C$12,000/mo). GrokBot included",
     inhouse: "Salaries + employer load + tools (see our 2026 cost research)",
     agency: "Retainer + scope changes; production often billed extra",
     fractional: "Day or monthly rate for a slice of a senior calendar",

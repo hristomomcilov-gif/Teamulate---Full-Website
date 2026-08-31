@@ -2,7 +2,7 @@
 
 > Teamulate is an autonomous AI marketing department for B2B companies. The department runs the work. Strategos is Head of Marketing. Chris Momchilov is the founder above Teamulate.
 
-A full marketing department. Without building one. Eleven named seats (Strategos as Head; Scout, Wordsmith, Seeker, GrowthTrack, Pixel, Flow, Socialite, Nexus as execution; Metric and Guardian as independent assurance), a 60-workflow eligible library with plan activation caps (8 / 20 / 35), and one dashboard. Pricing in CAD: Core C$7,500 setup + C$5,000/mo; Growth C$12,500 + C$7,500/mo; Scale C$20,000 + from C$12,000/mo.
+A full marketing department. Without building one. Eleven named seats (Strategos as Head; Scout, Wordsmith, Seeker, GrowthTrack, Pixel, Flow, Socialite, Nexus as execution; Metric and Guardian as independent assurance), a 60-workflow eligible library with plan activation caps (8 / 20 / 35), and one dashboard. Pricing in CAD: Core C$7,500 setup + C$5,000/mo; Growth C$12,500 + C$7,500/mo; Scale C$20,000 + C$12,000/mo.
 
 ## Product
 

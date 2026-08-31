@@ -113,12 +113,12 @@ export default function HomePage() {
       {/* Hero */}
       <Section muted className="pt-14 sm:pt-20">
         <div className="mx-auto max-w-3xl text-center lg:max-w-none lg:text-left">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="grid items-start gap-12 lg:grid-cols-2">
             <div>
-              <h1 className="whitespace-nowrap text-[clamp(1.55rem,6.9vw,3.1rem)] font-extrabold leading-[1.05] tracking-tight text-ink">
+              <h1 className="whitespace-nowrap text-[clamp(1.55rem,6.9vw,3.1rem)] font-bold leading-[1.05] tracking-tight text-ink">
                 Your AI Marketing Team
               </h1>
-              <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+              <p className="mt-5 text-lg font-medium leading-relaxed text-ink-muted">
                 A complete marketing department built around your business, working continuously from one dashboard.
               </p>
               <ul className="mt-6 flex flex-nowrap items-center justify-center gap-4 sm:gap-6 lg:justify-start">
@@ -130,7 +130,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-7 flex flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
-                <CtaLink href="/demo/dashboard/" ctaId="hero-primary" kind="primary" className="px-5 py-3 sm:px-7 sm:text-base">
+                <CtaLink href="/team/" ctaId="hero-primary" kind="primary" className="px-5 py-3 sm:px-7 sm:text-base">
                   See the team in action →
                 </CtaLink>
                 <CtaLink href="/request-demo/" ctaId="hero-book-demo" kind="secondary" variant="secondary" className="px-5 py-3 sm:px-7 sm:text-base">
@@ -167,7 +167,7 @@ export default function HomePage() {
             Learn through <span className="text-brand">Improve</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
-            Specialized agents run the work. Chris sets the strategy. The department executes.
+            Strategos prepares the strategy. Chris approves it and monitors the work. The department executes.
           </p>
         </div>
         <div className="relative mx-auto mt-10 max-w-2xl">
@@ -302,17 +302,20 @@ export default function HomePage() {
           <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">The system at a glance</h2>
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
-          <div className="flex flex-col gap-4 rounded-(--tm-radius-lg) bg-lavender p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-8">
-            <div className="min-w-0">
+          <div className="flex flex-row items-center gap-4 rounded-(--tm-radius-lg) bg-lavender p-6 sm:gap-8 sm:p-8">
+            <div className="min-w-0 flex-1">
               <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 90%</p>
-              <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
+              <p className="mt-1 text-sm font-bold leading-snug text-ink">
+                Lower people-cost than building the department
+              </p>
             </div>
             <Image
-              src="/assets/glance-90-coins-arrow.png"
+              src="/assets/glance-90-coins-square.png"
               alt=""
-              width={1536}
-              height={1024}
-              className="mx-auto h-auto w-[13.5rem] shrink-0 object-contain sm:mx-0 sm:w-[15.5rem]"
+              width={80}
+              height={80}
+              className="h-20 w-20 shrink-0 object-contain"
+              style={{ width: "5rem", height: "5rem" }}
             />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
@@ -407,7 +410,6 @@ export default function HomePage() {
                       Monthly retainer
                     </p>
                     <p className="mt-1.5 text-xl font-extrabold tabular-nums text-ink sm:text-2xl">
-                      {plan.monthlyPrefix ? <span className="text-sm font-bold text-ink-muted">from </span> : null}
                       {formatCad(plan.monthlyCad)}
                       <span className="text-sm font-medium text-ink-muted">/mo</span>
                     </p>
@@ -448,10 +450,7 @@ export default function HomePage() {
             <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
               Guides
             </p>
-            <h3 className="mt-3 text-lg font-extrabold text-ink">Product, pillars, research hubs</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-              One URL per intent. No daily blog slop. No invented proof.
-            </p>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">Guides to how it works</h3>
             <ul className="mt-4 space-y-1.5 text-sm font-semibold text-brand">
               <li><Link href="/autonomous-ai-marketing-department/" className="hover:underline">Autonomous Marketing Department →</Link></li>
               <li><Link href="/ai-marketing-team/" className="hover:underline">What is an AI marketing team? →</Link></li>
@@ -468,10 +467,7 @@ export default function HomePage() {
             <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
               About
             </p>
-            <h3 className="mt-3 text-lg font-extrabold text-ink">Founder-led. Human-accountable.</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-              AI-operated seats. You stay on the gates. Chris Momchilov, Barrie.
-            </p>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">Who runs it</h3>
             <p className="mt-4"><StatusChip tone="neutral" label="Publishing soon" /></p>
             <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
               <div className="absolute -right-10 top-2 h-40 w-40 rounded-full bg-brand-blue" />
@@ -484,10 +480,7 @@ export default function HomePage() {
             <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
               Demo
             </p>
-            <h3 className="mt-3 text-lg font-extrabold text-ink">One sample workflow</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-              Follow a demo workflow from research through measurement, labeled Demo data. No invented lift.
-            </p>
+            <h3 className="mt-3 text-lg font-extrabold text-ink">See one workflow</h3>
             <p className="mt-4 text-sm font-bold text-brand group-hover:underline">Open the demo →</p>
             <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
               <div className="absolute left-1/2 top-3 h-44 w-44 -translate-x-1/2 rounded-full bg-positive" />

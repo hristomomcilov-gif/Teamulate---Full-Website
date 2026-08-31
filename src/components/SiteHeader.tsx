@@ -103,17 +103,17 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          {/* Plain anchor to the live field form (matches production wiring;
+          {/* Plain anchor: /app/ is the live client login gate (full page load;
               /login-intercept.js additionally guards against client routing). */}
           <a
-            href="/client-login.html"
+            href="/app/"
             onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })}
             className="inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand hover:underline"
           >
             Login
           </a>
-          <CtaLink href="/request-demo/" ctaId="header-primary" kind="primary">
-            See the team in action
+          <CtaLink href="/demo/dashboard/" ctaId="header-primary" kind="primary">
+            Launch Demo
           </CtaLink>
         </div>
 
@@ -153,11 +153,11 @@ export function SiteHeader() {
               </div>
             ))}
             <div className="space-y-2 border-t border-line pt-3">
-              <a href="/client-login.html" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
+              <a href="/app/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
               </a>
-              <CtaLink href="/request-demo/" ctaId="header-primary-mobile" kind="primary" className="w-full">
-                See the team in action
+              <CtaLink href="/demo/dashboard/" ctaId="header-primary-mobile" kind="primary" className="w-full">
+                Launch Demo
               </CtaLink>
             </div>
           </div>
