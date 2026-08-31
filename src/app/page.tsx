@@ -302,8 +302,8 @@ export default function HomePage() {
           <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">The system at a glance</h2>
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
-          <div className="flex flex-row items-center justify-between gap-3 rounded-(--tm-radius-lg) bg-lavender p-6 sm:gap-6 sm:p-8">
-            <div className="min-w-0">
+          <div className="flex flex-row items-center gap-4 rounded-(--tm-radius-lg) bg-lavender p-6 sm:p-8">
+            <div className="min-w-0 flex-1">
               <p className="text-3xl font-extrabold text-brand sm:text-4xl">Up to 90%</p>
               <p className="mt-1 text-sm font-bold text-ink">Lower people-cost than building the department</p>
             </div>
@@ -312,7 +312,7 @@ export default function HomePage() {
               alt=""
               width={276}
               height={276}
-              className="h-16 w-16 shrink-0 bg-transparent object-contain sm:h-20 sm:w-20"
+              className="h-[7.5rem] w-[7.5rem] shrink-0 bg-transparent object-contain sm:h-[11rem] sm:w-[11rem]"
             />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">

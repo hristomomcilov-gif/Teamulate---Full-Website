@@ -43,7 +43,12 @@ describe("Chris homepage markup (31 Aug 2026)", () => {
 
   it("uses the square transparent coins icon on a row layout", () => {
     expect(home).toContain('src="/assets/glance-90-coins-square.png"');
-    expect(home).toContain("flex flex-row items-center justify-between");
+    expect(home).toContain("flex flex-row items-center gap-4");
+    expect(home).toContain("min-w-0 flex-1");
+    expect(home).toContain("h-[7.5rem] w-[7.5rem]");
+    expect(home).not.toMatch(
+      /flex flex-row items-center[^"]*justify-between[^"]*"[\s\S]{0,400}glance-90-coins-square/,
+    );
     expect(home).not.toContain("glance-90-coins-arrow.png");
     expect(home).not.toContain("flex-col gap-4");
     const png = readFileSync(resolve(process.cwd(), "public/assets/glance-90-coins-square.png"));
