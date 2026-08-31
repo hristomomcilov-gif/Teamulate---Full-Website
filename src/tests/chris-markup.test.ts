@@ -41,6 +41,18 @@ describe("Chris homepage markup (31 Aug 2026)", () => {
     expect(founder).toContain("We are our own first customer.");
   });
 
+  it("uses the square transparent coins icon on a row layout", () => {
+    expect(home).toContain('src="/assets/glance-90-coins-square.png"');
+    expect(home).toContain("flex flex-row items-center justify-between");
+    expect(home).not.toContain("glance-90-coins-arrow.png");
+    expect(home).not.toContain("flex-col gap-4");
+    const png = readFileSync(resolve(process.cwd(), "public/assets/glance-90-coins-square.png"));
+    expect(png.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))).toBe(true);
+    expect(png.readUInt32BE(16)).toBe(276);
+    expect(png.readUInt32BE(20)).toBe(276);
+    expect(png[25]).toBe(6); // RGBA
+  });
+
   it("drops extra proof-card body copy", () => {
     expect(home).not.toContain("No daily blog slop");
     expect(home).not.toContain("AI-operated seats. You stay on the gates.");
