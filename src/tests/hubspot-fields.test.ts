@@ -98,3 +98,16 @@ describe("resolveHubSpotRetryFields", () => {
     expect(mentionedHubSpotFieldNames(CONTACT_REQUIRED_MISSING)).toEqual(["form_consent_checkbox"]);
   });
 });
+
+describe("contact page Skipper copy", () => {
+  const contactPage = readFileSync(resolve(process.cwd(), "src/app/contact/page.tsx"), "utf8");
+  const robot = "\u{1F916}";
+
+  it("uses the locked Skipper success message and intro", () => {
+    expect(contactPage).toContain(
+      `successMessage="Thank you. We have received your message and Skipper will get back to you ${robot}"`,
+    );
+    expect(contactPage.replace(/\s+/g, " ")).toContain(`it reaches Skipper ${robot}.`);
+    expect(contactPage).not.toContain("a human who can answer");
+  });
+});
