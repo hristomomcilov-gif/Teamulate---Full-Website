@@ -312,7 +312,7 @@ export default function HomePage() {
               alt=""
               width={276}
               height={276}
-              className="h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20"
+              className="h-16 w-16 shrink-0 bg-transparent object-contain sm:h-20 sm:w-20"
             />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
