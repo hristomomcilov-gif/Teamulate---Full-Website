@@ -12,7 +12,7 @@
       if (!isLoginLink(a)) return;
       e.preventDefault();
       e.stopImmediatePropagation();
-      window.location.href = "/client-login.html";
+      window.location.href = "/app/";
     },
     true
   );

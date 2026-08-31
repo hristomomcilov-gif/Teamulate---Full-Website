@@ -51,9 +51,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* Capture-phase guard: any Login/Client-login anchor goes to the live
-            field form as a full page load - Next client routing can never
-            reopen an old cached login card (matches production wiring). */}
+        {/* Capture-phase guard: any Login/Client-login anchor goes to /app/
+            as a full page load - Next client routing can never reopen an old
+            cached login card (matches production wiring). */}
         <Script src="/login-intercept.js" strategy="beforeInteractive" />
         <GoogleAnalytics />
         <PageViewTracker />

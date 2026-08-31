@@ -139,7 +139,7 @@ export default function MarketingTeamCostPage() {
           </p>
           <p className="mt-3 text-sm leading-relaxed text-ink-muted">
             Core also carries a one-time setup of C$7,500. Growth (C$12,500 setup + C$7,500/mo) and Scale (C$20,000
-            setup + from C$12,000/mo) sit above it in capacity. The percentages compare people-cost only - they are
+            setup + C$12,000/mo) sit above it in capacity. The percentages compare people-cost only - they are
             not a claim of one-to-one output.
           </p>
         </div>

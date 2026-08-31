@@ -22,8 +22,8 @@ export function SiteFooter() {
               <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.href}>
-                    {item.href.endsWith(".html") ? (
-                      // Plain anchor: the login form is a full page load, never client-routed or prefetched.
+                    {item.href.endsWith(".html") || item.href.startsWith("/app") ? (
+                      // Plain anchor: the client login gate is a full page load, never client-routed or prefetched.
                       <a href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
                         {item.label}
                       </a>

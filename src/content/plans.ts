@@ -1,15 +1,14 @@
 /**
  * Plan data (project fact — cannot change without a decision from Chris).
  * Currency locked to CAD on 27 Aug 2026 with the SAME numerals (no FX
- * conversion). No annual discount; Scale uses "From" because complexity
- * varies.
+ * conversion). No annual discount. Scale lists the same flat monthly
+ * retainer as Core and Growth (no "from").
  */
 export type Plan = {
   key: "core" | "growth" | "scale";
   name: string;
   setupCad: number;
   monthlyCad: number;
-  monthlyPrefix?: "From";
   activeRecurringWorkflows: number;
   integrations: number;
   recommended?: boolean;
@@ -41,7 +40,6 @@ export const PLANS: Plan[] = [
     name: "Scale",
     setupCad: 20000,
     monthlyCad: 12000,
-    monthlyPrefix: "From",
     activeRecurringWorkflows: 35,
     integrations: 12,
     bestFor: "Organizations with multiple segments, products or regions in motion.",

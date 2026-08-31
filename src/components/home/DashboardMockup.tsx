@@ -1,14 +1,12 @@
 import { TeamulateIcon } from "@/components/BrandLogo";
 import { PerformanceChart, PerformanceLegend } from "@/components/demo/PerformanceChart";
-import { DEMO_FUNNEL, DEMO_KPIS, DEMO_NAV, DEMO_PROFILE } from "@/lib/demo/fixtures";
+import { DEMO_KPIS, DEMO_NAV, DEMO_PROFILE } from "@/lib/demo/fixtures";
 
 /**
  * Hero illustration of the live /app/ Marketing Dashboard chrome, driven by
  * the same demo-profile sample as /demo/dashboard/.
  */
 export function DashboardMockup() {
-  const maxFunnel = DEMO_FUNNEL[0].value;
-
   return (
     <figure>
       <div className="overflow-hidden rounded-(--tm-radius-lg) border border-line bg-surface shadow-card">
@@ -67,29 +65,6 @@ export function DashboardMockup() {
                 </div>
                 <PerformanceLegend />
                 <PerformanceChart />
-              </div>
-
-              <div className="rounded-md border border-line bg-surface p-2.5">
-                <p className="mb-1.5 text-[10px] font-semibold text-ink">Lead Funnel</p>
-                <ul className="space-y-1.5">
-                  {DEMO_FUNNEL.map((row) => (
-                    <li key={row.stage}>
-                      <div className="mb-0.5 flex items-baseline justify-between gap-1">
-                        <span className="text-[8px] font-semibold text-ink">{row.stage}</span>
-                        <span className="text-[8px] font-bold tabular-nums text-ink">
-                          {row.display}
-                          {"rate" in row && row.rate ? ` · ${row.rate}` : ""}
-                        </span>
-                      </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-lavender">
-                        <div
-                          className="h-full rounded-full bg-brand"
-                          style={{ width: `${Math.max(3, (row.value / maxFunnel) * 100)}%` }}
-                        />
-                      </div>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>

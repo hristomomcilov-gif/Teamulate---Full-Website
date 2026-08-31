@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
-import { Eyebrow, Section, StatusChip } from "@/components/ui";
+import { Eyebrow, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -15,9 +15,6 @@ export default function PrivacyPage() {
       <div className="mx-auto max-w-[780px]">
         <Eyebrow>Legal</Eyebrow>
         <h1 className="text-3xl font-bold tracking-tight text-ink">Privacy Policy</h1>
-        <div className="mt-3">
-          <StatusChip tone="attention" label="Interim policy - final version pending legal counsel review" />
-        </div>
         <div className="mt-8 space-y-6 text-[15px] leading-relaxed text-ink">
           <p className="text-ink-muted">
             This interim statement describes Teamulate&apos;s current practices for the public website. A complete
