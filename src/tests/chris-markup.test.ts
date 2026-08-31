@@ -71,6 +71,23 @@ describe("Chris homepage markup (31 Aug 2026)", () => {
     expect(png[25]).toBe(6); // RGBA
   });
 
+  it("locks Strategos-prepares / Chris-approves strategy copy", () => {
+    expect(founder).toContain(
+      "Strategos prepares the strategy; Chris approves it and monitors execution, with his sign-off on the",
+    );
+    expect(founder).not.toMatch(/He sets the\s+strategy/);
+    expect(home).toContain(
+      "Strategos prepares the strategy. Chris approves it and monitors the work. The department executes.",
+    );
+    expect(home).not.toContain("Chris sets the strategy");
+    const agents = src("src/content/agents.ts");
+    expect(agents).toContain(
+      "Prepares the strategy, aligns the team, and drives results across the entire funnel.",
+    );
+    expect(agents).not.toContain("Sets the strategy, aligns the team");
+    expect(src("src/app/team/page.tsx")).not.toMatch(/sets the strategy/i);
+  });
+
   it("drops extra proof-card body copy", () => {
     expect(home).not.toContain("No daily blog slop");
     expect(home).not.toContain("AI-operated seats. You stay on the gates.");

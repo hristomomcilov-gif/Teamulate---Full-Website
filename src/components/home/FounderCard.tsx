@@ -81,8 +81,9 @@ export function FounderCard() {
             Building the marketing department of the future.
           </h3>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-muted">
-            Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce. He sets the
-            strategy; the agents execute the routine work, with his sign-off on the decisions that matter.
+            Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce.
+            Strategos prepares the strategy; Chris approves it and monitors execution, with his sign-off on the
+            decisions that matter.
           </p>
 
           {/* Steps */}

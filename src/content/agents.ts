@@ -34,7 +34,7 @@ export const AGENTS: AgentProfile[] = [
     role: "Head of Marketing / Orchestrator",
     type: "orchestrator",
     tag: "HEAD",
-    blurb: "Sets the strategy, aligns the team, and drives results across the entire funnel.",
+    blurb: "Prepares the strategy, aligns the team, and drives results across the entire funnel.",
     skills: ["Strategy", "Priorities", "Team Orchestration", "Performance"],
     image: "/agents/agent-strategos.webp",
     mission: "Turn business goals into a prioritized, coordinated marketing operating plan.",

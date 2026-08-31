@@ -167,7 +167,7 @@ export default function HomePage() {
             Learn through <span className="text-brand">Improve</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
-            Specialized agents run the work. Chris sets the strategy. The department executes.
+            Strategos prepares the strategy. Chris approves it and monitors the work. The department executes.
           </p>
         </div>
         <div className="relative mx-auto mt-10 max-w-2xl">
