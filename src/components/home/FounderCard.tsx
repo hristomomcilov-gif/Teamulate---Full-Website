@@ -106,11 +106,11 @@ export function FounderCard() {
           </div>
 
           {/* Tenant 0 callout */}
-          <div className="mx-auto mt-7 flex max-w-md flex-col items-center gap-3 rounded-(--tm-radius-md) bg-lavender/60 p-4 text-center sm:p-5">
+          <div className="mx-auto mt-7 flex max-w-md flex-row items-center gap-3 rounded-(--tm-radius-md) bg-lavender/60 p-4 text-left sm:p-5">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface text-brand shadow-sm">
               <ShieldIcon className="h-5.5 w-5.5" />
             </span>
-            <div>
+            <div className="min-w-0 flex-1">
               <p className="text-sm font-bold text-ink">We are our own first customer.</p>
               <p className="mt-0.5 text-sm leading-relaxed text-ink-muted">
                 To prove you our work is worth it.

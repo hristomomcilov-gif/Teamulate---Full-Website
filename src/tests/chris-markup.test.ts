@@ -35,10 +35,14 @@ describe("Chris homepage markup (31 Aug 2026)", () => {
     expect(src("src/components/demo/DemoDashboard.tsx")).toContain("Lead Funnel");
   });
 
-  it("centers the first-customer badge", () => {
-    expect(founder).toContain("flex-col items-center");
-    expect(founder).toContain("text-center");
+  it("puts the first-customer shield on the left of the copy", () => {
+    expect(founder).toContain("flex-row items-center");
+    expect(founder).toContain("text-left");
+    expect(founder).toContain("min-w-0 flex-1");
+    expect(founder).toContain("h-11 w-11");
     expect(founder).toContain("We are our own first customer.");
+    expect(founder).not.toMatch(/flex-col items-center[\s\S]{0,200}We are our own first customer/);
+    expect(founder).not.toMatch(/text-center[\s\S]{0,120}We are our own first customer/);
   });
 
   it("uses the square transparent coins icon on a row layout", () => {
