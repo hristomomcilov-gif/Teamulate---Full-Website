@@ -312,9 +312,10 @@ export default function HomePage() {
             <Image
               src="/assets/glance-90-coins-square.png"
               alt=""
-              width={276}
-              height={276}
-              className="h-[7.5rem] w-[7.5rem] shrink-0 object-contain sm:h-[11rem] sm:w-[11rem]"
+              width={80}
+              height={80}
+              className="h-20 w-20 shrink-0 object-contain"
+              style={{ width: "5rem", height: "5rem" }}
             />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">

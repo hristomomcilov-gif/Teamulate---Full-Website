@@ -47,8 +47,13 @@ describe("Chris homepage markup (31 Aug 2026)", () => {
     expect(home).toContain("sm:gap-8 sm:p-8");
     expect(home).toContain("min-w-0 flex-1");
     expect(home).toContain("leading-snug");
-    expect(home).toContain("h-[7.5rem] w-[7.5rem]");
-    expect(home).toContain("sm:h-[11rem] sm:w-[11rem]");
+    expect(home).toContain("width={80}");
+    expect(home).toContain("height={80}");
+    expect(home).toContain('style={{ width: "5rem", height: "5rem" }}');
+    expect(home).toContain("h-20 w-20 shrink-0 object-contain");
+    expect(home).not.toContain("h-[7.5rem]");
+    expect(home).not.toContain("11rem");
+    expect(home).not.toContain("width={276}");
     expect(home).not.toMatch(/Lower people-cost[^>]{0,80}whitespace-nowrap/);
     expect(home).not.toMatch(
       /flex flex-row items-center[^"]*justify-between[^"]*"[\s\S]{0,400}glance-90-coins-square/,
