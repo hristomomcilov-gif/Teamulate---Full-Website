@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { hubSpotConsentFieldName, resolveHubSpotRetryFields } from "@/lib/forms/hubspot-fields";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 /**
@@ -16,11 +17,13 @@ import { CONTACT_EMAIL } from "@/lib/site";
  *   - marketing_team_size (dropdown: 0 (no dedicated marketer); 1-2; 3-5; 6-10; 10+)
  *   - primary_challenge (multi-line text)
  *   - current_stack (single-line text)
- *   - consent (single checkbox / boolean)
+ *   - consent (demo / newsletter checkbox) or form_consent_checkbox (contact)
  * If the API rejects unknown fields (FIELD_NOT_IN_FORM_DEFINITION /
  * INVALID_FORM_FIELD), the submit automatically retries WITHOUT the rejected
- * fields so the lead is never lost, and logs the rejected names to the
- * console as `[hubspot] rejected fields: ...` for follow-up.
+ * fields so the lead is never lost. If a required field is missing and we
+ * sent a known alias (consent ↔ form_consent_checkbox), the retry remaps to
+ * the required name instead of dropping. Rejected names are logged as
+ * `[hubspot] rejected fields: ...` for follow-up.
  *
  * Not the iframe embed by design: new-editor forms render in a sandboxed
  * iframe that site CSS cannot style (verified 28 Aug 2026).
@@ -62,20 +65,22 @@ async function postSubmission(formId: string, fields: FieldValue[]): Promise<Res
   });
 }
 
-/** Submit with automatic one-shot retry that drops API-rejected field names. */
+/** Submit with one-shot 400 retry: remap known consent aliases, else drop rejected fields. */
 async function submitToHubSpot(formId: string, fields: FieldValue[]): Promise<boolean> {
   let res = await postSubmission(formId, fields);
   if (res.ok) return true;
   if (res.status === 400) {
     const body = await res.text().catch(() => "");
-    const rejected = Array.from(new Set(Array.from(body.matchAll(/fields\.([a-zA-Z0-9_]+)/g)).map((m) => m[1])));
-    if (rejected.length > 0) {
-      console.warn("[hubspot] rejected fields:", rejected.join(", "), "- retrying without them");
-      const filtered = fields.filter((f) => !rejected.includes(f.name));
-      if (filtered.length > 0) {
-        res = await postSubmission(formId, filtered);
-        return res.ok;
+    const retryFields = resolveHubSpotRetryFields(fields, body);
+    if (retryFields) {
+      const dropped = fields.filter((field) => !retryFields.some((retry) => retry.name === field.name)).map((field) => field.name);
+      if (dropped.length > 0) {
+        console.warn("[hubspot] rejected fields:", dropped.join(", "), "- retrying without them");
+      } else {
+        console.warn("[hubspot] remapping required field aliases and retrying");
       }
+      res = await postSubmission(formId, retryFields);
+      return res.ok;
     }
   }
   return false;
@@ -167,13 +172,13 @@ export function HubSpotForm({
       if (v) fields.push({ name, value: v });
     };
     if (variant === "newsletter") {
-      fields.push({ name: "consent", value: "true" });
+      fields.push({ name: hubSpotConsentFieldName(variant), value: "true" });
     }
     if (variant !== "newsletter") {
       push("firstname");
       push("lastname");
       push("company");
-      fields.push({ name: "consent", value: "true" });
+      fields.push({ name: hubSpotConsentFieldName(variant), value: "true" });
     }
     if (variant === "demo") {
       push("website");
