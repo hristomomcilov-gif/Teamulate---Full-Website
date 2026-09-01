@@ -42,7 +42,9 @@ There were no pre-existing routes, so no `keep`, `revise`, `merge`, `redirect` o
 | `/research/` + flagship assets | absent | Methodology/source register per §18, §55.4 |
 | `/geo-ai-search/` | absent | Approved capability content |
 | `/about/`, `/teamulate-runs-teamulate/` | absent | Tenant 0 evidence to publish |
-| `/resources/`, `/blog/`, `/case-studies/`, `/changelog/` | absent | Real content only; case studies require customer permission |
+| `/resources/`, `/case-studies/`, `/changelog/` | absent | Real content only; case studies require customer permission |
+| `/blog/` | create | Blog index (v0). Header + footer nav. One published article. |
+| `/blog/11-human-hires-vs-11-ai-specialists/` | create | First article from the August 2026 11 vs 11 report. Public savings copy locked at 90%. |
 | `/acceptable-use/`, `/subprocessors/`, `/cookie-settings/` | absent | Legal review / consent tooling |
 
 ## Auth routes (Phase 2 — absent)

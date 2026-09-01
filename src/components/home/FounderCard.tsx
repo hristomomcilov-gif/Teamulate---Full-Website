@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SiteImage } from "@/components/SiteImage";
 
 function SparkleIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -55,7 +55,7 @@ export function FounderCard() {
         {/* Photo + name */}
         <div>
           <div className="relative overflow-hidden rounded-(--tm-radius-lg)">
-            <Image
+            <SiteImage
               src="/founder/chris-founder-2026.webp"
               alt="Chris Momchilov, founder of Teamulate"
               width={800}

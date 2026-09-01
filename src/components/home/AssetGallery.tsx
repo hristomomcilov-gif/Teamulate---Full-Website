@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { SiteImage } from "@/components/SiteImage";
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -59,7 +59,7 @@ export function AssetGallery() {
               <h3 className="text-base font-bold leading-snug text-ink">{item.title}</h3>
             </div>
             <div className="min-w-0 flex-1 overflow-hidden rounded-(--tm-radius-md)">
-              <Image src={item.image} alt={item.alt} width={720} height={540} className="h-auto w-full object-cover" />
+              <SiteImage src={item.image} alt={item.alt} width={720} height={540} className="h-auto w-full object-cover" />
             </div>
           </li>
         ))}
