@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { BLOG_POSTS } from "@/content/blog";
 import { CtaLink } from "@/components/CtaLink";
+import { SiteImage } from "@/components/SiteImage";
 import { Card, Eyebrow, Section } from "@/components/ui";
 import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 
@@ -44,7 +44,7 @@ export default function BlogIndexPage() {
             <article key={post.slug}>
               <Card className="overflow-hidden p-0">
                 <Link href={post.href} className="block">
-                  <Image
+                  <SiteImage
                     src={post.featuredImage}
                     alt={post.featuredImageAlt}
                     width={1200}

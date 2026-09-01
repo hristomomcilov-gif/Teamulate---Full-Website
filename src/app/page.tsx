@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { AGENTS } from "@/content/agents";
 import { PLANS, formatCad } from "@/content/plans";
@@ -8,6 +7,7 @@ import { Container, Section, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { DashboardMockup } from "@/components/home/DashboardMockup";
+import { SiteImage } from "@/components/SiteImage";
 import { AssetGallery } from "@/components/home/AssetGallery";
 import { FounderCard } from "@/components/home/FounderCard";
 import { LoopStepIcon, type LoopIconName } from "@/components/home/LoopStepIcon";
@@ -221,7 +221,7 @@ export default function HomePage() {
             Team lead
           </span>
           <div className="flex flex-col items-center gap-6 sm:flex-row">
-            <Image
+            <SiteImage
               src={strategos.image}
               alt="Strategos mascot: a white robot with a golden crown, purple cape and scepter"
               width={512}
@@ -249,7 +249,7 @@ export default function HomePage() {
         <ul className="mx-auto mt-6 grid max-w-5xl gap-5 sm:grid-cols-2">
           {teamAgents.map((agent) => (
             <li key={agent.slug} className="flex items-center gap-5 rounded-(--tm-radius-lg) border border-line bg-surface p-5 shadow-card">
-              <Image
+              <SiteImage
                 src={agent.image}
                 alt={`${agent.name} mascot robot`}
                 width={512}
@@ -309,7 +309,7 @@ export default function HomePage() {
                 Lower people-cost than building the department
               </p>
             </div>
-            <Image
+            <SiteImage
               src="/assets/glance-90-coins-square.png"
               alt=""
               width={80}

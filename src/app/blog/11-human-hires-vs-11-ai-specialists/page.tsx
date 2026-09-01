@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { AGENTS } from "@/content/agents";
 import {
@@ -12,6 +11,7 @@ import { PullQuote } from "@/components/blog/PullQuote";
 import { ScrollTable } from "@/components/blog/ScrollTable";
 import { YouTubeEmbed } from "@/components/blog/YouTubeEmbed";
 import { CtaLink } from "@/components/CtaLink";
+import { SiteImage } from "@/components/SiteImage";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
 import { ENTITY_LINE, SITE, absoluteUrl } from "@/lib/site";
@@ -242,7 +242,7 @@ export default function ElevenVsElevenPage() {
 
       <Section className="pt-0">
         <div className="mx-auto max-w-[820px] space-y-8">
-          <Image
+          <SiteImage
             src={post.featuredImage}
             alt={post.featuredImageAlt}
             width={1200}
