@@ -3,21 +3,22 @@ import Link from "next/link";
 import { BLOG_POSTS } from "@/content/blog";
 import { CtaLink } from "@/components/CtaLink";
 import { SiteImage } from "@/components/SiteImage";
-import { Card, Eyebrow, Section } from "@/components/ui";
+import { Card, Section } from "@/components/ui";
 import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
+
+const BLOG_DEK =
+  "Marketing end to end — demand, conversion, customers — and where the work is going.";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "Notes from the Teamulate department: buyer-facing writing on cost, coverage and control — starting with 11 human hires vs. 11 AI specialists.",
+  description: BLOG_DEK,
   alternates: { canonical: absoluteUrl("/blog/") },
   ...marketingShareMetadata,
   openGraph: {
     ...marketingShareMetadata.openGraph,
     url: absoluteUrl("/blog/"),
     title: "Blog | Teamulate",
-    description:
-      "Notes from the Teamulate department: buyer-facing writing on cost, coverage and control.",
+    description: BLOG_DEK,
   },
 };
 
@@ -26,15 +27,8 @@ export default function BlogIndexPage() {
     <>
       <Section className="pt-16">
         <div className="mx-auto max-w-[820px]">
-          <Eyebrow>Blog</Eyebrow>
-          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            Notes from the department
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-            Buyer-facing writing on what a marketing department costs, what coordinated AI coverage
-            actually changes, and where humans still need to stay in control. One article to start —
-            not a magazine of empty slots.
-          </p>
+          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">Blog</h1>
+          <p className="mt-5 text-lg leading-relaxed text-ink-muted">{BLOG_DEK}</p>
         </div>
       </Section>
 

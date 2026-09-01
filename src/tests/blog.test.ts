@@ -26,7 +26,14 @@ describe("Blog section (staging v0)", () => {
 
   it("keeps a real index at /blog and one published post", () => {
     expect(index).toContain("<h1");
-    expect(index).toContain("Notes from the department");
+    expect(index).toContain(">Blog<");
+    expect(index).toContain(
+      "Marketing end to end — demand, conversion, customers — and where the work is going.",
+    );
+    expect(index).not.toContain("Notes from the department");
+    expect(index).not.toContain("<Eyebrow>");
+    expect(index).not.toContain("one article to start");
+    expect(index).not.toContain("magazine of empty slots");
     expect(index).toContain("Read the article");
     expect(index).toContain("post.href");
     expect(FEATURED_BLOG_POST.href).toBe("/blog/11-human-hires-vs-11-ai-specialists/");
