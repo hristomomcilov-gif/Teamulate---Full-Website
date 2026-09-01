@@ -56,6 +56,7 @@ export const HEADER_NAV: NavGroup[] = [
   { label: "How it works", items: [{ label: "How it works", href: "/how-it-works/" }] },
   { label: "Team", items: [{ label: "Team", href: "/team/" }] },
   { label: "Pricing", items: [{ label: "Pricing", href: "/pricing/" }] },
+  { label: "Blog", items: [{ label: "Blog", href: "/blog/" }] },
   { label: "Demo", items: [{ label: "Demo", href: "/demo/dashboard/" }] },
 ];
 
@@ -91,6 +92,7 @@ export const FOOTER_GROUPS: NavGroup[] = [
   {
     label: "Company",
     items: [
+      { label: "Blog", href: "/blog/" },
       { label: "Contact", href: "/contact/" },
       { label: "Request a demonstration", href: "/request-demo/" },
       { label: "Client login", href: "/app/" },
@@ -114,6 +116,8 @@ export const SITEMAP_ROUTES = [
   "/workflows/",
   "/research/marketing-team-cost-2026/",
   "/compare/ai-vs-agency-vs-fractional-vs-inhouse/",
+  "/blog/",
+  "/blog/11-human-hires-vs-11-ai-specialists/",
   "/how-it-works/",
   "/team/",
   "/dashboard/",
