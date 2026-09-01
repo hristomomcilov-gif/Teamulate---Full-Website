@@ -12,7 +12,6 @@ export type BlogPost = {
   dateLabel: string;
   datePublished: string;
   author: string;
-  authorLocality: string;
   featuredImage: string;
   featuredImageAlt: string;
   pdfHref: string;
@@ -63,7 +62,6 @@ export const BLOG_POSTS: BlogPost[] = [
     dateLabel: "August 2026",
     datePublished: "2026-08-01",
     author: "Chris Momchilov",
-    authorLocality: "Barrie",
     featuredImage: `/assets/blog/${ELEVEN_VS_ELEVEN_SLUG}-og.png`,
     featuredImageAlt:
       "Teamulate blog cover: 11 Human Hires vs. 11 AI Specialists, brand purple field with the Teamulate T lockup.",

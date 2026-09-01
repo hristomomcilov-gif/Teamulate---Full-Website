@@ -57,7 +57,7 @@ describe("Blog section (staging v0)", () => {
   it("keeps public savings at 90% and out of 95% headlines", () => {
     expect(ELEVEN_VS_ELEVEN_FIGURES.publicSavings).toBe("up to 90%");
     expect(article).toContain(">90%<");
-    expect(article).toContain("up to 90%");
+    expect(article + src("src/components/blog/ReportFigures.tsx")).toContain("up to 90%");
     expect(article).not.toMatch(/up to 95%/i);
     expect(article).not.toMatch(/<h1[^>]*>[\s\S]*95%/);
     expect(index).not.toMatch(/95%/);
@@ -69,6 +69,16 @@ describe("Blog section (staging v0)", () => {
     expect(ELEVEN_VS_ELEVEN_FIGURES.loadedCaMonthly).toBe(88_348);
     expect(article).toContain("F.salaryUsRound");
     expect(article).toContain("F.loadedUsExact");
+    expect(article).toContain("<FigureSalaryIndex");
+    expect(article).toContain("<FigureEmployerBurden");
+    expect(article).toContain("<FigurePublicSavings");
+    expect(src("src/components/blog/ReportFigures.tsx")).toContain("146");
+    expect(src("src/components/blog/ReportFigures.tsx")).toContain("122");
+    expect(src("src/components/blog/ReportFigures.tsx")).toContain("+46%");
+    expect(src("src/components/blog/ReportFigures.tsx")).toContain("+22%");
+    expect(src("src/components/blog/ReportFigures.tsx")).toContain("10% cost reference");
+    expect(src("src/components/blog/ReportFigures.tsx")).not.toMatch(/up to 95%/i);
+    expect(src("src/components/blog/ReportFigures.tsx")).not.toContain("5% cost reference");
   });
 
   it("embeds the official explainer and links index ↔ post ↔ PDF", () => {
@@ -85,29 +95,28 @@ describe("Blog section (staging v0)", () => {
     expect(article).toContain("Back to the blog");
   });
 
-  it("uses the live 11-agent roster and the locked role table", () => {
+  it("uses the locked role table and keeps the article short", () => {
     expect(AGENTS).toHaveLength(11);
-    expect(AGENTS.map((a) => a.name)).toEqual([
-      "Strategos",
-      "Scout",
-      "Wordsmith",
-      "Seeker",
-      "GrowthTrack",
-      "Pixel",
-      "Flow",
-      "Socialite",
-      "Nexus",
-      "Metric",
-      "Guardian",
-    ]);
     expect(ELEVEN_ROLE_SALARIES).toHaveLength(11);
     expect(ELEVEN_ROLE_SALARIES[0]).toEqual({
       role: "Marketing Director / Strategy Lead",
       us: "US $166,790",
       ca: "C$115,003",
     });
-    for (const name of AGENTS.map((a) => a.name)) {
-      expect(article).toContain(name);
+    expect(article).not.toContain("CAMPAIGN_STAGES");
+    expect(article).not.toContain("BUYER_QUESTIONS");
+    expect(article).not.toContain("SHORT_COMPARISON");
+    expect(article).not.toContain("FAQAccordion");
+    expect(article.length).toBeLessThan(18_000);
+  });
+
+  it("does not treat Barrie, Ontario, or Canada as a company address", () => {
+    for (const file of [index, article, src("src/content/blog.ts")]) {
+      expect(file).not.toMatch(/Barrie/i);
+      expect(file).not.toMatch(/Ontario/i);
+      expect(file).not.toMatch(/Built in/i);
+      expect(file).not.toMatch(/Canadian company/i);
+      expect(file).not.toMatch(/addressLocality/);
     }
   });
 
@@ -127,9 +136,10 @@ describe("Blog section (staging v0)", () => {
 
   it("prefixes preview overlay hrefs only when a base path is set", () => {
     expect(withBasePath("/blog/")).toBe("/blog/");
-    expect(src("next.config.ts")).toContain('process.env.TEAMULATE_PREVIEW_BASE === "1"');
-    expect(src("next.config.ts")).toContain('basePath: previewBase');
-    expect(src("next.config.ts")).toContain('assetPrefix: previewBase');
+    expect(src("next.config.ts")).toContain('process.env.TEAMULATE_STAGING_BASE === "1"');
+    expect(src("next.config.ts")).toContain("basePath: stagingBase");
+    expect(src("next.config.ts")).toContain("assetPrefix: stagingBase");
+    expect(src("next.config.ts")).toContain('? "/stg"');
     expect(src("src/components/GoogleAnalytics.tsx")).toContain("NEXT_PUBLIC_PREVIEW_EXPORT");
     expect(src("src/components/blog/PdfDownloadLink.tsx")).toContain("withBasePath(href)");
   });

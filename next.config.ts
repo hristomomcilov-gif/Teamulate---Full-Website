@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 /**
- * Preview overlay (TEAMULATE_PREVIEW_BASE=1): served at teamulate.ca/preview/
+ * Phone-staging overlay (TEAMULATE_STAGING_BASE=1): served at teamulate.ca/stg/
  * only. Never use this flag for a live-root export.
  */
-const previewBase = process.env.TEAMULATE_PREVIEW_BASE === "1" ? "/preview" : "";
+const stagingBase = process.env.TEAMULATE_STAGING_BASE === "1" ? "/stg" : "";
 
 /**
  * Static export configuration for Apache hosting (SuperHosting, teamulate.ca).
@@ -21,10 +21,10 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
-  ...(previewBase ? { basePath: previewBase, assetPrefix: previewBase } : {}),
+  ...(stagingBase ? { basePath: stagingBase, assetPrefix: stagingBase } : {}),
   env: {
-    NEXT_PUBLIC_BASE_PATH: previewBase,
-    NEXT_PUBLIC_PREVIEW_EXPORT: previewBase ? "1" : "",
+    NEXT_PUBLIC_BASE_PATH: stagingBase,
+    NEXT_PUBLIC_PREVIEW_EXPORT: stagingBase ? "1" : "",
   },
 };
 

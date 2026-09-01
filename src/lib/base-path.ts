@@ -1,4 +1,4 @@
-/** Empty on the default site. Set to `/preview` for the SuperHosting preview export. */
+/** Empty on the default site. Set to `/stg` for the SuperHosting phone-staging export. */
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /** Prefix a root-relative public href so it stays on the preview overlay. */

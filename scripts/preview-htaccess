@@ -1,4 +1,4 @@
-# Preview overlay only. Extract this zip into teamulate.ca/preview/.
+# Staging overlay only. Extract this zip into teamulate.ca/stg/.
 # Do not copy these files to the document root.
 Options -Indexes
 DirectoryIndex index.html
