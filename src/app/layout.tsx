@@ -9,6 +9,8 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
+const previewExport = process.env.NEXT_PUBLIC_PREVIEW_EXPORT === "1";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.domain),
   title: {
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Teamulate",
   },
   description: SITE.description,
+  ...(previewExport ? { robots: { index: false, follow: false } } : {}),
   openGraph: {
     siteName: SITE.name,
     type: "website",

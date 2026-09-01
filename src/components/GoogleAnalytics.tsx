@@ -8,6 +8,9 @@ const GA_MEASUREMENT_ID = "G-N9TCF45QX6";
  * paths are separate deployments and never receive this tag.
  */
 export function GoogleAnalytics() {
+  // Preview overlay is a separate SuperHosting path and must not receive GA4.
+  if (process.env.NEXT_PUBLIC_PREVIEW_EXPORT === "1") return null;
+
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />

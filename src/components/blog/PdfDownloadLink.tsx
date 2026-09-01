@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { withBasePath } from "@/lib/base-path";
 
 export function PdfDownloadLink({
   href,
@@ -19,7 +20,7 @@ export function PdfDownloadLink({
 
   return (
     <a
-      href={href}
+      href={withBasePath(href)}
       download
       onClick={() =>
         trackEvent("research_pdf_downloaded", {

@@ -1,6 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
+import { withBasePath } from "@/lib/base-path";
 import { FOOTER_GROUPS, HEADER_NAV, SITEMAP_ROUTES } from "@/lib/site";
 import {
   BLOG_POSTS,
@@ -122,6 +123,15 @@ describe("Blog section (staging v0)", () => {
     expect(pdfBuf.subarray(0, 5).toString("utf8")).toBe("%PDF-");
     expect(pdfBuf.byteLength).toBeGreaterThan(8_000);
     expect(pdfBuf.toString("latin1")).not.toMatch(/up to 95%/i);
+  });
+
+  it("prefixes preview overlay hrefs only when a base path is set", () => {
+    expect(withBasePath("/blog/")).toBe("/blog/");
+    expect(src("next.config.ts")).toContain('process.env.TEAMULATE_PREVIEW_BASE === "1"');
+    expect(src("next.config.ts")).toContain('basePath: previewBase');
+    expect(src("next.config.ts")).toContain('assetPrefix: previewBase');
+    expect(src("src/components/GoogleAnalytics.tsx")).toContain("NEXT_PUBLIC_PREVIEW_EXPORT");
+    expect(src("src/components/blog/PdfDownloadLink.tsx")).toContain("withBasePath(href)");
   });
 
   it("does not invent testimonials or live metrics", () => {
