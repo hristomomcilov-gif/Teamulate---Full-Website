@@ -64,7 +64,8 @@ describe("marketing sitemap", () => {
     const php = readFileSync(resolve(process.cwd(), "public/sitemap.php"), "utf8");
     expect(php.startsWith("<?php")).toBe(true);
     expect(php).toContain("application/xml");
-    expect(php).toContain("echo '<?xml version=\"1.0\" encoding=\"UTF-8"?>'");
+    expect(php).toContain("echo '<?xml version=");
+    expect(php).toContain('encoding="UTF-8"');
     expect(php).not.toMatch(/Barrie|Ontario|PostalAddress/i);
     for (const loc of sitemapLocs()) {
       expect(php).toContain(loc);
