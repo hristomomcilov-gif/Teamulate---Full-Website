@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -24,7 +25,12 @@ describe("2026-09-02 live marketing locks", () => {
     expect(home).toContain("Lower people-cost than building the department");
     expect(home).not.toContain("glance-90-coins-arrow.png");
     expect(home).not.toContain("people-seats");
-    expect(existsSync(resolve(process.cwd(), "public/assets/glance-90-coins-square.png"))).toBe(true);
+    const pngPath = resolve(process.cwd(), "public/assets/glance-90-coins-square.png");
+    expect(existsSync(pngPath)).toBe(true);
+    const png = readFileSync(pngPath);
+    expect(createHash("md5").update(png).digest("hex")).toBe("456b1ae7a28df08ebaa32b44c7cf0c5c");
+    expect(png.readUInt32BE(16)).toBe(276);
+    expect(png.readUInt32BE(20)).toBe(276);
   });
 
   it("client login shows a password toggle, current-password autocomplete, and Forgot password mailto", () => {
