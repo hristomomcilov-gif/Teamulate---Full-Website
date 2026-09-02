@@ -32,9 +32,32 @@ export const ORGANIZATION_DESCRIPTION =
 export const ORGANIZATION_LOGO_URL = `${SITE.domain}/apple-icon.png`;
 
 /**
+ * Official Teamulate social profiles (Chris-approved, 2026-09-02).
+ * Order is locked for the footer icon row and Organization sameAs.
+ * Do not invent extra URLs. Do not use Singularity Drive YouTube.
+ */
+export const SOCIAL_PROFILES = [
+  { name: "X", href: "https://x.com/Teamulate", label: "Teamulate on X" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/teamulate/", label: "Teamulate on LinkedIn" },
+  { name: "TikTok", href: "https://www.tiktok.com/@teamulate", label: "Teamulate on TikTok" },
+  { name: "YouTube", href: "https://www.youtube.com/@teamulate", label: "Teamulate on YouTube" },
+  { name: "Instagram", href: "https://www.instagram.com/teamulate/", label: "Teamulate on Instagram" },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61594152804581",
+    label: "Teamulate on Facebook",
+  },
+] as const;
+
+export type SocialProfileName = (typeof SOCIAL_PROFILES)[number]["name"];
+
+/** Official profile URLs for schema.org Organization.sameAs — same six, same order. */
+export const ORGANIZATION_SAME_AS = SOCIAL_PROFILES.map((profile) => profile.href);
+
+/**
  * Sitewide Organization JSON-LD. Merge into the existing @graph; do not add a
- * second Organization. No PostalAddress / Barrie / Ontario / Canada. No sameAs
- * until a real official profile is linked from the live site.
+ * second Organization. No PostalAddress / Barrie / Ontario / Canada.
+ * sameAs is only the six official Teamulate profiles linked from the footer.
  */
 export const ORGANIZATION_JSON_LD = {
   "@type": ["Organization", "Brand"],
@@ -47,7 +70,8 @@ export const ORGANIZATION_JSON_LD = {
     url: ORGANIZATION_LOGO_URL,
   },
   description: ORGANIZATION_DESCRIPTION,
-} as const;
+  sameAs: ORGANIZATION_SAME_AS,
+};
 
 /** 1200×630 share graphic. Public marketing routes must point at this exact URL. */
 export const MARKETING_SHARE_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;

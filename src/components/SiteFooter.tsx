@@ -3,6 +3,7 @@ import { ENTITY_LINE, FOOTER_GROUPS } from "@/lib/site";
 import { Container } from "@/components/ui";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { TeamulateLogo } from "@/components/BrandLogo";
+import { SocialIcons } from "@/components/SocialIcons";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -13,6 +14,9 @@ export function SiteFooter() {
           <TeamulateLogo className="h-12 w-auto sm:h-14" />
           <p className="mt-4 text-base text-ink">A full marketing department. Without building one.</p>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">{ENTITY_LINE}</p>
+          <div className="mt-6">
+            <SocialIcons />
+          </div>
         </div>
 
         <div className="grid gap-10 md:grid-cols-3">
