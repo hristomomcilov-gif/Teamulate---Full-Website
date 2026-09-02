@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SITE, absoluteUrl } from "@/lib/site";
+import { SITE, SITE_URL, ORGANIZATION_JSON_LD } from "@/lib/site";
 import Script from "next/script";
 import { SiteChrome } from "@/components/SiteChrome";
 import { PageViewTracker } from "@/components/PageViewTracker";
@@ -29,19 +29,13 @@ export const metadata: Metadata = {
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      "@id": absoluteUrl("/") + "#organization",
-      name: SITE.name,
-      url: SITE.domain,
-      description: SITE.category,
-    },
+    ORGANIZATION_JSON_LD,
     {
       "@type": "WebSite",
-      "@id": absoluteUrl("/") + "#website",
+      "@id": `${SITE_URL}#website`,
       name: SITE.name,
-      url: SITE.domain,
-      publisher: { "@id": absoluteUrl("/") + "#organization" },
+      url: SITE_URL,
+      publisher: { "@id": ORGANIZATION_JSON_LD["@id"] },
     },
   ],
 };

@@ -18,6 +18,37 @@ export function absoluteUrl(path: string): string {
   return `${SITE.domain}${normalized}`;
 }
 
+/** Canonical site root with trailing slash (schema.org Organization.url). */
+export const SITE_URL = `${SITE.domain}/`;
+
+/**
+ * One-line Organization description matching the live homepage.
+ * AI marketing team / department — not “fully autonomous”. No invented location.
+ */
+export const ORGANIZATION_DESCRIPTION =
+  "Teamulate is an AI marketing team and department — a complete marketing department built around your business, working continuously from one dashboard.";
+
+/** Live T lockup already used as the Apple / profile icon. Do not invent a new logo. */
+export const ORGANIZATION_LOGO_URL = `${SITE.domain}/apple-icon.png`;
+
+/**
+ * Sitewide Organization JSON-LD. Merge into the existing @graph; do not add a
+ * second Organization. No PostalAddress / Barrie / Ontario / Canada. No sameAs
+ * until a real official profile is linked from the live site.
+ */
+export const ORGANIZATION_JSON_LD = {
+  "@type": ["Organization", "Brand"],
+  "@id": `${SITE_URL}#organization`,
+  name: "Teamulate",
+  legalName: "Teamulate",
+  url: SITE_URL,
+  logo: {
+    "@type": "ImageObject",
+    url: ORGANIZATION_LOGO_URL,
+  },
+  description: ORGANIZATION_DESCRIPTION,
+} as const;
+
 /** 1200×630 share graphic. Public marketing routes must point at this exact URL. */
 export const MARKETING_SHARE_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;
 
@@ -107,7 +138,11 @@ export const FOOTER_GROUPS: NavGroup[] = [
   },
 ];
 
-/** Routes included in the XML sitemap. Preview, demo, app, admin, api and login are excluded. */
+/**
+ * Routes included in the XML sitemap. lastmod is omitted: we do not have
+ * trustworthy per-URL modification dates (build-time `new Date()` is not real).
+ * Preview, demo, app, auth, admin, api, login, shop, stg are excluded.
+ */
 export const SITEMAP_ROUTES = [
   "/",
   "/autonomous-ai-marketing-department/",

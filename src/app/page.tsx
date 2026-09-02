@@ -115,8 +115,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-3xl text-center lg:max-w-none lg:text-left">
           <div className="grid items-start gap-12 lg:grid-cols-2">
             <div>
-              <h1 className="whitespace-nowrap text-[clamp(1.55rem,6.9vw,3.1rem)] font-bold leading-[1.05] tracking-tight text-ink">
-                Your AI Marketing Team
+              <h1 className="text-[clamp(1.55rem,6.9vw,3.1rem)] font-bold leading-[1.05] tracking-tight text-ink">
+                Teamulate — Your AI Marketing Team
               </h1>
               <p className="mt-5 text-lg font-medium leading-relaxed text-ink-muted">
                 A complete marketing department built around your business, working continuously from one dashboard.

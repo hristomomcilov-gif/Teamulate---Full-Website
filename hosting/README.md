@@ -7,6 +7,7 @@ These are the exact files running on SuperHosting (Apache + PHP 7.4). Deploy lay
 | `client-login.html` | document root `/client-login.html` |
 | `login-intercept.js` | document root `/login-intercept.js` |
 | `root.htaccess` | merged into the document-root `.htaccess` (do not wipe other rules) |
+| `sitemap.php` | document root `/sitemap.php` (rewrites `/sitemap.xml`; do not process `.xml` as PHP) |
 | `auth/login.php`, `auth/serve.php`, `auth/.htaccess` | `/auth/` |
 | `app.htaccess` | `/app/.htaccess` (NO Basic Auth) |
 
