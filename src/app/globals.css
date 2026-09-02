@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/*
+ * Teamulate design tokens.
+ * Fallback palette per spec §7.2 (ADR-002): no pre-existing brand tokens were
+ * found in the repository audit. If live brand tokens are provided later,
+ * replace values here only — components reference tokens, never raw colors.
+ */
+:root {
+  --tm-navy-950: #0b1631;
+  --tm-navy-900: #10213f;
+  --tm-blue-600: #3b6ef5;
+  --tm-purple-600: #6437f5;
+  --tm-violet-600: #5b47f0;
+  --tm-lavender-50: #f5f4fb;
+  --tm-lavender-100: #eceafa;
+  --tm-cyan-600: #19a9b8;
+  --tm-green-600: #2da65a;
+  --tm-orange-500: #f49a16;
+  --tm-pink-500: #e3459b;
+  --tm-red-600: #dc2626;
+  --tm-surface: #ffffff;
+  --tm-surface-muted: #f5f7fc;
+  --tm-border: #dbe3f0;
+  --tm-text: #0b1631;
+  --tm-text-muted: #64748b;
+  --tm-radius-sm: 8px;
+  --tm-radius-md: 14px;
+  --tm-radius-lg: 22px;
+  --tm-shadow-card: 0 12px 36px rgba(11, 22, 49, 0.08);
+}
+
+@theme inline {
+  --color-navy-950: var(--tm-navy-950);
+  --color-navy-900: var(--tm-navy-900);
+  /* Primary brand accent: violet, per founder-approved homepage design reference (2026-08-26). */
+  --color-brand: var(--tm-violet-600);
+  --color-brand-blue: var(--tm-blue-600);
+  --color-brand-purple: var(--tm-purple-600);
+  --color-brand-cyan: var(--tm-cyan-600);
+  --color-positive: var(--tm-green-600);
+  --color-attention: var(--tm-orange-500);
+  --color-accent-pink: var(--tm-pink-500);
+  --color-critical: var(--tm-red-600);
+  --color-surface: var(--tm-surface);
+  --color-surface-muted: var(--tm-lavender-50);
+  --color-lavender: var(--tm-lavender-100);
+  --color-line: var(--tm-border);
+  --color-ink: var(--tm-text);
+  --color-ink-muted: var(--tm-text-muted);
+  --radius-sm: var(--tm-radius-sm);
+  --radius-md: var(--tm-radius-md);
+  --radius-lg: var(--tm-radius-lg);
+  --shadow-card: var(--tm-shadow-card);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--tm-surface);
+  color: var(--tm-text);
+  font-feature-settings: "tnum" 0;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Visible focus per spec §49 */
+:focus-visible {
+  outline: 2px solid var(--tm-blue-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--tm-navy-950);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
