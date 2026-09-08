@@ -9,6 +9,8 @@ import {
   ELEVEN_VS_ELEVEN_FIGURES,
   ELEVEN_VS_ELEVEN_SLUG,
   FEATURED_BLOG_POST,
+  WHO_AI_SEARCH_CITES_CARD,
+  WHO_AI_SEARCH_CITES_SLUG,
 } from "@/content/blog";
 import { AGENTS } from "@/content/agents";
 
@@ -37,11 +39,34 @@ describe("Blog section (staging v0)", () => {
     expect(index).toContain("Read the article");
     expect(index).toContain("post.href");
     expect(FEATURED_BLOG_POST.href).toBe("/blog/11-human-hires-vs-11-ai-specialists/");
-    expect(BLOG_POSTS).toHaveLength(1);
+    expect(BLOG_POSTS).toHaveLength(2);
+    expect(BLOG_POSTS.map((post) => post.href)).toContain(FEATURED_BLOG_POST.href);
     expect(FEATURED_BLOG_POST.href).toBe(`/blog/${ELEVEN_VS_ELEVEN_SLUG}/`);
     expect(FEATURED_BLOG_POST.title).toBe("11 Human Hires vs. 11 AI Specialists");
     expect(FEATURED_BLOG_POST.subtitle).toContain("cost, capacity, consistency and control");
     expect(FEATURED_BLOG_POST.youtubeId).toBe("Lr8QlT2ng9o");
+  });
+
+  it("lists the Who AI Search Cites card with the locked dek and summary (W1 batch)", () => {
+    expect(WHO_AI_SEARCH_CITES_CARD.href).toBe("/blog/who-ai-search-cites-2026/");
+    expect(WHO_AI_SEARCH_CITES_CARD.href).toBe(`/blog/${WHO_AI_SEARCH_CITES_SLUG}/`);
+    expect(WHO_AI_SEARCH_CITES_CARD.title).toBe("Who AI Search Cites in 2026");
+    expect(WHO_AI_SEARCH_CITES_CARD.subtitle).toBe(
+      "Ranking highly does not guarantee that an AI answer will cite you.",
+    );
+    expect(WHO_AI_SEARCH_CITES_CARD.excerpt).toBe(
+      "An analysis of sources cited in Google AI Overviews for ordinary marketing questions on September 1, 2026—and why rankings alone are not the same as being in the answer.",
+    );
+    expect(WHO_AI_SEARCH_CITES_CARD.datePublished).toBe("2026-09-01");
+    expect(BLOG_POSTS[0]).toBe(WHO_AI_SEARCH_CITES_CARD);
+    expect(BLOG_POSTS.map((post) => post.slug)).toEqual([WHO_AI_SEARCH_CITES_SLUG, ELEVEN_VS_ELEVEN_SLUG]);
+    // The card renders from the catalog; the index never hard-codes article copy.
+    expect(index).toContain("post.subtitle");
+    expect(index).toContain("post.excerpt");
+    expect(index).not.toContain("Ranking highly");
+    // The article body is not authored here — no new /blog/who-ai-search-cites-2026/ route.
+    expect(existsSync(resolve(process.cwd(), "src/app/blog/who-ai-search-cites-2026"))).toBe(false);
+    expect(existsSync(resolve(process.cwd(), `public${WHO_AI_SEARCH_CITES_CARD.featuredImage}`))).toBe(true);
   });
 
   it("adds Blog to header and footer without removing Guides", () => {
