@@ -8,19 +8,24 @@ import { ORGANIZATION_JSON_LD, SITE, absoluteUrl } from "@/lib/site";
 const PAGE_PATH = "/about-chris/";
 const SINGULARITY_DRIVE_URL = "https://www.youtube.com/@SingularityDrive";
 const HERO_IMAGE = "/about-chris/hero-card-4x3.webp";
-const OG_IMAGE = "/about-chris/og-about-chris-1200x630.webp";
+/** PNG (not webp) so LinkedIn / X scrapers render the preview. Absolute HTTPS URL below. */
+const OG_IMAGE = "/about-chris/og-about-chris-1200x630.png";
 const AI_SYSTEMS_DIAGRAM = "/about-chris/ai-systems-diagram.svg";
 
 const PAGE_TITLE = "About Chris Momchilov";
+const SHARE_TITLE = `${PAGE_TITLE} | ${SITE.name}`;
 const PAGE_DESCRIPTION =
   "Meet Chris Momchilov — marketing leader behind Teamulate’s multi-agent system, with a track record across SaaS, enterprise tech, fintech, and ecommerce.";
+/** Hero dek, also the share description. Experience lock: exactly 12 years. */
+const HERO_DEK = "12 years in B2B marketing. Builder of a live multi-agent AI marketing system.";
 
 const shareImage = {
   url: absoluteUrl(OG_IMAGE),
   secureUrl: absoluteUrl(OG_IMAGE),
   width: 1200,
   height: 630,
-  type: "image/webp" as const,
+  type: "image/png" as const,
+  alt: "Chris Momchilov — Founder, operator behind Teamulate’s multi-agent marketing system",
 };
 
 export const metadata: Metadata = {
@@ -31,16 +36,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   openGraph: {
     siteName: SITE.name,
-    type: "profile",
+    type: "website",
     url: absoluteUrl(PAGE_PATH),
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
+    title: SHARE_TITLE,
+    description: HERO_DEK,
     images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
+    title: SHARE_TITLE,
+    description: HERO_DEK,
     images: [shareImage.url],
   },
 };
@@ -254,9 +259,7 @@ export default function AboutChrisPage() {
           <div className="max-w-2xl">
             <Eyebrow>Founder · Operator · Marketer</Eyebrow>
             <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">Chris Momchilov</h1>
-            <p className="mt-5 text-lg font-medium leading-relaxed text-ink-muted sm:text-xl">
-              12 years in B2B marketing. Builder of a live multi-agent AI marketing system.
-            </p>
+            <p className="mt-5 text-lg font-medium leading-relaxed text-ink-muted sm:text-xl">{HERO_DEK}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <CtaLink href="/request-demo/" ctaId="about-chris-hero-demo" kind="primary" className="px-6 py-3 sm:text-base">
                 See the department
