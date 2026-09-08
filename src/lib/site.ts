@@ -55,6 +55,19 @@ export type SocialProfileName = (typeof SOCIAL_PROFILES)[number]["name"];
 export const ORGANIZATION_SAME_AS = SOCIAL_PROFILES.map((profile) => profile.href);
 
 /**
+ * Entity disambiguation for AI search and knowledge panels (W1 batch).
+ * Separates teamulate.ca from unrelated HR / behavioural-skills products with
+ * similar names. Copy is locked; do not add knowsAbout or notes here.
+ */
+export const ORGANIZATION_DISAMBIGUATING_DESCRIPTION =
+  "Teamulate (teamulate.ca) is a managed AI marketing department for B2B companies. It is distinct from unrelated HR and behavioural-skills products that use similar names.";
+
+export const ORGANIZATION_ALTERNATE_NAMES = ["Teamulate AI Marketing Team"] as const;
+
+/** 1200×630 share graphic. Public marketing routes must point at this exact URL. */
+export const MARKETING_SHARE_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;
+
+/**
  * Sitewide Organization JSON-LD. Merge into the existing @graph; do not add a
  * second Organization. No PostalAddress / Barrie / Ontario / Canada.
  * sameAs is only the six official Teamulate profiles linked from the footer.
@@ -63,18 +76,18 @@ export const ORGANIZATION_JSON_LD = {
   "@type": ["Organization", "Brand"],
   "@id": `${SITE_URL}#organization`,
   name: "Teamulate",
+  alternateName: [...ORGANIZATION_ALTERNATE_NAMES],
   legalName: "Teamulate",
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
     url: ORGANIZATION_LOGO_URL,
   },
+  image: MARKETING_SHARE_IMAGE_URL,
   description: ORGANIZATION_DESCRIPTION,
+  disambiguatingDescription: ORGANIZATION_DISAMBIGUATING_DESCRIPTION,
   sameAs: ORGANIZATION_SAME_AS,
 };
-
-/** 1200×630 share graphic. Public marketing routes must point at this exact URL. */
-export const MARKETING_SHARE_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;
 
 export const MARKETING_SHARE_IMAGE = {
   url: MARKETING_SHARE_IMAGE_URL,

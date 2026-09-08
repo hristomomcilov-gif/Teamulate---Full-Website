@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  MARKETING_SHARE_IMAGE_URL,
   ORGANIZATION_DESCRIPTION,
   ORGANIZATION_JSON_LD,
   ORGANIZATION_LOGO_URL,
@@ -41,6 +42,35 @@ describe("Organization JSON-LD", () => {
     expect(JSON.stringify(ORGANIZATION_JSON_LD)).not.toMatch(/Barrie|Ontario|Canada|PostalAddress/i);
     expect(JSON.stringify(ORGANIZATION_JSON_LD)).not.toMatch(
       /wikipedia\.org|crunchbase\.com|martechulate|marketeam|teamulation|singularity/i,
+    );
+  });
+
+  it("disambiguates Teamulate from similarly named products (W1 batch, exact strings)", () => {
+    expect(ORGANIZATION_JSON_LD.disambiguatingDescription).toBe(
+      "Teamulate (teamulate.ca) is a managed AI marketing department for B2B companies. It is distinct from unrelated HR and behavioural-skills products that use similar names.",
+    );
+    expect(ORGANIZATION_JSON_LD.alternateName).toEqual(["Teamulate AI Marketing Team"]);
+    expect(ORGANIZATION_JSON_LD.image).toBe("https://teamulate.ca/assets/og/teamulate-og.png");
+    expect(ORGANIZATION_JSON_LD.image).toBe(MARKETING_SHARE_IMAGE_URL);
+    // Existing fields are untouched; nothing beyond the three approved additions.
+    expect(ORGANIZATION_JSON_LD.sameAs).toEqual(ORGANIZATION_SAME_AS);
+    expect(ORGANIZATION_JSON_LD.description).toBe(ORGANIZATION_DESCRIPTION);
+    expect(ORGANIZATION_JSON_LD).not.toHaveProperty("knowsAbout");
+    expect(ORGANIZATION_JSON_LD).not.toHaveProperty("notes");
+    expect(Object.keys(ORGANIZATION_JSON_LD).sort()).toEqual(
+      [
+        "@type",
+        "@id",
+        "name",
+        "alternateName",
+        "legalName",
+        "url",
+        "logo",
+        "image",
+        "description",
+        "disambiguatingDescription",
+        "sameAs",
+      ].sort(),
     );
   });
 
