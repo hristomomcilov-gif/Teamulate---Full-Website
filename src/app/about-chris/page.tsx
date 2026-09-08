@@ -1,18 +1,46 @@
 import type { Metadata } from "next";
 import { PullQuote } from "@/components/blog/PullQuote";
 import { CtaLink } from "@/components/CtaLink";
+import { SiteImage } from "@/components/SiteImage";
 import { Card, Eyebrow, Section, SectionHeading } from "@/components/ui";
-import { ORGANIZATION_JSON_LD, SITE, absoluteUrl, marketingShareMetadata } from "@/lib/site";
+import { ORGANIZATION_JSON_LD, SITE, absoluteUrl } from "@/lib/site";
 
 const PAGE_PATH = "/about-chris/";
 const SINGULARITY_DRIVE_URL = "https://www.youtube.com/@SingularityDrive";
+const HERO_IMAGE = "/about-chris/hero-card-4x3.webp";
+const OG_IMAGE = "/about-chris/og-about-chris-1200x630.webp";
+const AI_SYSTEMS_DIAGRAM = "/about-chris/ai-systems-diagram.svg";
+
+const PAGE_TITLE = "About Chris Momchilov";
+const PAGE_DESCRIPTION =
+  "Meet Chris Momchilov — marketing leader behind Teamulate’s multi-agent system, with a track record across SaaS, enterprise tech, fintech, and ecommerce.";
+
+const shareImage = {
+  url: absoluteUrl(OG_IMAGE),
+  secureUrl: absoluteUrl(OG_IMAGE),
+  width: 1200,
+  height: 630,
+  type: "image/webp" as const,
+};
 
 export const metadata: Metadata = {
-  title: "About Chris Momchilov",
-  description:
-    "Meet Chris Momchilov — marketing leader behind Teamulate’s multi-agent system, with a track record across SaaS, enterprise tech, fintech, and ecommerce.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   alternates: { canonical: absoluteUrl(PAGE_PATH) },
-  ...marketingShareMetadata,
+  openGraph: {
+    siteName: SITE.name,
+    type: "profile",
+    url: absoluteUrl(PAGE_PATH),
+    title: `${PAGE_TITLE} | ${SITE.name}`,
+    description: PAGE_DESCRIPTION,
+    images: [shareImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${PAGE_TITLE} | ${SITE.name}`,
+    description: PAGE_DESCRIPTION,
+    images: [shareImage.url],
+  },
 };
 
 const personSchema = {
@@ -25,6 +53,7 @@ const personSchema = {
     jobTitle: "Founder & Operator",
     worksFor: { "@id": ORGANIZATION_JSON_LD["@id"], name: SITE.name },
     url: absoluteUrl(PAGE_PATH),
+    image: absoluteUrl(HERO_IMAGE),
     sameAs: [SINGULARITY_DRIVE_URL],
   },
 };
@@ -193,53 +222,20 @@ function Icon({ name, className = "h-5 w-5" }: { name: IconName; className?: str
 const EXTERNAL_BUTTON =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200";
 
-/**
- * Interim hero art (gradient + dashboard-still silhouette) until final
- * portrait / hero art is supplied. Not a face photo — no photo is invented.
- */
-function HeroPlaceholderArt() {
-  const bars = [46, 68, 58, 82, 74, 96];
+/** Founder photo: same source as the homepage FounderCard, face-centred 4:3 crop. */
+function HeroPortrait() {
   return (
-    <figure className="relative mx-auto w-full max-w-md lg:max-w-none">
-      <div
-        aria-hidden
-        className="relative aspect-[4/5] overflow-hidden rounded-(--tm-radius-lg) border border-line shadow-card sm:aspect-[5/6] lg:aspect-[4/5]"
-        style={{
-          background:
-            "radial-gradient(120% 90% at 15% 0%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 45%), linear-gradient(160deg, var(--tm-violet-600) 0%, var(--tm-purple-600) 42%, var(--tm-navy-900) 100%)",
-        }}
-      >
-        {/* Founder silhouette */}
-        <div className="absolute left-1/2 top-[14%] h-[26%] w-[32%] -translate-x-1/2 rounded-full bg-white/12 ring-1 ring-white/20" />
-        <div className="absolute left-1/2 top-[42%] h-[40%] w-[64%] -translate-x-1/2 rounded-t-[45%] bg-white/10 ring-1 ring-white/15" />
-
-        {/* Dashboard still */}
-        <div className="absolute inset-x-[10%] bottom-[7%] rounded-(--tm-radius-md) border border-white/25 bg-navy-950/70 p-3 backdrop-blur-sm">
-          <div className="mb-2 flex items-center justify-between">
-            <span className="h-2 w-16 rounded-full bg-white/60" />
-            <span className="flex gap-1">
-              <span className="h-2 w-2 rounded-full bg-white/40" />
-              <span className="h-2 w-2 rounded-full bg-white/40" />
-              <span className="h-2 w-2 rounded-full bg-white/40" />
-            </span>
-          </div>
-          <div className="mb-2 grid grid-cols-3 gap-1.5">
-            {["10+", "11", "28×"].map((v) => (
-              <span key={v} className="rounded-md bg-white/10 px-2 py-1.5 text-center text-xs font-extrabold tabular-nums text-white">
-                {v}
-              </span>
-            ))}
-          </div>
-          <div className="flex h-12 items-end gap-1.5">
-            {bars.map((h, i) => (
-              <span
-                key={i}
-                className="flex-1 rounded-t-sm bg-white/70"
-                style={{ height: `${h}%`, opacity: 0.45 + i * 0.09 }}
-              />
-            ))}
-          </div>
-        </div>
+    <figure className="mx-auto w-full max-w-md lg:max-w-none">
+      <div className="overflow-hidden rounded-(--tm-radius-lg) border border-line bg-navy-950 shadow-card">
+        <SiteImage
+          src={HERO_IMAGE}
+          alt="Chris Momchilov, founder and operator of Teamulate"
+          width={1200}
+          height={900}
+          priority
+          sizes="(min-width: 1024px) 40vw, (min-width: 640px) 28rem, 100vw"
+          className="h-auto w-full object-cover"
+        />
       </div>
     </figure>
   );
@@ -252,7 +248,7 @@ export default function AboutChrisPage() {
 
       {/* 1. Hero */}
       <Section muted className="pt-14 sm:pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-14">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:gap-14">
           <div className="max-w-2xl">
             <Eyebrow>Founder · Operator · Marketer</Eyebrow>
             <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">Chris Momchilov</h1>
@@ -274,7 +270,7 @@ export default function AboutChrisPage() {
               </a>
             </div>
           </div>
-          <HeroPlaceholderArt />
+          <HeroPortrait />
         </div>
       </Section>
 
@@ -353,20 +349,21 @@ export default function AboutChrisPage() {
 
       {/* 6. AI systems tiles */}
       <Section muted>
+        {/* The diagram carries its own "AI systems" eyebrow, so the heading omits it. */}
         <SectionHeading
-          eyebrow="AI systems"
           title="What he builds and runs"
           lede="Human decisions stay with Chris. Agents draft, research, produce, and check — inside guardrails."
         />
 
-        {/* Chip flow stands in for a diagram until final art is supplied. */}
-        <div className="mb-8 flex flex-wrap items-center gap-2 text-sm font-semibold">
-          <span className="rounded-full bg-brand px-4 py-2 text-white">Chris decides</span>
-          <span aria-hidden className="hidden text-ink-muted sm:inline">→</span>
-          <span className="rounded-full border border-line bg-surface px-4 py-2 text-ink">Agents draft · research · produce · check</span>
-          <span aria-hidden className="hidden text-ink-muted sm:inline">→</span>
-          <span className="rounded-full bg-lavender px-4 py-2 text-brand">Guardrails hold</span>
-        </div>
+        <figure className="mb-8 overflow-hidden rounded-(--tm-radius-lg) border border-line bg-surface-muted shadow-card">
+          <SiteImage
+            src={AI_SYSTEMS_DIAGRAM}
+            alt="Flow diagram: Chris (human) → Strategos, Head of Marketing → 11 specialist agents → Guardian QA and brand checks → human approval gates. Strategy, spend, and brand stay with Chris; agents run the routine work."
+            width={960}
+            height={300}
+            className="h-auto w-full"
+          />
+        </figure>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AI_TILES.map((tile) => (
