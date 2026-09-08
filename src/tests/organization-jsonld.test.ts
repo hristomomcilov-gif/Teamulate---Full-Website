@@ -1,8 +1,10 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  MARKETING_SHARE_IMAGE_URL,
   ORGANIZATION_DESCRIPTION,
+  ORGANIZATION_DISAMBIGUATING_DESCRIPTION,
   ORGANIZATION_JSON_LD,
   ORGANIZATION_LOGO_URL,
   ORGANIZATION_SAME_AS,
@@ -42,6 +44,38 @@ describe("Organization JSON-LD", () => {
     expect(JSON.stringify(ORGANIZATION_JSON_LD)).not.toMatch(
       /wikipedia\.org|crunchbase\.com|martechulate|marketeam|teamulation|singularity/i,
     );
+  });
+
+  it("disambiguates Teamulate with the locked W1 identity fields only", () => {
+    expect(ORGANIZATION_JSON_LD.disambiguatingDescription).toBe(
+      "Teamulate (teamulate.ca) is a managed AI marketing department for B2B companies. It is distinct from unrelated HR and behavioural-skills products that use similar names.",
+    );
+    expect(ORGANIZATION_JSON_LD.disambiguatingDescription).toBe(ORGANIZATION_DISAMBIGUATING_DESCRIPTION);
+    expect(ORGANIZATION_JSON_LD.alternateName).toEqual(["Teamulate AI Marketing Team"]);
+    expect(ORGANIZATION_JSON_LD.alternateName).toHaveLength(1);
+    expect(ORGANIZATION_JSON_LD.image).toBe("https://teamulate.ca/assets/og/teamulate-og.png");
+    expect(ORGANIZATION_JSON_LD.image).toBe(MARKETING_SHARE_IMAGE_URL);
+    expect(existsSync(resolve(process.cwd(), "public/assets/og/teamulate-og.png"))).toBe(true);
+
+    // Merge-only: nothing else may be added alongside the three W1 fields.
+    expect(ORGANIZATION_JSON_LD).not.toHaveProperty("knowsAbout");
+    expect(ORGANIZATION_JSON_LD).not.toHaveProperty("notes");
+    expect(Object.keys(ORGANIZATION_JSON_LD).sort()).toEqual(
+      [
+        "@id",
+        "@type",
+        "alternateName",
+        "description",
+        "disambiguatingDescription",
+        "image",
+        "legalName",
+        "logo",
+        "name",
+        "sameAs",
+        "url",
+      ].sort(),
+    );
+    expect(JSON.stringify(ORGANIZATION_JSON_LD)).not.toMatch(/\/\*|TODO|NOTE:|implementation/i);
   });
 
   it("merges into the existing homepage graph without a second Organization", () => {
