@@ -43,9 +43,15 @@ There were no pre-existing routes, so no `keep`, `revise`, `merge`, `redirect` o
 | `/geo-ai-search/` | absent | Approved capability content |
 | `/about/`, `/teamulate-runs-teamulate/` | absent | Tenant 0 evidence to publish |
 | `/resources/`, `/case-studies/`, `/changelog/` | absent | Real content only; case studies require customer permission |
-| `/blog/` | create | Blog index (v0). Header + footer nav. One published article. |
+| `/blog/` | create | Blog index. Header + footer nav. Cards: Who AI Search Cites in 2026 (index card only; article is a live static page, source not in this repo) and 11 vs 11. |
 | `/blog/11-human-hires-vs-11-ai-specialists/` | create | First article from the August 2026 11 vs 11 report. Public savings copy locked at 90%. |
 | `/acceptable-use/`, `/subprocessors/`, `/cookie-settings/` | absent | Legal review / consent tooling |
+
+## Vertical hub — preview / staging only (Gate A, Batch W1)
+
+| Route | Status | In navigation | In sitemap | Notes |
+|---|---|---|---|---|
+| `/for/msp-managed-it-cyber/` | create (preview) | no | **no** | MSP · managed IT · cyber hub from the V3.1 draft. `noindex,nofollow` until Chris gives an explicit publish yes; then flip robots, add to `SITEMAP_ROUTES` + `public/sitemap.xml` + `public/sitemap.php`. Wave A 2a on HOLD: no second MSP URL. Copy in `src/content/msp-hub.ts`; guardrails in `src/tests/msp-hub.test.ts`. |
 
 ## Auth routes (Phase 2 — absent)
 
