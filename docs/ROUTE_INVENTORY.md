@@ -47,6 +47,16 @@ There were no pre-existing routes, so no `keep`, `revise`, `merge`, `redirect` o
 | `/blog/11-human-hires-vs-11-ai-specialists/` | create | First article from the August 2026 11 vs 11 report. Public savings copy locked at 90%. |
 | `/acceptable-use/`, `/subprocessors/`, `/cookie-settings/` | absent | Legal review / consent tooling |
 
+## Preview drafts — `/preview/*` (noindex, never in nav or sitemap)
+
+`/preview/` is a separate SuperHosting deployment (hosting/README.md). Routes here are review drafts: `robots` meta `noindex,nofollow`, `/preview/` disallowed in `robots.txt`, blocked by the sitemap generator, and stripped from the live-root zip by `scripts/export-live.sh`.
+
+| Route | Status | In navigation | In sitemap | Notes |
+|---|---|---|---|---|
+| `/preview/team/` | create (preview draft, 8 Sep 2026) | no | **no** | Glassmorphism redesign of the `/team/` "How the department is organized" section (`src/components/team/DepartmentOrgChart.tsx`, copy in `src/content/team-chart.ts`). Same hero + final CTA as live `/team/`, shared SiteChrome. Live `/team/` is untouched. Locks: Strategos *prepares* the strategy; human oversight; 90% not 95%; no Barrie; no "fully autonomous". Guardrails in `src/tests/preview-team.test.ts`. |
+
+**Deploy (Flow):** run `./scripts/export-preview-team.sh` → `previews/preview-team.zip`. SFTP/extract its contents into **`teamulate.ca/preview/team/`** only (`index.html`, `*.txt`, `_next/`, `.htaccess` with `X-Robots-Tag: noindex, nofollow`). The bundle is self-contained (its assets are rewritten to `/preview/team/_next/`), so nothing is uploaded to the document root, `/_next/`, or `/team/`. To adopt the design on live `/team/`, replace the "Structure" section in `src/app/team/page.tsx` with `<DepartmentOrgChart />` (seat cards then anchor to the on-page profiles) and delete the preview route.
+
 ## Auth routes (Phase 2 — absent)
 
 `/invite/[token]`, `/verify-email`, `/forgot-password`, `/reset-password/[token]`, `/mfa/*`, `/logout`, `/access-denied`
