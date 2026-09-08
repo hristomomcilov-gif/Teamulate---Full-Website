@@ -7,6 +7,14 @@ import type { NextConfig } from "next";
 const stagingBase = process.env.TEAMULATE_STAGING_BASE === "1" ? "/stg" : "";
 
 /**
+ * Preview-bundle flag (TEAMULATE_PREVIEW_EXPORT=1): keeps the root basePath but
+ * marks the whole build noindex and drops GA4, for self-contained draft overlays
+ * such as scripts/export-preview-team.sh (teamulate.ca/preview/team/). Never
+ * set it for a live-root export.
+ */
+const previewExport = stagingBase !== "" || process.env.TEAMULATE_PREVIEW_EXPORT === "1";
+
+/**
  * Static export configuration for Apache hosting (SuperHosting, teamulate.ca).
  * - output "export" emits plain HTML/CSS/JS into `out/` — no Node required.
  * - trailingSlash keeps canonical /route/ URLs and maps to route/index.html,
@@ -24,7 +32,7 @@ const nextConfig: NextConfig = {
   ...(stagingBase ? { basePath: stagingBase, assetPrefix: stagingBase } : {}),
   env: {
     NEXT_PUBLIC_BASE_PATH: stagingBase,
-    NEXT_PUBLIC_PREVIEW_EXPORT: stagingBase ? "1" : "",
+    NEXT_PUBLIC_PREVIEW_EXPORT: previewExport ? "1" : "",
   },
 };
 
