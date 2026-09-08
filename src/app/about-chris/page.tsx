@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
   alternates: { canonical: absoluteUrl(PAGE_PATH) },
+  // Published live by Chris; indexable like the other public marketing routes.
+  robots: { index: true, follow: true },
   openGraph: {
     siteName: SITE.name,
     type: "profile",
@@ -59,7 +61,7 @@ const personSchema = {
 };
 
 const PROOF_STATS = [
-  { value: "10+", label: "Years leading marketing across SaaS, enterprise tech, fintech & ecommerce" },
+  { value: "12", label: "Years leading marketing across SaaS, enterprise tech, fintech & ecommerce" },
   { value: "11", label: "Specialized AI agents in the Teamulate department he designed and operates" },
   { value: "28×", label: "Organic traffic lift at MioCommerce" },
 ] as const;
@@ -253,7 +255,7 @@ export default function AboutChrisPage() {
             <Eyebrow>Founder · Operator · Marketer</Eyebrow>
             <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">Chris Momchilov</h1>
             <p className="mt-5 text-lg font-medium leading-relaxed text-ink-muted sm:text-xl">
-              10+ years in B2B marketing. Builder of a live multi-agent AI marketing system.
+              12 years in B2B marketing. Builder of a live multi-agent AI marketing system.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <CtaLink href="/request-demo/" ctaId="about-chris-hero-demo" kind="primary" className="px-6 py-3 sm:text-base">
