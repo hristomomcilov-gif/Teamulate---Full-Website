@@ -366,9 +366,9 @@ export default function AboutChrisPage() {
         {/* Diagram placeholder: chip flow until Pixel supplies a diagram. */}
         <div className="mb-8 flex flex-wrap items-center gap-2 text-sm font-semibold">
           <span className="rounded-full bg-brand px-4 py-2 text-white">Chris decides</span>
-          <span aria-hidden className="text-ink-muted">→</span>
+          <span aria-hidden className="hidden text-ink-muted sm:inline">→</span>
           <span className="rounded-full border border-line bg-surface px-4 py-2 text-ink">Agents draft · research · produce · check</span>
-          <span aria-hidden className="text-ink-muted">→</span>
+          <span aria-hidden className="hidden text-ink-muted sm:inline">→</span>
           <span className="rounded-full bg-lavender px-4 py-2 text-brand">Guardrails hold</span>
         </div>
 
