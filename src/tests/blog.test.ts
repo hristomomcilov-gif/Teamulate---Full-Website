@@ -47,7 +47,7 @@ describe("Blog section (staging v0)", () => {
   it("adds Blog to header and footer without removing Guides", () => {
     expect(HEADER_NAV.map((g) => g.label)).toEqual([
       "How it works",
-      "Team",
+      "About",
       "Pricing",
       "Blog",
       "Demo",
