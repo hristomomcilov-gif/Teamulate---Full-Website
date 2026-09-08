@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="960" height="320" role="img" aria-labelledby="ai-diag-title ai-diag-desc" font-family="Inter, ui-sans-serif, system-ui, sans-serif">
+<title id="ai-diag-title">How Chris runs the department</title>
+<desc id="ai-diag-desc">Flow: Chris (human) to Strategos (Head of Marketing) to specialist agents to Guardian QA to human approvals.</desc>
+<rect width="960" height="320" rx="18" fill="#f5f4fb"/>
+<rect x="1" y="1" width="958" height="318" rx="17" fill="none" stroke="#dbe3f0"/>
+<text x="32" y="42" fill="#5b47f0" font-size="12" font-weight="700" letter-spacing="0.14em">AI SYSTEMS</text>
+<text x="32" y="70" fill="#0b1631" font-size="20" font-weight="700">Human oversight → agent execution</text>
+<rect x="32" y="110" width="150" height="120" rx="14" fill="#0b1631"/>
+<circle cx="107" cy="148" r="18" fill="#5b47f0"/>
+<path d="M107 138c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9z" fill="#fff"/>
+<path d="M92 178c0-8 7-14 15-14h0c8 0 15 6 15 14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+<text x="107" y="198" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Chris</text>
+<text x="107" y="216" text-anchor="middle" fill="#94a3b8" font-size="11">Human</text>
+<path d="M192 170 H218" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M212 164 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="228" y="110" width="150" height="120" rx="14" fill="#ffffff" stroke="#5b47f0" stroke-width="2"/>
+<rect x="278" y="130" width="50" height="36" rx="10" fill="#eceafa"/>
+<path d="M303 140 l4 10 11 1.5 -8 7.5 2 11 -9-5 -9 5 2-11 -8-7.5 11-1.5z" fill="#5b47f0"/>
+<text x="303" y="198" text-anchor="middle" fill="#0b1631" font-size="13" font-weight="700">Strategos</text>
+<text x="303" y="216" text-anchor="middle" fill="#64748b" font-size="11">Head of Marketing</text>
+<path d="M388 170 H414" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M408 164 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="424" y="110" width="150" height="120" rx="14" fill="#ffffff" stroke="#3b6ef5" stroke-width="2"/>
+<circle cx="454" cy="148" r="10" fill="#3b6ef5"/>
+<circle cx="499" cy="148" r="10" fill="#5b47f0"/>
+<circle cx="544" cy="148" r="10" fill="#19a9b8"/>
+<text x="499" y="198" text-anchor="middle" fill="#0b1631" font-size="13" font-weight="700">11 agents</text>
+<text x="499" y="216" text-anchor="middle" fill="#64748b" font-size="11">Specialists</text>
+<path d="M584 170 H610" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M604 164 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="620" y="110" width="150" height="120" rx="14" fill="#ffffff" stroke="#2da65a" stroke-width="2"/>
+<path d="M695 128 l22 8 v18c0 14-9 26-22 32 -13-6-22-18-22-32v-18z" fill="#e8f6ee" stroke="#2da65a" stroke-width="2"/>
+<path d="M686 156 l7 7 14-12" fill="none" stroke="#2da65a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="695" y="198" text-anchor="middle" fill="#0b1631" font-size="13" font-weight="700">Guardian</text>
+<text x="695" y="216" text-anchor="middle" fill="#64748b" font-size="11">QA / brand</text>
+<path d="M780 170 H806" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M800 164 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="816" y="110" width="112" height="120" rx="14" fill="#0b1631"/>
+<rect x="848" y="136" width="48" height="28" rx="8" fill="#5b47f0"/>
+<path d="M860 150 l8 8 16-14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="872" y="198" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Approvals</text>
+<text x="872" y="216" text-anchor="middle" fill="#94a3b8" font-size="11">Human gates</text>
+<text x="32" y="286" fill="#64748b" font-size="12">Strategy, spend, and brand stay with Chris. Agents run the routine work.</text>
+</svg>
