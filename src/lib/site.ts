@@ -179,6 +179,7 @@ export const SITEMAP_ROUTES = [
   "/blog/11-human-hires-vs-11-ai-specialists/",
   "/how-it-works/",
   "/team/",
+  "/about-chris/",
   "/dashboard/",
   "/pricing/",
   "/security-governance/",

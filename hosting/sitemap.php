@@ -20,6 +20,7 @@ $urls = [
     'https://teamulate.ca/blog/11-human-hires-vs-11-ai-specialists/',
     'https://teamulate.ca/how-it-works/',
     'https://teamulate.ca/team/',
+    'https://teamulate.ca/about-chris/',
     'https://teamulate.ca/dashboard/',
     'https://teamulate.ca/pricing/',
     'https://teamulate.ca/security-governance/',
