@@ -55,7 +55,10 @@ describe("2026-09-08 /preview/team/ department redesign (PREVIEW DRAFT)", () => 
     expect(DEPARTMENT_SUBHEAD).toBe(
       "Specialized AI agents, working together under human oversight, to grow your brand faster and smarter.",
     );
-    expect(STRATEGOS_CHART_BADGE.toUpperCase()).toBe("HUMAN + AI");
+    // Chris lock (Skipper 2026-09-08): Strategos is not human, so never "HUMAN + AI".
+    expect(STRATEGOS_CHART_BADGE).toBe("Reports to Chris");
+    expect(chart).not.toMatch(/human\s*\+\s*ai/i);
+    expect(page).not.toMatch(/human\s*\+\s*ai/i);
     expect(chart).toContain('SeatIcon slug="strategos"');
   });
 

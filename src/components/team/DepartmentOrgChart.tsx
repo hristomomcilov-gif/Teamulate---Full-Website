@@ -332,7 +332,7 @@ export function DepartmentOrgChart({
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="text-lg font-bold leading-tight text-ink">{strategos.name}</p>
-                    <span className="inline-flex rounded-full border border-[#d9d2ff] bg-[#f1eeff] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-brand">
+                    <span className="inline-flex rounded-full border border-[#d9d2ff] bg-[#f1eeff] px-2.5 py-0.5 text-[11px] font-semibold tracking-[0.02em] text-brand">
                       {STRATEGOS_CHART_BADGE}
                     </span>
                   </div>

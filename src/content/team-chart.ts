@@ -16,7 +16,8 @@ export const DEPARTMENT_HEADLINE_LINE_2 = "Built for results.";
 export const DEPARTMENT_SUBHEAD =
   "Specialized AI agents, working together under human oversight, to grow your brand faster and smarter.";
 export const STRATEGOS_CHART_LINE = "Prepares the strategy, aligns the team, drives results.";
-export const STRATEGOS_CHART_BADGE = "Human + AI";
+/** Chris lock (Skipper, 2026-09-08): Strategos is not human - the badge is "Reports to Chris". */
+export const STRATEGOS_CHART_BADGE = "Reports to Chris";
 export const ASSURANCE_NOTE =
   "Metric and Guardian are an independent assurance layer - they do not report to any execution specialist.";
 export const DEPARTMENT_FOOTER_LINE = "Different expertise. A shared goal.";
