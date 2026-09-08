@@ -74,13 +74,19 @@ export function SiteHeader() {
                   aria-expanded={openGroup === group.label}
                   aria-haspopup="true"
                   onClick={() => setOpenGroup(openGroup === group.label ? null : group.label)}
-                  className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-ink hover:text-brand"
+                  className={`flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium hover:text-brand ${
+                    group.items.some((item) => item.href === pathname) ? "text-brand" : "text-ink"
+                  }`}
                 >
                   {group.label}
                   <span aria-hidden className="text-[10px]">▾</span>
                 </button>
                 {openGroup === group.label ? (
-                  <div className="absolute left-0 top-full mt-1 w-80 rounded-(--tm-radius-md) border border-line bg-surface p-2 shadow-card">
+                  <div
+                    className={`absolute left-0 top-full mt-1 rounded-(--tm-radius-md) border border-line bg-surface p-2 shadow-card ${
+                      group.items.some((item) => item.description) ? "w-80" : "w-56"
+                    }`}
+                  >
                     {group.items.map((item) => (
                       <Link
                         key={item.href}

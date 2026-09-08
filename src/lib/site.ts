@@ -106,10 +106,20 @@ export type NavGroup = { label: string; items: NavItem[] };
 /**
  * Header nav locked by Chris/Skipper (27 Aug): lean top bar only.
  * The six SEO pages live in the footer "Guides" column, never the header.
+ *
+ * 8 Sep (Chris): the top-level "Team" link became an "About" dropdown with
+ * exactly two children — "Chris" (/about-chris/) and "The Team" (/team/).
+ * Team must not appear as its own top-level item.
  */
 export const HEADER_NAV: NavGroup[] = [
   { label: "How it works", items: [{ label: "How it works", href: "/how-it-works/" }] },
-  { label: "Team", items: [{ label: "Team", href: "/team/" }] },
+  {
+    label: "About",
+    items: [
+      { label: "Chris", href: "/about-chris/" },
+      { label: "The Team", href: "/team/" },
+    ],
+  },
   { label: "Pricing", items: [{ label: "Pricing", href: "/pricing/" }] },
   { label: "Blog", items: [{ label: "Blog", href: "/blog/" }] },
   { label: "Demo", items: [{ label: "Demo", href: "/demo/dashboard/" }] },
