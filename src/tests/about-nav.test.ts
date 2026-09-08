@@ -55,6 +55,15 @@ describe("2026-09-08 About nav + live About Chris", () => {
     expect(page).not.toMatch(/resume-backed/i);
     expect(page).not.toMatch(/Barrie|Ontario/i);
     expect(SITEMAP_ROUTES).toContain("/about-chris/");
+  });
+
+  it("states Chris's marketing tenure as exactly 12 years (locked 2026-09-08)", () => {
+    const page = src("src/app/about-chris/page.tsx");
+    expect(page).toContain('{ value: "12", label: "Years leading marketing');
+    expect(page).toContain("12 years in B2B marketing.");
+    expect(page).not.toMatch(/10\+/);
+    expect(page).not.toMatch(/ten\+? years/i);
+    expect(page).not.toMatch(/about 12|~12|12\+ years|over a decade|a decade/i);
     for (const asset of [
       "public/about-chris/hero-card-4x3.webp",
       "public/about-chris/og-about-chris-1200x630.webp",
