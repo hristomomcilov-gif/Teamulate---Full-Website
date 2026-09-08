@@ -21,7 +21,9 @@ if rg -q '/stg/' out/blog/index.html out/blog/11-human-hires-vs-11-ai-specialist
   exit 1
 fi
 
-rm -rf out/app out/auth out/shop
+# /preview/ is a separate SuperHosting deployment (hosting/README.md); the
+# preview-team draft ships only via scripts/export-preview-team.sh.
+rm -rf out/app out/auth out/shop out/preview
 rm -f out/client-login.html
 
 dest="${1:-$root/previews/live-blog.zip}"
@@ -33,6 +35,7 @@ rm -f "$dest"
     -x "app/*" \
     -x "auth/*" \
     -x "shop/*" \
+    -x "preview/*" \
     -x "hosting/*" \
     -x ".htaccess"
 )
