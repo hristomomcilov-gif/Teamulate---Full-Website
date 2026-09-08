@@ -32,7 +32,7 @@ const personSchema = {
 const PROOF_STATS = [
   { value: "10+", label: "Years leading marketing across SaaS, enterprise tech, fintech & ecommerce" },
   { value: "11", label: "Specialized AI agents in the Teamulate department he designed and operates" },
-  { value: "28×", label: "Organic traffic lift at MioCommerce (resume-backed)" },
+  { value: "28×", label: "Organic traffic lift at MioCommerce" },
 ] as const;
 
 const TRUST_CARDS = [
@@ -194,9 +194,8 @@ const EXTERNAL_BUTTON =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200";
 
 /**
- * PLACEHOLDER hero art (gradient + dashboard-still silhouette).
- * Pixel to replace with final portrait / hero visual before live publish.
- * Not a face photo — no photo is invented here.
+ * Interim hero art (gradient + dashboard-still silhouette) until final
+ * portrait / hero art is supplied. Not a face photo — no photo is invented.
  */
 function HeroPlaceholderArt() {
   const bars = [46, 68, 58, 82, 74, 96];
@@ -242,9 +241,6 @@ function HeroPlaceholderArt() {
           </div>
         </div>
       </div>
-      <figcaption className="absolute left-3 top-3 rounded-full border border-white/30 bg-navy-950/60 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
-        Placeholder visual — final art by Pixel
-      </figcaption>
     </figure>
   );
 }
@@ -363,7 +359,7 @@ export default function AboutChrisPage() {
           lede="Human decisions stay with Chris. Agents draft, research, produce, and check — inside guardrails."
         />
 
-        {/* Diagram placeholder: chip flow until Pixel supplies a diagram. */}
+        {/* Chip flow stands in for a diagram until final art is supplied. */}
         <div className="mb-8 flex flex-wrap items-center gap-2 text-sm font-semibold">
           <span className="rounded-full bg-brand px-4 py-2 text-white">Chris decides</span>
           <span aria-hidden className="hidden text-ink-muted sm:inline">→</span>
