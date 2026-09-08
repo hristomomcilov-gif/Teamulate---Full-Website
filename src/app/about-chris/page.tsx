@@ -360,7 +360,7 @@ export default function AboutChrisPage() {
             src={AI_SYSTEMS_DIAGRAM}
             alt="Flow diagram: Chris (human) → Strategos, Head of Marketing → 11 specialist agents → Guardian QA and brand checks → human approval gates. Strategy, spend, and brand stay with Chris; agents run the routine work."
             width={960}
-            height={300}
+            height={320}
             className="h-auto w-full"
           />
         </figure>
