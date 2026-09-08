@@ -1,5 +1,5 @@
 /**
- * Blog catalog. One published post is enough for v0 — no empty magazine slots.
+ * Blog catalog. Real published posts only — no empty magazine slots.
  * Public savings language is locked at 90% (not the PDF cover's 95%).
  */
 
@@ -7,19 +7,29 @@ export type BlogPost = {
   slug: string;
   href: string;
   title: string;
+  /** Card dek (one line under the title). */
   subtitle: string;
+  /** Card summary paragraph. */
   excerpt: string;
   dateLabel: string;
   datePublished: string;
   author: string;
   featuredImage: string;
   featuredImageAlt: string;
+  pdfHref?: string;
+  youtubeId?: string;
+  youtubeTitle?: string;
+};
+
+/** A post that ships with the downloadable report and the official explainer video. */
+export type ReportBlogPost = BlogPost & {
   pdfHref: string;
   youtubeId: string;
   youtubeTitle: string;
 };
 
 export const ELEVEN_VS_ELEVEN_SLUG = "11-human-hires-vs-11-ai-specialists";
+export const WHO_AI_SEARCH_CITES_SLUG = "who-ai-search-cites-2026";
 
 /** Locked research totals from the August 2026 comparison report. */
 export const ELEVEN_VS_ELEVEN_FIGURES = {
@@ -50,29 +60,50 @@ export const ELEVEN_ROLE_SALARIES = [
   { role: "Marketing Operations & Automation Specialist", us: "US $105,850", ca: "C$93,870" },
 ] as const;
 
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    slug: ELEVEN_VS_ELEVEN_SLUG,
-    href: `/blog/${ELEVEN_VS_ELEVEN_SLUG}/`,
-    title: "11 Human Hires vs. 11 AI Specialists",
-    subtitle:
-      "The cost, capacity, consistency and control trade-offs behind a modern marketing department.",
-    excerpt:
-      "Most businesses do not need eleven additional payrolls. They need the coordinated capabilities those eleven specialists provide. A buyer guide to cost, capacity, consistency and control — with humans still owning the decisions that need judgment.",
-    dateLabel: "August 2026",
-    datePublished: "2026-08-01",
-    author: "Chris Momchilov",
-    featuredImage: `/assets/blog/${ELEVEN_VS_ELEVEN_SLUG}-og.png`,
-    featuredImageAlt:
-      "Teamulate blog cover: 11 Human Hires vs. 11 AI Specialists, brand purple field with the Teamulate T lockup.",
-    pdfHref: `/reports/${ELEVEN_VS_ELEVEN_SLUG}.pdf`,
-    youtubeId: "Lr8QlT2ng9o",
-    youtubeTitle: "11 Human Hires vs. 11 AI Specialists — Teamulate explainer",
-  },
-];
+const ELEVEN_VS_ELEVEN_POST: ReportBlogPost = {
+  slug: ELEVEN_VS_ELEVEN_SLUG,
+  href: `/blog/${ELEVEN_VS_ELEVEN_SLUG}/`,
+  title: "11 Human Hires vs. 11 AI Specialists",
+  subtitle:
+    "The cost, capacity, consistency and control trade-offs behind a modern marketing department.",
+  excerpt:
+    "Most businesses do not need eleven additional payrolls. They need the coordinated capabilities those eleven specialists provide. A buyer guide to cost, capacity, consistency and control — with humans still owning the decisions that need judgment.",
+  dateLabel: "August 2026",
+  datePublished: "2026-08-01",
+  author: "Chris Momchilov",
+  featuredImage: `/assets/blog/${ELEVEN_VS_ELEVEN_SLUG}-og.png`,
+  featuredImageAlt:
+    "Teamulate blog cover: 11 Human Hires vs. 11 AI Specialists, brand purple field with the Teamulate T lockup.",
+  pdfHref: `/reports/${ELEVEN_VS_ELEVEN_SLUG}.pdf`,
+  youtubeId: "Lr8QlT2ng9o",
+  youtubeTitle: "11 Human Hires vs. 11 AI Specialists — Teamulate explainer",
+};
+
+/**
+ * Index card for the live article at /blog/who-ai-search-cites-2026/.
+ * Dek and summary are locked (Gate A, W1). Cover is the interim site share
+ * graphic until a dedicated cover is approved.
+ */
+const WHO_AI_SEARCH_CITES_POST: BlogPost = {
+  slug: WHO_AI_SEARCH_CITES_SLUG,
+  href: `/blog/${WHO_AI_SEARCH_CITES_SLUG}/`,
+  title: "Who AI Search Cites in 2026",
+  subtitle: "Ranking highly does not guarantee that an AI answer will cite you.",
+  excerpt:
+    "An analysis of sources cited in Google AI Overviews for ordinary marketing questions on September 1, 2026—and why rankings alone are not the same as being in the answer.",
+  dateLabel: "September 2026",
+  datePublished: "2026-09-01",
+  author: "Chris Momchilov",
+  featuredImage: "/assets/og/teamulate-og.png",
+  featuredImageAlt: "Teamulate blog cover: Who AI Search Cites in 2026, Teamulate brand share graphic.",
+};
+
+/** Newest first. */
+export const BLOG_POSTS: BlogPost[] = [WHO_AI_SEARCH_CITES_POST, ELEVEN_VS_ELEVEN_POST];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((post) => post.slug === slug);
 }
 
-export const FEATURED_BLOG_POST = BLOG_POSTS[0];
+/** The 11 vs 11 report remains the featured post (article page, PDF and explainer). */
+export const FEATURED_BLOG_POST: ReportBlogPost = ELEVEN_VS_ELEVEN_POST;
