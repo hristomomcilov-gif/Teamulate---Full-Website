@@ -9,6 +9,8 @@ import {
   ELEVEN_VS_ELEVEN_FIGURES,
   ELEVEN_VS_ELEVEN_SLUG,
   FEATURED_BLOG_POST,
+  WHO_AI_SEARCH_CITES_SLUG,
+  getBlogPost,
 } from "@/content/blog";
 import { AGENTS } from "@/content/agents";
 
@@ -24,7 +26,7 @@ describe("Blog section (staging v0)", () => {
   const index = src("src/app/blog/page.tsx");
   const article = src("src/app/blog/11-human-hires-vs-11-ai-specialists/page.tsx");
 
-  it("keeps a real index at /blog and one published post", () => {
+  it("keeps a real index at /blog with real published posts only", () => {
     expect(index).toContain("<h1");
     expect(index).toContain(">Blog<");
     expect(index).toContain(
@@ -37,11 +39,35 @@ describe("Blog section (staging v0)", () => {
     expect(index).toContain("Read the article");
     expect(index).toContain("post.href");
     expect(FEATURED_BLOG_POST.href).toBe("/blog/11-human-hires-vs-11-ai-specialists/");
-    expect(BLOG_POSTS).toHaveLength(1);
+    expect(BLOG_POSTS).toHaveLength(2);
+    expect(BLOG_POSTS.map((post) => post.href)).toEqual([
+      "/blog/who-ai-search-cites-2026/",
+      "/blog/11-human-hires-vs-11-ai-specialists/",
+    ]);
     expect(FEATURED_BLOG_POST.href).toBe(`/blog/${ELEVEN_VS_ELEVEN_SLUG}/`);
     expect(FEATURED_BLOG_POST.title).toBe("11 Human Hires vs. 11 AI Specialists");
     expect(FEATURED_BLOG_POST.subtitle).toContain("cost, capacity, consistency and control");
     expect(FEATURED_BLOG_POST.youtubeId).toBe("Lr8QlT2ng9o");
+  });
+
+  it("renders the Who AI Search Cites card with the locked dek and summary (W1)", () => {
+    const card = getBlogPost(WHO_AI_SEARCH_CITES_SLUG);
+    expect(card).toBeDefined();
+    expect(card?.href).toBe("/blog/who-ai-search-cites-2026/");
+    expect(card?.title).toBe("Who AI Search Cites in 2026");
+    expect(card?.subtitle).toBe("Ranking highly does not guarantee that an AI answer will cite you.");
+    expect(card?.excerpt).toBe(
+      "An analysis of sources cited in Google AI Overviews for ordinary marketing questions on September 1, 2026—and why rankings alone are not the same as being in the answer.",
+    );
+    expect(card?.author).toBe("Chris Momchilov");
+    expect(card?.dateLabel).toBe("September 2026");
+    expect(card?.featuredImage).toBe("/assets/og/teamulate-og.png");
+    expect(existsSync(resolve(process.cwd(), `public${card?.featuredImage}`))).toBe(true);
+    // Card strings flow through the same JSX render path as every other post.
+    expect(index).toContain("{post.subtitle}");
+    expect(index).toContain("{post.excerpt}");
+    expect(index).not.toContain("dangerouslySetInnerHTML");
+    expect(index).not.toContain("who-ai-search-cites");
   });
 
   it("adds Blog to header and footer without removing Guides", () => {

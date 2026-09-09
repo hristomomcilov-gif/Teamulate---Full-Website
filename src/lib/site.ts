@@ -32,6 +32,19 @@ export const ORGANIZATION_DESCRIPTION =
 export const ORGANIZATION_LOGO_URL = `${SITE.domain}/apple-icon.png`;
 
 /**
+ * Entity disambiguation (Gate A, W1). Separates Teamulate from unrelated
+ * HR / behavioural-skills products with similar names. Wording is locked.
+ */
+export const ORGANIZATION_DISAMBIGUATING_DESCRIPTION =
+  "Teamulate (teamulate.ca) is a managed AI marketing department for B2B companies. It is distinct from unrelated HR and behavioural-skills products that use similar names.";
+
+/** Single alternate name only. Do not add more. */
+export const ORGANIZATION_ALTERNATE_NAMES = ["Teamulate AI Marketing Team"] as const;
+
+/** Organization.image is the 1200×630 share graphic (same file as MARKETING_SHARE_IMAGE_URL). */
+export const ORGANIZATION_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;
+
+/**
  * Official Teamulate social profiles (Chris-approved, 2026-09-02).
  * Order is locked for the footer icon row and Organization sameAs.
  * Do not invent extra URLs. Do not use Singularity Drive YouTube.
@@ -64,17 +77,20 @@ export const ORGANIZATION_JSON_LD = {
   "@id": `${SITE_URL}#organization`,
   name: "Teamulate",
   legalName: "Teamulate",
+  alternateName: [...ORGANIZATION_ALTERNATE_NAMES],
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
     url: ORGANIZATION_LOGO_URL,
   },
+  image: ORGANIZATION_IMAGE_URL,
   description: ORGANIZATION_DESCRIPTION,
+  disambiguatingDescription: ORGANIZATION_DISAMBIGUATING_DESCRIPTION,
   sameAs: ORGANIZATION_SAME_AS,
 };
 
 /** 1200×630 share graphic. Public marketing routes must point at this exact URL. */
-export const MARKETING_SHARE_IMAGE_URL = `${SITE.domain}/assets/og/teamulate-og.png`;
+export const MARKETING_SHARE_IMAGE_URL = ORGANIZATION_IMAGE_URL;
 
 export const MARKETING_SHARE_IMAGE = {
   url: MARKETING_SHARE_IMAGE_URL,
