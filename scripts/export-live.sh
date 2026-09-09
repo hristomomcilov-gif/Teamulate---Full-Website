@@ -21,6 +21,10 @@ if rg -q '/stg/' out/blog/index.html out/blog/11-human-hires-vs-11-ai-specialist
   exit 1
 fi
 
+# LOCKED SITECHROME: every exported marketing page must carry the homepage
+# header + footer byte-for-byte (docs/LOCKED_SITECHROME.md).
+node scripts/check-sitechrome-parity.mjs out
+
 rm -rf out/app out/auth out/shop
 rm -f out/client-login.html
 

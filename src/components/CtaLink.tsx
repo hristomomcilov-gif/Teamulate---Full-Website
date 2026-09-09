@@ -4,10 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { isFullDocumentHref } from "@/lib/site";
 
 /**
  * CTA link that fires the appropriate analytics event
  * (primary_cta_clicked / secondary_cta_clicked / nav_item_clicked / login_clicked).
+ *
+ * Demo, /app/ and .html targets render as a plain `<a>` so they are always a
+ * full document load (docs/LOCKED_SITECHROME.md); everything else uses next/link.
  */
 export function CtaLink({
   href,
@@ -46,8 +50,18 @@ export function CtaLink({
     trackEvent(eventName, { ctaId, route: pathname ?? "" });
   };
 
+  const classes = `${base} ${variants[resolvedVariant]} ${className}`;
+
+  if (isFullDocumentHref(href)) {
+    return (
+      <a href={href} onClick={onClick} className={classes}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link href={href} onClick={onClick} className={`${base} ${variants[resolvedVariant]} ${className}`}>
+    <Link href={href} onClick={onClick} className={classes}>
       {children}
     </Link>
   );

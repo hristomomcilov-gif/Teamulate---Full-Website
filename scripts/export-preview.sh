@@ -46,6 +46,10 @@ PY
 rm -rf "$export_root/app" "$export_root/auth" "$export_root/shop"
 rm -f "$export_root/client-login.html"
 
+# LOCKED SITECHROME: preview pages carry the homepage header + footer too
+# (docs/LOCKED_SITECHROME.md). The checker handles the /stg basePath.
+node scripts/check-sitechrome-parity.mjs "$export_root"
+
 dest="${1:-$root/previews/stg-blog.zip}"
 mkdir -p "$(dirname "$dest")"
 rm -f "$dest"

@@ -1,10 +1,15 @@
 import Link from "next/link";
-import { ENTITY_LINE, FOOTER_GROUPS } from "@/lib/site";
+import { ENTITY_LINE, FOOTER_GROUPS, isFullDocumentHref } from "@/lib/site";
 import { Container } from "@/components/ui";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { TeamulateLogo } from "@/components/BrandLogo";
 import { SocialIcons } from "@/components/SocialIcons";
 
+/**
+ * LOCKED sitewide chrome (docs/LOCKED_SITECHROME.md). Rendered once, from
+ * SiteChrome in the root layout, on every marketing page. Never build a
+ * page-local or slimmed-down footer.
+ */
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
@@ -14,9 +19,8 @@ export function SiteFooter() {
           <TeamulateLogo className="h-12 w-auto sm:h-14" />
           <p className="mt-4 text-base text-ink">A full marketing department. Without building one.</p>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">{ENTITY_LINE}</p>
-          <div className="mt-6">
-            <SocialIcons />
-          </div>
+          {/* Must stay the immediate sibling of the entity line (footer-social.js contract). */}
+          <SocialIcons className="mt-4" />
         </div>
 
         <div className="grid gap-10 md:grid-cols-3">
@@ -26,8 +30,8 @@ export function SiteFooter() {
               <ul className="space-y-2.5">
                 {group.items.map((item) => (
                   <li key={item.href}>
-                    {item.href.endsWith(".html") || item.href.startsWith("/app") ? (
-                      // Plain anchor: the client login gate is a full page load, never client-routed or prefetched.
+                    {isFullDocumentHref(item.href) ? (
+                      // Plain anchor: client login gate and the filled demo are full page loads, never client-routed or prefetched.
                       <a href={item.href} className="text-sm text-ink-muted hover:text-brand hover:underline">
                         {item.label}
                       </a>

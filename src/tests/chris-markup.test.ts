@@ -15,7 +15,8 @@ describe("Chris homepage markup (31 Aug 2026)", () => {
   const founder = src("src/components/home/FounderCard.tsx");
 
   it("points header Launch Demo at the live demo and hero primary at Team", () => {
-    expect(header).toContain('href="/demo/dashboard/"');
+    // 2026-09-09: the header CTA targets the filled demo document (LAUNCH_DEMO_HREF) — docs/LOCKED_SITECHROME.md
+    expect(header).toContain("href={LAUNCH_DEMO_HREF}");
     expect(header).toContain("Launch Demo");
     expect(header).not.toContain("See the team in action");
     expect(home).toContain('href="/team/" ctaId="hero-primary"');
