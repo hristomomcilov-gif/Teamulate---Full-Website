@@ -150,7 +150,7 @@ export function HumanControlLayers() {
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">{SMV1_CONTROL.founderEyebrow}</p>
         <h3 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Chris Momchilov runs the department.</h3>
       </div>
-      <FounderCard />
+      <FounderCard tenureLine={SMV1_CONTROL.founderTenureLine} firstCustomerNote={SMV1_CONTROL.founderFirstCustomerNote} />
     </Section>
   );
 }
@@ -233,28 +233,21 @@ export function OutcomeSystems() {
 const DATE_FORMAT = new Intl.DateTimeFormat("en-CA", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
 
 export function BuildLogPanel() {
-  const live = SMV1_BUILD_LOG_ENTRIES.filter((entry) => entry.status === "live");
-  const review = SMV1_BUILD_LOG_ENTRIES.filter((entry) => entry.status === "in review");
-
   return (
     <Section id="build-log" muted>
       <SectionIntro eyebrow={SMV1_BUILD_LOG.eyebrow} title={SMV1_BUILD_LOG.title} lede={SMV1_BUILD_LOG.lede} />
       <div className="mx-auto mt-10 max-w-3xl rounded-(--tm-radius-lg) border border-line bg-surface shadow-card">
         <ol className="divide-y divide-line">
-          {live.map((entry) => (
+          {SMV1_BUILD_LOG_ENTRIES.map((entry) => (
             <li key={`${entry.date}-${entry.title}`} className="grid gap-2 px-5 py-4 sm:grid-cols-[7.5rem_1fr] sm:gap-5 sm:px-6">
               <p className="text-xs font-bold uppercase tracking-wide text-ink-muted">
                 <time dateTime={entry.date}>{DATE_FORMAT.format(new Date(`${entry.date}T00:00:00Z`))}</time>
               </p>
               <div>
                 <p className="flex flex-wrap items-center gap-2 text-base font-extrabold text-ink">
-                  {entry.href ? (
-                    <Link href={entry.href} className="hover:text-brand hover:underline">
-                      {entry.title}
-                    </Link>
-                  ) : (
-                    entry.title
-                  )}
+                  <Link href={entry.href} className="hover:text-brand hover:underline">
+                    {entry.title}
+                  </Link>
                   <StatusChip tone="positive" label="Live" />
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-ink-muted">{entry.detail}</p>
@@ -262,20 +255,6 @@ export function BuildLogPanel() {
             </li>
           ))}
         </ol>
-        {review.length ? (
-          <div className="border-t border-line bg-surface-muted px-5 py-4 sm:px-6">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink-muted">In review - not live</p>
-            <ul className="mt-2 space-y-1.5">
-              {review.map((entry) => (
-                <li key={entry.title} className="flex flex-wrap items-center gap-2 text-sm text-ink">
-                  <StatusChip tone="attention" label="In review" />
-                  <span className="font-semibold">{entry.title}</span>
-                  <span className="text-ink-muted">- {entry.detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
       </div>
       <p className="mx-auto mt-4 max-w-2xl text-center text-xs leading-relaxed text-ink-muted">{SMV1_BUILD_LOG.footnote}</p>
     </Section>

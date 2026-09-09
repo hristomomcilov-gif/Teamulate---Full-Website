@@ -48,7 +48,18 @@ const STEPS = [
   { icon: GroupIcon, title: "Outcome for AI Visibility", caption: "The new marketing medium" },
 ];
 
-export function FounderCard() {
+/**
+ * Founder card. The live homepage renders it with no props (locked markup).
+ * Preview drafts may pass the locked public tenure line ("12 years in B2B
+ * marketing") and a different first-customer note without touching live output.
+ */
+export function FounderCard({
+  tenureLine = "Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce.",
+  firstCustomerNote = "To prove you our work is worth it.",
+}: {
+  tenureLine?: string;
+  firstCustomerNote?: string;
+} = {}) {
   return (
     <div className="mx-auto max-w-5xl rounded-[28px] border border-line bg-surface p-5 shadow-card sm:p-8 lg:p-10">
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12">
@@ -81,8 +92,7 @@ export function FounderCard() {
             Building the marketing department of the future.
           </h3>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-muted">
-            Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce.
-            Strategos prepares the strategy; Chris approves it and monitors execution, with his sign-off on the
+            {tenureLine} Strategos prepares the strategy; Chris approves it and monitors execution, with his sign-off on the
             decisions that matter.
           </p>
 
@@ -114,7 +124,7 @@ export function FounderCard() {
             <div className="min-w-0 flex-1">
               <p className="text-sm font-bold text-ink">We are our own first customer.</p>
               <p className="mt-0.5 text-sm leading-relaxed text-ink-muted">
-                To prove you our work is worth it.
+                {firstCustomerNote}
               </p>
             </div>
           </div>

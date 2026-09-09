@@ -25,11 +25,16 @@ import { COPY } from "@/content/copy";
 
 export const SMV1_PATH = "/preview/site-message-v1/";
 
-/** One CTA set for the whole page. A label never points at two destinations. */
+/**
+ * One CTA set for the whole page. A label never points at two destinations.
+ * Skipper + Guardian lock (9 Sep 2026) for this preview: primary "Explore the
+ * sample workflow" (the demo dashboard walkthrough), secondary "Book a fit call"
+ * (the request-demo fit review). The live homepage's CTA pair is not used here.
+ */
 export const SMV1_CTA = {
-  primary: { label: "Book a demo", href: "/request-demo/" },
-  secondary: { label: "See the team in action", href: "/team/" },
-  demo: { label: "Try the demo dashboard", href: "/demo/dashboard/" },
+  primary: { label: "Explore the sample workflow", href: "/demo/dashboard/" },
+  secondary: { label: "Book a fit call", href: "/request-demo/" },
+  team: { label: "Meet the full team", href: "/team/" },
 } as const;
 
 export const SMV1_META = {
@@ -78,7 +83,8 @@ export const SMV1_HERO = {
   eyebrow: "For B2B teams with more marketing than people",
   headline: "Too much marketing to do. Too few people to do it.",
   dek: "Teamulate is a complete AI marketing department: 11 specialist agents under one strategy, working from one dashboard, with a human approving the decisions that matter.",
-  proofChips: ["11 Agents", "1 Dashboard", "24/7"],
+  /** Cadence is always stated together with approvals (matches the FAQ). */
+  proofChips: ["11 Agents", "1 Dashboard", "Approvals where they matter"],
   tenant0: "Teamulate is building and marketing Teamulate with the same AI-operated system it offers to clients.",
 } as const;
 
@@ -162,6 +168,9 @@ export const SMV1_CONTROL = {
   ],
   link: { label: "The P0-P4 approval model", href: "/security-governance/" },
   founderEyebrow: "The human above the agents",
+  /** Locked public tenure line - matches /about-chris/ ("12 years in B2B marketing"). */
+  founderTenureLine: "12 years in B2B marketing - VistaVu, MioCommerce, Cosmetic World, SaaS and ecommerce.",
+  founderFirstCustomerNote: "So you can judge the work before you buy it.",
 } as const;
 
 /**
@@ -264,86 +273,65 @@ export function seatsFor(system: OutcomeSystem): AgentProfile[] {
 
 /* 5. Build Log --------------------------------------------------------------- */
 
-export type BuildLogStatus = "live" | "in review";
-
+/** Visitor-facing log: only items that are live on teamulate.ca, each with the page that proves it. */
 export type BuildLogEntry = {
-  /** ISO date the item went live (or was submitted for review). */
+  /** ISO date the item went live. */
   date: string;
-  status: BuildLogStatus;
   title: string;
   detail: string;
-  /** Live page that proves the entry. Omitted only for items still in review. */
-  href?: string;
+  /** Live page that proves the entry. */
+  href: string;
 };
 
 export const SMV1_BUILD_LOG = {
   eyebrow: "Build log",
   title: "What we have actually shipped",
   lede: `${COPY.tenant0Message} This log lists what is live on teamulate.ca, with a link to each item. It is evidence of the operating system working on our own marketing - not a customer result.`,
-  footnote: "Dates are when the item went live on teamulate.ca. Items marked in review are not live and may change.",
+  footnote: "Dates are when the item went live on teamulate.ca.",
 } as const;
 
 export const SMV1_BUILD_LOG_ENTRIES: BuildLogEntry[] = [
   {
     date: "2026-09-08",
-    status: "live",
     title: "MSP, managed IT and cyber hub",
     detail: "A vertical page for MSPs and cybersecurity providers: seat map, approval boundaries and fit criteria.",
     href: "/for/msp-managed-it-cyber/",
   },
   {
     date: "2026-09-08",
-    status: "live",
     title: "About Chris",
     detail: "Founder page: 12 years in B2B marketing and the systems behind Teamulate. The header gained an About menu.",
     href: "/about-chris/",
   },
   {
     date: "2026-09-02",
-    status: "live",
     title: "Organization identity",
     detail: "Sitemap fix, Organization JSON-LD with disambiguation, and six social profiles in the footer.",
     href: "/",
   },
   {
     date: "2026-09-01",
-    status: "live",
     title: "Research: Who AI Search Cites in 2026",
     detail: "Sources cited in Google AI Overviews for ordinary marketing questions on 1 September 2026.",
     href: "/blog/who-ai-search-cites-2026/",
   },
   {
     date: "2026-09-01",
-    status: "live",
     title: "Blog: 11 human hires vs 11 AI specialists",
     detail: "The August 2026 cost report and its article, with the modeled 90% people-cost comparison.",
     href: "/blog/11-human-hires-vs-11-ai-specialists/",
   },
   {
     date: "2026-08-30",
-    status: "live",
     title: "Interactive demo on the real dashboard",
     detail: "The demo walkthrough runs on the same Marketing Dashboard chrome as the client app, with sample data labelled as such.",
     href: "/demo/dashboard/",
   },
   {
     date: "2026-08-27",
-    status: "live",
     title: "Public site and six guide pages",
     detail: "Homepage, how it works, team, pricing, security & governance, and the six guides - from the autonomous marketing department to the 2026 cost research.",
     href: "/autonomous-ai-marketing-department/",
-  },
-  {
-    date: "2026-09-08",
-    status: "in review",
-    title: "Department chart redesign for the Team page",
-    detail: "Glassmorphism organization chart for /team/, in preview for Chris's review.",
-  },
-  {
-    date: "2026-09-08",
-    status: "in review",
-    title: "Site message v1 (this page)",
-    detail: "Problem-first homepage draft from the Site Message & Experience Audit.",
   },
 ];
 
@@ -356,9 +344,9 @@ export const SMV1_GLANCE = {
   headlineCaption: "Lower people-cost than building the department",
   stats: [
     { value: "11", label: "AI specialists" },
-    { value: "24/7", label: "Operations" },
-    { value: "60", label: "Eligible library workflows" },
-    { value: "231", label: "Marketing functions mapped" },
+    { value: "Continuous", label: "Monitoring and operating cadence - with approvals where they matter" },
+    { value: "60", label: "Eligible library workflows (Entitlement Matrix v1.0)" },
+    { value: "P0-P4", label: "Approval tiers with named human decision owners" },
   ],
   /** Chris lock (2026-09-08): exactly 12 years, no plus sign. */
   tenure: { value: "12 years", label: "Marketing experience behind the system" },

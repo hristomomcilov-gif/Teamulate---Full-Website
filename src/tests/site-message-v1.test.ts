@@ -82,7 +82,7 @@ describe("2026-09-08 /preview/site-message-v1/ homepage draft (PREVIEW ONLY)", (
     expect(SMV1_HERO.headline).toBe("Too much marketing to do. Too few people to do it.");
     expect(SMV1_HERO.dek).toMatch(/complete AI marketing department/);
     expect(SMV1_HERO.dek).toMatch(/human approving the decisions that matter/);
-    expect(SMV1_HERO.proofChips).toEqual(["11 Agents", "1 Dashboard", "24/7"]);
+    expect(SMV1_HERO.proofChips).toEqual(["11 Agents", "1 Dashboard", "Approvals where they matter"]);
     expect(page).not.toContain("Teamulate — Your AI Marketing Team");
     // The hero H1 is the problem, not the brand name.
     expect(page).toMatch(/<h1[^>]*>\s*\{SMV1_HERO\.headline\}/);
@@ -114,7 +114,14 @@ describe("2026-09-08 /preview/site-message-v1/ homepage draft (PREVIEW ONLY)", (
     const assuranceOutputs = new Set(AGENTS.filter((a) => a.type === "assurance").flatMap((a) => a.typicalOutputs));
     for (const check of SMV1_ASSURANCE_CHECKS) expect(assuranceOutputs.has(check)).toBe(true);
     expect(SMV1_CONTROL.link.href).toBe("/security-governance/");
-    expect(sections).toContain("<FounderCard />");
+    // Founder card carries the locked public tenure line (matches /about-chris/), not the live "marketing manager" line.
+    expect(SMV1_CONTROL.founderTenureLine).toMatch(/^12 years in B2B marketing/);
+    expect(sections).toContain("<FounderCard tenureLine={SMV1_CONTROL.founderTenureLine} firstCustomerNote={SMV1_CONTROL.founderFirstCustomerNote} />");
+    // The shared FounderCard's defaults (live homepage output) are unchanged.
+    const founder = src("src/components/home/FounderCard.tsx");
+    expect(founder).toContain('tenureLine = "Twelve years as a marketing manager - VistaVu, MioCommerce, Cosmetic World, B2B and ecommerce."');
+    expect(founder).toContain('firstCustomerNote = "To prove you our work is worth it."');
+    expect(liveHome).toContain("<FounderCard />");
   });
 
   it("delta 4: three outcome systems cover all eleven agents exactly once - no roster on the page", () => {
@@ -137,40 +144,46 @@ describe("2026-09-08 /preview/site-message-v1/ homepage draft (PREVIEW ONLY)", (
     expect(all).toContain("Meet the full team");
   });
 
-  it("delta 5: the Build Log only lists live items with a link, and labels review items honestly", () => {
+  it("delta 5: the Build Log lists only live items, each linked - no process notes for visitors", () => {
     expect(SMV1_BUILD_LOG_ENTRIES.length).toBeGreaterThanOrEqual(5);
     for (const entry of SMV1_BUILD_LOG_ENTRIES) {
       expect(entry.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(Number.isNaN(new Date(entry.date).getTime())).toBe(false);
-      if (entry.status === "live") {
-        expect(entry.href).toBeTruthy();
-        expect(LIVE_PATHS).toContain(entry.href);
-      } else {
-        expect(entry.status).toBe("in review");
-        expect(entry.href).toBeUndefined();
-      }
+      expect(LIVE_PATHS).toContain(entry.href);
       expect(entry.detail).not.toMatch(/\d+\s?%\s?(lift|increase|growth|more leads)/i);
+      expect(`${entry.title} ${entry.detail}`).not.toMatch(/in review|this page|for Chris|glassmorphism|preview/i);
     }
-    // Newest first among live entries.
-    const liveDates = SMV1_BUILD_LOG_ENTRIES.filter((e) => e.status === "live").map((e) => e.date);
-    expect([...liveDates].sort().reverse()).toEqual(liveDates);
+    // Newest first.
+    const dates = SMV1_BUILD_LOG_ENTRIES.map((e) => e.date);
+    expect([...dates].sort().reverse()).toEqual(dates);
     expect(content).toContain("not a customer result");
-    expect(sections).toContain('label="In review"');
+    // Guardian (9 Sep): no "In review - not live" block or internal method notes in the visitor body.
+    expect(sections).not.toMatch(/in review/i);
+    expect(content).not.toMatch(/in review|Glassmorphism|\(this page\)/i);
   });
 
-  it("delta 6: one CTA set - a label never points at two destinations", () => {
-    expect(SMV1_CTA.primary).toEqual({ label: "Book a demo", href: "/request-demo/" });
-    expect(SMV1_CTA.secondary).toEqual({ label: "See the team in action", href: "/team/" });
-    expect(SMV1_CTA.demo).toEqual({ label: "Try the demo dashboard", href: "/demo/dashboard/" });
+  it("delta 6: one CTA set under the Skipper + Guardian lock - primary 'Explore the sample workflow', secondary 'Book a fit call'", () => {
+    expect(SMV1_CTA.primary).toEqual({ label: "Explore the sample workflow", href: "/demo/dashboard/" });
+    expect(SMV1_CTA.secondary).toEqual({ label: "Book a fit call", href: "/request-demo/" });
+    expect(SMV1_CTA.team).toEqual({ label: "Meet the full team", href: "/team/" });
     // Every CtaLink on the page uses the set, never a literal href or literal label.
-    const ctaHrefs = [...page.matchAll(/<CtaLink\s+href=\{?([^\s}]+)\}?/g)].map((m) => m[1]);
-    expect(ctaHrefs.length).toBeGreaterThanOrEqual(4);
-    for (const href of ctaHrefs) expect(href).toMatch(/^SMV1_CTA\.(primary|secondary|demo)\.href$/);
+    const ctas = [...page.matchAll(/<CtaLink\s+href=\{?([^\s}]+)\}?[\s\S]*?ctaId="([^"]+)"[\s\S]*?kind="([^"]+)"/g)];
+    expect(ctas.length).toBeGreaterThanOrEqual(4);
+    for (const [, href, , kind] of ctas) {
+      expect(href).toMatch(/^SMV1_CTA\.(primary|secondary)\.href$/);
+      // The purple (kind="primary") button is always the primary label; the secondary is never styled as primary.
+      expect(kind).toBe(href.includes(".primary.") ? "primary" : "secondary");
+    }
+    // Hero and final band both lead with the primary.
+    expect(page).toMatch(/ctaId="smv1-hero-primary"/);
+    expect(page).toMatch(/href=\{SMV1_CTA\.primary\.href\} ctaId="smv1-hero-primary" kind="primary"/);
+    expect(page).toMatch(/href=\{SMV1_CTA\.primary\.href\}\s+ctaId="smv1-final-primary"\s+kind="primary"/);
     expect(page).not.toMatch(/<CtaLink[^>]*href="\//);
     expect(sections).not.toContain("<CtaLink");
-    // Live-homepage variants that broke the rule are gone from the preview.
-    expect(page).not.toContain("Book a Demo");
-    expect(page).not.toMatch(/See the team in action →/);
+    // Locked out of this preview: the live pair as primary, and leading with a demo booking.
+    expect(all).not.toMatch(/Book a demo/i);
+    expect(all).not.toMatch(/See the team in action/);
+    expect(all).not.toContain("Try the demo dashboard");
     expect(all).not.toContain("Meet your department");
   });
 
@@ -186,6 +199,12 @@ describe("2026-09-08 /preview/site-message-v1/ homepage draft (PREVIEW ONLY)", (
     expect(all).toMatch(/Strategos prepares the strategy/);
     expect(all).not.toMatch(/sets the strategy/i);
     expect(all).not.toMatch(/95\s?%/);
+    // Guardian (9 Sep): no unsupported round-the-clock claim, tenure never "as a marketing manager".
+    expect(all).not.toMatch(/24\s?\/\s?7|around the clock|round-the-clock/i);
+    expect(all).not.toMatch(/marketing manager|Twelve years/);
+    expect(all).toMatch(/approvals where they matter/i);
+    // Every stat on the glance grid is sourced on a live page (no unsourced "functions mapped" count).
+    expect(all).not.toMatch(/231|functions mapped/);
     expect(all).not.toMatch(/Barrie|Ontario/i);
     expect(all).not.toMatch(/human\s*\+\s*ai/i);
     const percentages = new Set(all.match(/\d+\s?%/g));

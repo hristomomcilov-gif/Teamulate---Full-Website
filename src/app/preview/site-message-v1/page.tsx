@@ -335,14 +335,14 @@ export default function PreviewSiteMessageV1Page() {
             </div>
           </Link>
           <Link
-            href={SMV1_CTA.demo.href}
+            href={SMV1_CTA.primary.href}
             className="group rounded-(--tm-radius-lg) border border-line bg-surface p-6 shadow-card transition-colors hover:border-brand"
           >
             <p className="inline-block rounded-full bg-lavender px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink">
               Demo
             </p>
             <h3 className="mt-3 text-lg font-extrabold text-ink">See one workflow</h3>
-            <p className="mt-4 text-sm font-bold text-brand group-hover:underline">{SMV1_CTA.demo.label} →</p>
+            <p className="mt-4 text-sm font-bold text-brand group-hover:underline">{SMV1_CTA.primary.label} →</p>
             <div aria-hidden className="relative mt-5 h-28 overflow-hidden rounded-(--tm-radius-md) bg-[#0a0a0f]">
               <div className="absolute left-1/2 top-3 h-44 w-44 -translate-x-1/2 rounded-full bg-positive" />
             </div>
@@ -385,8 +385,8 @@ export default function PreviewSiteMessageV1Page() {
             </CtaLink>
           </div>
           <p className="mt-5">
-            <Link href={SMV1_CTA.demo.href} className="text-sm font-semibold text-white/85 underline-offset-2 hover:underline">
-              {SMV1_CTA.demo.label} →
+            <Link href={SMV1_CTA.team.href} className="text-sm font-semibold text-white/85 underline-offset-2 hover:underline">
+              {SMV1_CTA.team.label} →
             </Link>
           </p>
         </Container>
