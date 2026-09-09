@@ -38,6 +38,33 @@ export const SMV1_META = {
     "Too much marketing to do and too few people to do it? Teamulate is a complete AI marketing department - 11 specialist agents, one dashboard, a human approving the decisions that matter.",
 } as const;
 
+/**
+ * Pixel assets for this preview, served from public/preview/site-message-v1/ so
+ * the export bundle ships them under teamulate.ca/preview/site-message-v1/ and
+ * nothing lands in the live document root.
+ */
+export const SMV1_ASSETS = {
+  /** Goal → Strategos (Reports to Chris) → Agents → Guardian + Metric → Client yes → Dashboard. */
+  signatureWorkflow: {
+    src: "/preview/site-message-v1/signature-workflow.svg",
+    alt: "Signature workflow: a goal goes to Strategos, who reports to Chris, then to the execution agents, then to Guardian and Metric for independent assurance, then to the client yes, then to the dashboard.",
+    width: 1200,
+    height: 300,
+  },
+  /** Demo UI with callouts only - sample data stays labelled sample, no invented metrics. */
+  dashboardHero: {
+    src: "/preview/site-message-v1/dashboard-hero-annotated.webp",
+    alt: "The Teamulate Marketing Dashboard demo with callouts: sample KPIs labelled sample, a human yes gate on send and spend, active campaigns with a human yes on the next step, and agent activity for Strategos and the specialists.",
+    width: 1280,
+    height: 800,
+  },
+} as const;
+
+export const SMV1_WORKFLOW = {
+  caption:
+    "One goal, end to end: Strategos prepares the plan and reports to Chris, the agents draft the work, Guardian and Metric check it independently, the client says yes where it matters, and the dashboard shows what your tools recorded.",
+} as const;
+
 export const SMV1_RIBBON = {
   label: "Preview draft",
   text: "site message v1 - problem-first homepage for review. noindex, not linked from navigation, not the live homepage.",

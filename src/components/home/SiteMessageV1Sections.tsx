@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AGENTS, TEAM_STRUCTURE_SENTENCE } from "@/content/agents";
 import {
+  SMV1_ASSETS,
   SMV1_ASSURANCE_CHECKS,
   SMV1_BUILD_LOG,
   SMV1_BUILD_LOG_ENTRIES,
@@ -10,6 +11,7 @@ import {
   SMV1_OUTCOMES,
   SMV1_PROBLEMS,
   SMV1_SYSTEMS,
+  SMV1_WORKFLOW,
   seatsFor,
 } from "@/content/site-message-v1";
 import { FounderCard } from "@/components/home/FounderCard";
@@ -81,6 +83,28 @@ export function BuyerProblemChooser() {
 
 /* 3. Human control, two layers --------------------------------------------- */
 
+/** Pixel's signature-workflow diagram; wide, so it scrolls sideways on phones instead of shrinking. */
+function SignatureWorkflowFigure() {
+  const asset = SMV1_ASSETS.signatureWorkflow;
+  return (
+    <figure className="mx-auto mt-10 max-w-5xl">
+      <div className="overflow-x-auto rounded-(--tm-radius-lg) shadow-card">
+        <SiteImage
+          src={asset.src}
+          alt={asset.alt}
+          width={asset.width}
+          height={asset.height}
+          unoptimized
+          className="h-auto w-full min-w-[840px]"
+        />
+      </div>
+      <figcaption className="mx-auto mt-3 max-w-3xl text-center text-xs leading-relaxed text-ink-muted">
+        {SMV1_WORKFLOW.caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 const LAYER_LISTS: readonly (readonly string[])[] = [SMV1_HUMAN_GATES, SMV1_ASSURANCE_CHECKS];
 
 export function HumanControlLayers() {
@@ -119,6 +143,8 @@ export function HumanControlLayers() {
           {SMV1_CONTROL.link.label} →
         </Link>
       </p>
+
+      <SignatureWorkflowFigure />
 
       <div className="mx-auto mt-14 mb-8 max-w-2xl text-center">
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">{SMV1_CONTROL.founderEyebrow}</p>

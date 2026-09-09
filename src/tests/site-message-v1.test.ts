@@ -1,9 +1,10 @@
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { AGENTS } from "@/content/agents";
 import { COPY } from "@/content/copy";
 import {
+  SMV1_ASSETS,
   SMV1_ASSURANCE_CHECKS,
   SMV1_BUILD_LOG_ENTRIES,
   SMV1_CONTROL,
@@ -195,9 +196,53 @@ describe("2026-09-08 /preview/site-message-v1/ homepage draft (PREVIEW ONLY)", (
     expect(faq?.answer).toMatch(/^No, and by design/);
   });
 
+  it("Pixel assets: signature workflow is Goal → Strategos (Reports to Chris) → Agents → Guardian + Metric → Client yes → Dashboard", () => {
+    expect(SMV1_ASSETS.signatureWorkflow.src).toBe("/preview/site-message-v1/signature-workflow.svg");
+    expect(SMV1_ASSETS.dashboardHero.src).toBe("/preview/site-message-v1/dashboard-hero-annotated.webp");
+    // Both live under public/preview/site-message-v1/ so they ship inside the preview folder only.
+    for (const asset of Object.values(SMV1_ASSETS)) {
+      expect(asset.src.startsWith("/preview/site-message-v1/")).toBe(true);
+      expect(asset.alt.length).toBeGreaterThan(20);
+    }
+    const svgPath = join(process.cwd(), "public", SMV1_ASSETS.signatureWorkflow.src);
+    expect(existsSync(svgPath)).toBe(true);
+    const svg = readFileSync(svgPath, "utf8");
+    expect(svg).toMatch(/^<svg /);
+    expect(svg).toContain("<title");
+    // Well-formed enough to render: ASCII only (a stray byte once broke the whole image) and balanced tags.
+    expect(/^[\x09\x0a\x0d\x20-\x7e]*$/.test(svg)).toBe(true);
+    const opened = (svg.match(/<(svg|text|title|desc)\b/g) ?? []).length;
+    const closed = (svg.match(/<\/(svg|text|title|desc)>/g) ?? []).length;
+    expect(closed).toBe(opened);
+    expect(svg.match(/<(rect|circle|path)\b[^>]*[^/]>/g)).toBeNull();
+    for (const stage of ["Goal", "Strategos", "Agents", "Guardian + Metric", "Client yes", "Dashboard"]) {
+      expect(svg).toContain(`>${stage}<`);
+    }
+    const order = ["Goal", "Strategos", "Agents", "Guardian + Metric", "Client yes", "Dashboard"].map((s) => svg.indexOf(`>${s}<`));
+    expect([...order].sort((a, b) => a - b)).toEqual(order);
+    // Chris lock: Strategos is not human - the badge is exactly "Reports to Chris".
+    expect(svg).toContain(">Reports to Chris<");
+    expect(svg).not.toMatch(/human\s*\+\s*ai/i);
+    expect(svg).not.toMatch(/sets the strategy|fully autonomous|\d+\s?%/i);
+    expect(svg).not.toMatch(/<script/i);
+    expect(sections).toContain("SMV1_ASSETS.signatureWorkflow");
+    // The annotated dashboard hero is a binary drop-in; the page falls back to the shipped mockup until it exists.
+    expect(page).toContain("hasDashboardHeroAsset");
+    expect(page).toContain("<DashboardMockup />");
+    expect(page).toContain("SMV1_ASSETS.dashboardHero");
+    const webpPath = join(process.cwd(), "public", SMV1_ASSETS.dashboardHero.src);
+    if (existsSync(webpPath)) {
+      const webp = readFileSync(webpPath);
+      expect(webp.subarray(0, 4).toString("ascii")).toBe("RIFF");
+      expect(webp.subarray(8, 12).toString("ascii")).toBe("WEBP");
+    }
+  });
+
   it("ships a self-contained preview export that never touches the live root", () => {
     const script = src("scripts/export-preview-site-message.sh");
     expect(script).toContain('PREVIEW_PATH="/preview/site-message-v1"');
+    expect(script).toContain("! -name 'index.html' -exec cp");
+    expect(script).toContain("signature-workflow.svg");
     expect(script).toContain("TEAMULATE_PREVIEW_EXPORT=1 npm run build");
     expect(script).toContain("previews/preview-site-message-v1.zip");
     expect(script).toContain("scripts/preview-site-message-htaccess");

@@ -1,7 +1,10 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PLANS, formatCad } from "@/content/plans";
 import {
+  SMV1_ASSETS,
   SMV1_CTA,
   SMV1_FAQ,
   SMV1_FINAL,
@@ -49,6 +52,36 @@ export const metadata: Metadata = {
   description: SMV1_META.description,
   robots: { index: false, follow: false, nocache: true },
 };
+
+/**
+ * Pixel's annotated dashboard hero is a binary that has to be dropped into
+ * public/preview/site-message-v1/. Until it is there, the static build keeps
+ * the shipped DashboardMockup so the preview never shows a broken image.
+ * (Resolved once at build time - this is a static export.)
+ */
+function hasDashboardHeroAsset(): boolean {
+  return existsSync(join(process.cwd(), "public", SMV1_ASSETS.dashboardHero.src));
+}
+
+function HeroVisual() {
+  if (!hasDashboardHeroAsset()) return <DashboardMockup />;
+  const asset = SMV1_ASSETS.dashboardHero;
+  return (
+    <figure>
+      <SiteImage
+        src={asset.src}
+        alt={asset.alt}
+        width={asset.width}
+        height={asset.height}
+        priority
+        className="h-auto w-full rounded-(--tm-radius-lg) border border-line shadow-card"
+      />
+      <figcaption className="mt-3 text-center text-xs text-ink-muted lg:text-left">
+        Demo dashboard with callouts. Sample data, labelled sample.
+      </figcaption>
+    </figure>
+  );
+}
 
 const PLAN_FEATURES: Record<string, string[]> = {
   core: ["1 brand", "4 integrations", "8 workflows", "2 primary channels + email/site"],
@@ -104,7 +137,7 @@ export default function PreviewSiteMessageV1Page() {
               </div>
               <p className="mt-6 text-sm leading-relaxed text-ink-muted">{SMV1_HERO.tenant0}</p>
             </div>
-            <DashboardMockup />
+            <HeroVisual />
           </div>
         </div>
       </Section>

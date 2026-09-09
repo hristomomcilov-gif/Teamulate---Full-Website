@@ -39,8 +39,18 @@ fi
 rm -rf "$BUNDLE"
 mkdir -p "$BUNDLE/_next"
 cp "$ROUTE_DIR/index.html" "$BUNDLE/index.html"
-# RSC payloads (index.txt + __next.*.txt segments) used by client-side navigation.
-find "$ROUTE_DIR" -maxdepth 1 -name '*.txt' -exec cp {} "$BUNDLE/" \;
+# RSC payloads (index.txt + __next.*.txt segments) used by client-side navigation,
+# plus the Pixel assets from public/preview/site-message-v1/ (signature-workflow.svg,
+# dashboard-hero-annotated.webp) that Next copies into the same route folder.
+find "$ROUTE_DIR" -maxdepth 1 -type f ! -name 'index.html' -exec cp {} "$BUNDLE/" \;
+
+if [[ ! -f "$BUNDLE/signature-workflow.svg" ]]; then
+  echo "signature-workflow.svg missing from the bundle (expected in public$PREVIEW_PATH/)" >&2
+  exit 1
+fi
+if [[ ! -f "$BUNDLE/dashboard-hero-annotated.webp" ]]; then
+  echo "note: dashboard-hero-annotated.webp not present - the hero keeps the DashboardMockup fallback" >&2
+fi
 cp -R out/_next/static "$BUNDLE/_next/static"
 cp -f "$root/scripts/preview-site-message-htaccess" "$BUNDLE/.htaccess"
 
