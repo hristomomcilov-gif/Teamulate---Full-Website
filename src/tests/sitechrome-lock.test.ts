@@ -34,13 +34,10 @@ vi.mock("next/navigation", () => ({
 }));
 
 vi.mock("next/link", () => ({
-  default: ({
-    href,
-    children,
-    prefetch: _prefetch,
-    ...rest
-  }: { href: string; children: ReactNode; prefetch?: boolean } & Record<string, unknown>) =>
-    createElement("a", { href, ...rest }, children),
+  default: ({ href, children, ...rest }: { href: string; children: ReactNode } & Record<string, unknown>) => {
+    delete rest.prefetch;
+    return createElement("a", { href, ...rest }, children);
+  },
 }));
 
 const { SiteHeader } = await import("@/components/SiteHeader");
@@ -150,6 +147,24 @@ describe("LOCKED SITECHROME · source lock", () => {
       .filter((f) => f.endsWith(".html") || f.endsWith(".htm"));
     // The client-login field form is the only static document the marketing tree ships.
     expect(html).toEqual(["public/client-login.html"]);
+  });
+
+  it("allows hosting/ marketing overlays only when they are the Next export with the shared chrome", () => {
+    const overlays = walk(resolve(ROOT, "hosting"))
+      .map(rel)
+      .filter((f) => f.endsWith(".html") && f !== "hosting/client-login.html");
+    for (const file of overlays) {
+      const html = src(file);
+      expect(html, `${file} must load the compiled stylesheet (export-derived, not hand-authored)`).toMatch(
+        /<link rel="stylesheet" href="\/_next\/static\/chunks\/[^"]+\.css"/,
+      );
+      expect(html.split("<header").length - 1, `${file}: exactly one <header>`).toBe(1);
+      expect(html.split("<footer").length - 1, `${file}: exactly one <footer>`).toBe(1);
+      expect(html).toContain('<nav aria-label="Main"');
+      expect(html).toContain('<footer class="border-t border-line bg-surface-muted">');
+      expect(html).toContain(`href="${LAUNCH_DEMO_HREF}"`);
+      expect(html).not.toContain('href="/demo/dashboard/"');
+    }
   });
 
   it("does not let any marketing page bypass the layout with its own <html>/<body>", () => {
