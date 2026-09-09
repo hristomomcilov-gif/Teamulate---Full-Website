@@ -1,0 +1,8 @@
+# Staging overlay only. Extract this zip into teamulate.ca/stg/.
+# Do not copy these files to the document root.
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>

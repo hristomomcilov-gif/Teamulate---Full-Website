@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="sw-title sw-desc" font-family="Inter, ui-sans-serif, system-ui, sans-serif">
+<title id="sw-title">Teamulate signature workflow</title>
+<desc id="sw-desc">Flow: Goal, to Strategos (Head of Marketing, reports to Chris), to the execution agents, to Guardian and Metric independent assurance, to the client yes (human approval), to the dashboard.</desc>
+<rect width="1200" height="300" rx="18" fill="#f5f4fb"/>
+<rect x="1" y="1" width="1198" height="298" rx="17" fill="none" stroke="#dbe3f0"/>
+<text x="32" y="42" fill="#5b47f0" font-size="12" font-weight="700" letter-spacing="0.14em">SIGNATURE WORKFLOW</text>
+<text x="32" y="70" fill="#0b1631" font-size="20" font-weight="700">Goal in. Governed work out.</text>
+
+<!-- 1. Goal -->
+<rect x="32" y="108" width="160" height="130" rx="14" fill="#ffffff" stroke="#dbe3f0"/>
+<circle cx="112" cy="150" r="18" fill="#eceafa"/>
+<circle cx="112" cy="150" r="9" fill="none" stroke="#5b47f0" stroke-width="2.5"/>
+<circle cx="112" cy="150" r="2.5" fill="#5b47f0"/>
+<text x="112" y="196" text-anchor="middle" fill="#0b1631" font-size="14" font-weight="700">Goal</text>
+<text x="112" y="216" text-anchor="middle" fill="#64748b" font-size="11">Owner, timeframe, KPI</text>
+
+<path d="M200 173 H214" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M208 167 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- 2. Strategos -->
+<rect x="220" y="108" width="160" height="130" rx="14" fill="#0b1631"/>
+<rect x="238" y="94" width="124" height="24" rx="12" fill="#5b47f0"/>
+<text x="300" y="110" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">Reports to Chris</text>
+<path d="M286 160 h28" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M288 160 l-3 -14 7 6 8 -10 8 10 7 -6 -3 14z" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="300" y="196" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Strategos</text>
+<text x="300" y="216" text-anchor="middle" fill="#94a3b8" font-size="11">Head of Marketing</text>
+
+<path d="M388 173 H402" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M396 167 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- 3. Agents -->
+<rect x="408" y="108" width="160" height="130" rx="14" fill="#ffffff" stroke="#dbe3f0"/>
+<rect x="468" y="134" width="12" height="12" rx="3" fill="#3b6ef5"/>
+<rect x="484" y="134" width="12" height="12" rx="3" fill="#f49a16"/>
+<rect x="500" y="134" width="12" height="12" rx="3" fill="#19a9b8"/>
+<rect x="468" y="150" width="12" height="12" rx="3" fill="#e3459b"/>
+<rect x="484" y="150" width="12" height="12" rx="3" fill="#6437f5"/>
+<rect x="500" y="150" width="12" height="12" rx="3" fill="#e0a800"/>
+<rect x="476" y="166" width="12" height="12" rx="3" fill="#2da65a"/>
+<rect x="492" y="166" width="12" height="12" rx="3" fill="#5b6b86"/>
+<text x="488" y="196" text-anchor="middle" fill="#0b1631" font-size="14" font-weight="700">Agents</text>
+<text x="488" y="216" text-anchor="middle" fill="#64748b" font-size="11">8 execution specialists</text>
+
+<path d="M576 173 H590" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M584 167 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- 4. Guardian + Metric -->
+<rect x="596" y="108" width="160" height="130" rx="14" fill="#ffffff" stroke="#2da65a"/>
+<circle cx="676" cy="150" r="18" fill="#dff5e6"/>
+<path d="M676 138l8 3v6c0 5-3.5 9.5-8 11.5-4.5-2-8-6.5-8-11.5v-6l8-3z" fill="none" stroke="#2da65a" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M672 150l3 3 5-6" fill="none" stroke="#2da65a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="676" y="196" text-anchor="middle" fill="#0b1631" font-size="14" font-weight="700">Guardian + Metric</text>
+<text x="676" y="216" text-anchor="middle" fill="#64748b" font-size="11">Independent assurance</text>
+
+<path d="M764 173 H778" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M772 167 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- 5. Client yes -->
+<rect x="784" y="108" width="160" height="130" rx="14" fill="#ffffff" stroke="#5b47f0" stroke-width="2"/>
+<circle cx="864" cy="150" r="18" fill="#eceafa"/>
+<circle cx="860" cy="145" r="4" fill="none" stroke="#5b47f0" stroke-width="2.2"/>
+<path d="M852 160c0-4 3.5-7 8-7s8 3 8 7" fill="none" stroke="#5b47f0" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M868 149l3 3 6-7" fill="none" stroke="#2da65a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="864" y="196" text-anchor="middle" fill="#0b1631" font-size="14" font-weight="700">Client yes</text>
+<text x="864" y="216" text-anchor="middle" fill="#64748b" font-size="11">Human approval (P3-P4)</text>
+
+<path d="M952 173 H966" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M960 167 l8 6 -8 6" fill="none" stroke="#5b47f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- 6. Dashboard -->
+<rect x="972" y="108" width="160" height="130" rx="14" fill="#ffffff" stroke="#dbe3f0"/>
+<rect x="1032" y="140" width="6" height="22" rx="2" fill="#3b6ef5"/>
+<rect x="1043" y="132" width="6" height="30" rx="2" fill="#5b47f0"/>
+<rect x="1054" y="146" width="6" height="16" rx="2" fill="#19a9b8"/>
+<rect x="1065" y="136" width="6" height="26" rx="2" fill="#2da65a"/>
+<text x="1052" y="196" text-anchor="middle" fill="#0b1631" font-size="14" font-weight="700">Dashboard</text>
+<text x="1052" y="216" text-anchor="middle" fill="#64748b" font-size="11">What your tools recorded</text>
+
+<text x="32" y="276" fill="#64748b" font-size="11">Routine, reversible work runs inside approved thresholds. Strategy, spend, sensitive claims and anything irreversible wait for the client yes.</text>
+</svg>
