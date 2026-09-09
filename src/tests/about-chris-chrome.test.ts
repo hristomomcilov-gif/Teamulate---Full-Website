@@ -90,6 +90,23 @@ describe("2026-09-09 live /about-chris/ overlay is the Next export with the shar
     expect(page).not.toMatch(/10\+/);
   });
 
+  it("Singularity Drive card embeds the channel trailer (Y9AdO6d9x5U) as a 16:9 click-to-play iframe, keeping the CTA", () => {
+    const source = src("src/app/about-chris/page.tsx");
+    expect(source).toContain('const SINGULARITY_DRIVE_TRAILER_ID = "Y9AdO6d9x5U";');
+    expect(page).toContain('src="https://www.youtube-nocookie.com/embed/Y9AdO6d9x5U"');
+    expect(page).toContain('title="Singularity Drive Trailer"');
+    expect(count(page, "<iframe")).toBe(1);
+    expect(page).toMatch(/<iframe[^>]*class="absolute inset-0 h-full w-full"/);
+    expect(page).toMatch(/<div class="relative aspect-video w-full"><iframe/);
+    expect(page).not.toMatch(/autoplay/i);
+    // The gradient play-button placeholder is gone; the text block + CTA remain.
+    expect(page).not.toContain('aria-label="Open Singularity Drive on YouTube"');
+    expect(page).not.toContain(">YouTube channel<");
+    expect(page).toContain(">On YouTube<");
+    expect(page).toContain("Singularity Drive</h2>");
+    expect(page).toMatch(/href="https:\/\/www\.youtube\.com\/@SingularityDrive"[^>]*>Watch on YouTube/);
+  });
+
   it("ships with a deploy zip that contains every _next/ and about-chris/ asset the page references", () => {
     const zips = readdirSync(resolve(process.cwd(), "export")).filter((f) => /^about-chris-sitechrome-\d{4}-\d{2}-\d{2}\.zip$/.test(f));
     expect(zips.length).toBeGreaterThan(0);

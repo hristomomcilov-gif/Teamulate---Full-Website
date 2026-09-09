@@ -7,6 +7,9 @@ import { ORGANIZATION_JSON_LD, SITE, absoluteUrl } from "@/lib/site";
 
 const PAGE_PATH = "/about-chris/";
 const SINGULARITY_DRIVE_URL = "https://www.youtube.com/@SingularityDrive";
+/** Channel trailer "Singularity Drive Trailer" — https://www.youtube.com/watch?v=Y9AdO6d9x5U */
+const SINGULARITY_DRIVE_TRAILER_ID = "Y9AdO6d9x5U";
+const SINGULARITY_DRIVE_TRAILER_TITLE = "Singularity Drive Trailer";
 const HERO_IMAGE = "/about-chris/hero-card-4x3.webp";
 const OG_IMAGE = "/about-chris/og-about-chris-1200x630.webp";
 const AI_SYSTEMS_DIAGRAM = "/about-chris/ai-systems-diagram.svg";
@@ -382,24 +385,27 @@ export default function AboutChrisPage() {
       <Section>
         <div className="mx-auto max-w-4xl overflow-hidden rounded-(--tm-radius-lg) border border-line bg-surface shadow-card">
           <div className="grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-            <a
-              href={SINGULARITY_DRIVE_URL}
-              target="_blank"
-              rel="noopener"
-              aria-label="Open Singularity Drive on YouTube"
-              className="group relative flex min-h-48 items-center justify-center bg-navy-950 md:min-h-full"
+            {/* Channel trailer: 16:9 on every width, click-to-play (no autoplay). The gradient
+                only letterboxes the frame when the copy column is taller than the video. */}
+            <div
+              className="flex items-center bg-navy-950"
               style={{
                 background:
                   "linear-gradient(150deg, var(--tm-navy-900) 0%, var(--tm-navy-950) 60%, var(--tm-violet-600) 140%)",
               }}
             >
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-brand shadow-card transition-transform group-hover:scale-105">
-                <Icon name="play" className="h-7 w-7" />
-              </span>
-              <span className="absolute bottom-3 left-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70">
-                YouTube channel
-              </span>
-            </a>
+              <div className="relative aspect-video w-full">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${SINGULARITY_DRIVE_TRAILER_ID}`}
+                  title={SINGULARITY_DRIVE_TRAILER_TITLE}
+                  className="absolute inset-0 h-full w-full"
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+            </div>
             <div className="p-6 sm:p-8">
               <Eyebrow>On YouTube</Eyebrow>
               <h2 className="text-2xl font-bold tracking-tight text-ink">Singularity Drive</h2>
