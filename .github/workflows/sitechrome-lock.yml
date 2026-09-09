@@ -1,0 +1,64 @@
+# LOCKED SITECHROME — docs/LOCKED_SITECHROME.md
+#
+# Fails any pull request that ships a marketing page whose header or footer
+# differs from the homepage chrome. Three layers, all must pass:
+#   1. eslint   — forbids page-local <header>/<footer>/main nav and stray
+#                 SiteHeader/SiteFooter imports (src/components/demo excluded:
+#                 protected product recreation).
+#   2. vitest   — source lock + rendered header/footer parity on every route.
+#   3. export   — `next build` then scripts/check-sitechrome-parity.mjs compares
+#                 every exported page's <header>/<footer> to out/index.html.
+name: SiteChrome lock
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: sitechrome-lock-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sitechrome-lock:
+    name: header + footer 1:1 with homepage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip when the checkout has no site source
+        id: has-site
+        run: |
+          if [ -f package.json ] && [ -f src/components/SiteChrome.tsx ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "No site source on this ref (README overlay) — nothing to check."
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.has-site.outputs.present == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        if: steps.has-site.outputs.present == 'true'
+        run: npm ci
+
+      - name: Lint chrome rules (pages + shared components)
+        if: steps.has-site.outputs.present == 'true'
+        run: npx eslint src/app src/components src/lib --ignore-pattern "src/components/demo/**"
+
+      - name: Unit + rendered parity tests
+        if: steps.has-site.outputs.present == 'true'
+        run: npm test
+
+      - name: Static export
+        if: steps.has-site.outputs.present == 'true'
+        run: npm run build
+
+      - name: Exported header/footer parity vs homepage
+        if: steps.has-site.outputs.present == 'true'
+        run: npm run check:chrome

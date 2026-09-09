@@ -104,6 +104,27 @@ export type NavItem = { label: string; href: string; description?: string };
 export type NavGroup = { label: string; items: NavItem[] };
 
 /**
+ * LOCKED (Chris, 2026-09-09) — see docs/LOCKED_SITECHROME.md.
+ * The live "filled" Launch Demo document. Every demo entry point in the shared
+ * chrome (header CTA, header Demo item, mobile drawer CTA, footer Interactive
+ * Demo) points here and is always a full document load — never a Next soft-nav.
+ * This mirrors what the live homepage does today via /js/launch-demo.js, so a
+ * page exported from this repo behaves identically without that overlay.
+ */
+export const LAUNCH_DEMO_HREF = "/demo/dashboard/dashboard.html";
+
+/**
+ * Hrefs that must leave the Next app as a plain `<a>` (full document load):
+ * anything under /demo/ (the filled clone owns it), the /app/ client-login
+ * gate, and any static .html document. Everything else may use next/link.
+ */
+export function isFullDocumentHref(href: string): boolean {
+  const path = href.split("?")[0].split("#")[0];
+  if (/^https?:\/\//.test(path)) return false;
+  return path === "/demo" || path.startsWith("/demo/") || path === "/app" || path.startsWith("/app/") || path.endsWith(".html");
+}
+
+/**
  * Header nav locked by Chris/Skipper (27 Aug): lean top bar only.
  * The six SEO pages live in the footer "Guides" column, never the header.
  *
@@ -122,7 +143,7 @@ export const HEADER_NAV: NavGroup[] = [
   },
   { label: "Pricing", items: [{ label: "Pricing", href: "/pricing/" }] },
   { label: "Blog", items: [{ label: "Blog", href: "/blog/" }] },
-  { label: "Demo", items: [{ label: "Demo", href: "/demo/dashboard/" }] },
+  { label: "Demo", items: [{ label: "Demo", href: LAUNCH_DEMO_HREF }] },
 ];
 
 export const FOOTER_GROUPS: NavGroup[] = [
@@ -132,7 +153,7 @@ export const FOOTER_GROUPS: NavGroup[] = [
       { label: "How It Works", href: "/how-it-works/" },
       { label: "The 11-Agent Team", href: "/team/" },
       { label: "Dashboard", href: "/dashboard/" },
-      { label: "Interactive Demo", href: "/demo/dashboard/" },
+      { label: "Interactive Demo", href: LAUNCH_DEMO_HREF },
     ],
   },
   {

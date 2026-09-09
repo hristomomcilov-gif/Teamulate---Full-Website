@@ -2,12 +2,49 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { HEADER_NAV } from "@/lib/site";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { HEADER_NAV, LAUNCH_DEMO_HREF, isFullDocumentHref } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 import { CtaLink } from "@/components/CtaLink";
 import { TeamulateLogo } from "@/components/BrandLogo";
 
+/**
+ * Nav item link. Demo / /app/ / .html targets are plain anchors (full document
+ * load, never a Next soft-nav); marketing routes use next/link.
+ */
+function NavLink({
+  href,
+  current,
+  onClick,
+  className,
+  children,
+}: {
+  href: string;
+  current: boolean;
+  onClick: () => void;
+  className: string;
+  children: ReactNode;
+}) {
+  const ariaCurrent = current ? "page" : undefined;
+  if (isFullDocumentHref(href)) {
+    return (
+      <a href={href} aria-current={ariaCurrent} onClick={onClick} className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} aria-current={ariaCurrent} onClick={onClick} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+/**
+ * LOCKED sitewide chrome (docs/LOCKED_SITECHROME.md). Rendered once, from
+ * SiteChrome in the root layout, on every marketing page. Never copy this
+ * markup into a page or build a page-local header.
+ */
 export function SiteHeader() {
   const pathname = usePathname();
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -56,17 +93,17 @@ export function SiteHeader() {
         <div className="hidden items-center gap-1 lg:flex">
           {HEADER_NAV.map((group) =>
             group.items.length === 1 ? (
-              <Link
+              <NavLink
                 key={group.label}
                 href={group.items[0].href}
-                aria-current={pathname === group.items[0].href ? "page" : undefined}
+                current={pathname === group.items[0].href}
                 onClick={() => navClick(group.items[0].href)}
                 className={`rounded-md px-3 py-2 text-sm font-medium hover:text-brand ${
                   pathname === group.items[0].href ? "text-brand" : "text-ink"
                 }`}
               >
                 {group.label}
-              </Link>
+              </NavLink>
             ) : (
               <div key={group.label} className="relative">
                 <button
@@ -84,22 +121,26 @@ export function SiteHeader() {
                 {openGroup === group.label ? (
                   <div
                     className={`absolute left-0 top-full mt-1 rounded-(--tm-radius-md) border border-line bg-surface p-2 shadow-card ${
-                      group.items.some((item) => item.description) ? "w-80" : "w-56"
+                      group.items.some((item) => item.description) ? "w-80" : "min-w-[180px]"
                     }`}
                   >
                     {group.items.map((item) => (
-                      <Link
+                      <NavLink
                         key={item.href}
                         href={item.href}
-                        aria-current={pathname === item.href ? "page" : undefined}
+                        current={pathname === item.href}
                         onClick={() => navClick(item.href)}
                         className="block rounded-md px-3 py-2.5 hover:bg-surface-muted"
                       >
-                        <span className="block text-sm font-semibold text-ink">{item.label}</span>
+                        <span
+                          className={`block text-sm font-semibold ${pathname === item.href ? "text-brand" : "text-ink"}`}
+                        >
+                          {item.label}
+                        </span>
                         {item.description ? (
                           <span className="mt-0.5 block text-xs text-ink-muted">{item.description}</span>
                         ) : null}
-                      </Link>
+                      </NavLink>
                     ))}
                   </div>
                 ) : null}
@@ -118,7 +159,8 @@ export function SiteHeader() {
           >
             Login
           </a>
-          <CtaLink href="/demo/dashboard/" ctaId="header-primary" kind="primary">
+          {/* Plain anchor via CtaLink: full document load into the filled demo clone. */}
+          <CtaLink href={LAUNCH_DEMO_HREF} ctaId="header-primary" kind="primary">
             Launch Demo
           </CtaLink>
         </div>
@@ -143,18 +185,18 @@ export function SiteHeader() {
             {HEADER_NAV.map((group) => (
               <div key={group.label}>
                 {group.items.length > 1 ? (
-                  <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">{group.label}</p>
+                  <p className="mb-1 px-2 text-xs font-bold uppercase tracking-wide text-brand">{group.label}</p>
                 ) : null}
                 {group.items.map((item) => (
-                  <Link
+                  <NavLink
                     key={item.href}
                     href={item.href}
-                    aria-current={pathname === item.href ? "page" : undefined}
+                    current={pathname === item.href}
                     onClick={() => navClick(item.href)}
                     className="block rounded-md px-2 py-2.5 text-sm font-medium text-ink hover:bg-surface-muted"
                   >
                     {item.label}
-                  </Link>
+                  </NavLink>
                 ))}
               </div>
             ))}
@@ -162,7 +204,7 @@ export function SiteHeader() {
               <a href="/app/" onClick={() => trackEvent("login_clicked", { route: pathname ?? "" })} className="block rounded-md px-2 py-2.5 text-sm font-semibold text-brand">
                 Login
               </a>
-              <CtaLink href="/demo/dashboard/" ctaId="header-primary-mobile" kind="primary" className="w-full">
+              <CtaLink href={LAUNCH_DEMO_HREF} ctaId="header-primary-mobile" kind="primary" className="w-full">
                 Launch Demo
               </CtaLink>
             </div>

@@ -60,28 +60,36 @@ const ICONS: Record<SocialProfileName, () => JSX.Element> = {
   Facebook: FacebookIcon,
 };
 
-/** Icon-only social row. Names live in aria-label; no visible text list. */
-export function SocialIcons() {
+/**
+ * Icon-only social row. Names live in aria-label; no visible text list.
+ *
+ * Shape is locked to what the live /js/footer-social.js overlay expects
+ * (nav[aria-label="Teamulate on social"][data-teamulate-social="2"] with six
+ * direct anchors, rendered immediately after the founder line) so the overlay
+ * recognises this row and never injects a second one. docs/LOCKED_SITECHROME.md
+ */
+export function SocialIcons({ className = "" }: { className?: string }) {
   return (
-    <nav aria-label="Teamulate on social media">
-      <ul className="flex flex-wrap items-center gap-4">
-        {SOCIAL_PROFILES.map((profile) => {
-          const Icon = ICONS[profile.name];
-          return (
-            <li key={profile.href}>
-              <a
-                href={profile.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={profile.label}
-                className="inline-flex h-6 w-6 items-center justify-center text-ink-muted transition-colors hover:text-brand"
-              >
-                <Icon />
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+    <nav
+      aria-label="Teamulate on social"
+      data-teamulate-social="2"
+      className={`flex flex-wrap items-center gap-4 text-ink-muted ${className}`}
+    >
+      {SOCIAL_PROFILES.map((profile) => {
+        const Icon = ICONS[profile.name];
+        return (
+          <a
+            key={profile.href}
+            href={profile.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={profile.label}
+            className="inline-flex h-6 w-6 items-center justify-center transition-colors hover:text-brand"
+          >
+            <Icon />
+          </a>
+        );
+      })}
     </nav>
   );
 }

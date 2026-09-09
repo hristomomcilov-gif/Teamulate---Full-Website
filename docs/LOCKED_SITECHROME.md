@@ -1,0 +1,70 @@
+# LOCKED: SiteChrome parity (header 1:1 + footer 1:1 with the homepage)
+
+**Locked by Chris, 2026-09-09.** Every Teamulate marketing page — existing and
+new — renders the identical shared chrome. A visitor must not be able to tell
+from the header or footer that they left `https://teamulate.ca/`. Page bodies
+may differ; chrome may not.
+
+## What is locked
+
+| Piece | Lock |
+|---|---|
+| Header component | `src/components/SiteHeader.tsx`, rendered once by `SiteChrome` from `src/app/layout.tsx`. No page-local header. |
+| Container | `nav[aria-label="Main"]` · `mx-auto flex h-16 w-full max-w-[1240px] … px-5 sm:px-8` — same width on every page. |
+| Menu items | `HEADER_NAV` in `src/lib/site.ts`: **How it works · About ▾ · Pricing · Blog · Demo**. About has exactly two children: **Chris** → `/about-chris/`, **The Team** → `/team/`. |
+| About trigger | Plain text + `▾` chevron. Same classes as the text links (`rounded-md px-3 py-2 text-sm font-medium`). No background, border, shadow or box. Turns brand violet only when a child is the current page. |
+| Login | Plain `<a href="/app/">` — full document load into the client-login gate. |
+| Launch Demo | `LAUNCH_DEMO_HREF = /demo/dashboard/dashboard.html` (the filled clone). Plain `<a>` via `CtaLink`, desktop + mobile drawer. **Never a Next `<Link>`/soft-nav.** The header **Demo** item and footer **Interactive Demo** use the same target. |
+| Mobile | One `Menu`/`Close` button; drawer lists the same groups (ABOUT heading with Chris / The Team) then Login + Launch Demo. |
+| Footer component | `src/components/SiteFooter.tsx`, rendered once by `SiteChrome`. Logo, tagline, entity line, social row, Product / Guides / Plans / Company columns, "Stay in the loop" newsletter, © line with Privacy · Terms. No slim, socials-only or page-local footer. |
+| Social row | `SocialIcons` → `nav[aria-label="Teamulate on social"][data-teamulate-social="2"]`, six direct anchors, immediate sibling after the entity line. This is the contract the live `/js/footer-social.js` overlay checks, so it recognises the row and never injects a second one. |
+| Only permitted per-page difference | The current-page highlight: `aria-current="page"` and `text-brand` on the active item (or on About when Chris / The Team is current). |
+
+## Root cause this lock closes (2026-09-09)
+
+The live `/about-chris/` was a hand-authored HTML document, not the Next export.
+It copied the header's Tailwind class names but never loaded the site
+stylesheet, so `max-w-[1240px]` did nothing (wider nav), the About `<button>`
+kept browser-default styling (the gray box), it had no `<footer>` at all (the
+social overlay fell back to a socials-only bar), and its demo links diverged.
+Pages now come only from `src/app/**/page.tsx` through the root layout;
+hand-built marketing HTML under `public/` is rejected by the tests.
+
+## How to add a marketing page
+
+1. Create `src/app/<route>/page.tsx`. Export `metadata`; return body sections only.
+2. Do **not** add a `layout.tsx`, `<header>`, `<footer>`, a `nav[aria-label="Main"]`,
+   or import `SiteHeader` / `SiteFooter`. The root layout supplies them.
+3. Demo CTAs in the body use `CtaLink` with `LAUNCH_DEMO_HREF` (plain anchor).
+4. Run `npm run verify:chrome` before opening the PR.
+
+## Safeguards (all must pass; CI runs them on every PR)
+
+| Layer | Command | What fails |
+|---|---|---|
+| Lint | `npx eslint src/app src/components src/lib --ignore-pattern "src/components/demo/**"` | `no-restricted-imports` on `**/SiteHeader`, `**/SiteFooter` outside `SiteChrome.tsx`; `no-restricted-syntax` on JSX `<header>`, `<footer>`, `aria-label="Main"` outside the shared components. |
+| Test | `npm test` → `src/tests/sitechrome-lock.test.ts` | Source lock (single root layout wrapping `<SiteChrome>`, no page-local chrome, no `.html` marketing files in `public/`), content lock (nav labels, About children, plain-text trigger, `LAUNCH_DEMO_HREF` on Demo / Launch Demo / Interactive Demo, Login → `/app/`, social-row contract), and **rendered parity**: `SiteHeader` + `SiteFooter` are rendered for `/` and every route in `SITEMAP_ROUTES` (+ `/about-chris/`, `/team/`, `/login/`, not-found) and must be byte-identical after removing the current-page highlight. |
+| Export | `npm run build && npm run check:chrome` (`scripts/check-sitechrome-parity.mjs`) | Every `out/**/*.html` (except `demo/`, `app/`, `auth/`, `shop/`, `_next/`) must contain exactly one `<header>` and one `<footer>` byte-identical to `out/index.html` (highlight removed), load the same stylesheet links, and carry Launch Demo → `LAUNCH_DEMO_HREF`, Login → `/app/`. |
+| Export scripts | `scripts/export-live.sh`, `scripts/export-preview.sh` | Both call the parity checker after `next build`; a divergent page aborts the zip. |
+| CI | `.github/workflows/sitechrome-lock.yml` | Runs lint → test → build → check on every pull request. |
+
+One-shot local run of all three: `npm run verify:chrome`.
+
+## QA checklist for Guardian / Flow (live)
+
+Compare `https://teamulate.ca/` against the page under test at 1440px and 390px:
+
+- Header: same logo size, same items in the same order, same spacing, same
+  1240px container; About is plain text + chevron with no box; dropdown opens
+  with Chris / The Team.
+- Login → `/app/` full page load. Launch Demo → `/demo/dashboard/dashboard.html`
+  full page load (no SPA transition, URL bar shows `dashboard.html`).
+- Footer: same logo, tagline, entity line, **one** social row of six icons,
+  four link columns, newsletter, © line with Privacy · Terms.
+- Deploy the page from the repo's static export (`scripts/export-live.sh`),
+  never a hand-authored HTML file, and ship the export's `_next/` assets with it.
+
+## Out of scope / protected
+
+`demo/` (including `/demo/dashboard/dashboard.html`), `/app/`, `/auth/`, the
+glance-90 square art, and page body copy (About Chris body is unchanged by this lock).

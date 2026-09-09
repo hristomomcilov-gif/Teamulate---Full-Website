@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { HEADER_NAV, SITEMAP_ROUTES } from "@/lib/site";
+import { HEADER_NAV, LAUNCH_DEMO_HREF, SITEMAP_ROUTES } from "@/lib/site";
 
 function src(relative: string) {
   return readFileSync(resolve(process.cwd(), relative), "utf8");
@@ -25,12 +25,12 @@ describe("2026-09-08 About nav + live About Chris", () => {
     ]);
   });
 
-  it("keeps the rest of the lean top bar and the Launch Demo CTA untouched", () => {
+  it("keeps the rest of the lean top bar and the Launch Demo CTA (filled demo, full document load)", () => {
     expect(HEADER_NAV.map((g) => g.label)).toEqual(["How it works", "About", "Pricing", "Blog", "Demo"]);
-    expect(HEADER_NAV.find((g) => g.label === "Demo")?.items[0].href).toBe("/demo/dashboard/");
+    expect(HEADER_NAV.find((g) => g.label === "Demo")?.items[0].href).toBe(LAUNCH_DEMO_HREF);
     const header = src("src/components/SiteHeader.tsx");
     expect(header).toContain("HEADER_NAV.map(");
-    expect(header).toContain('href="/demo/dashboard/"');
+    expect(header).toContain("href={LAUNCH_DEMO_HREF}");
     expect(header).toContain("Launch Demo");
     expect(header).toContain('href="/app/"');
   });
