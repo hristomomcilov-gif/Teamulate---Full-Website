@@ -268,7 +268,7 @@ export const SMV1_BUILD_LOG_ENTRIES: BuildLogEntry[] = [
     date: "2026-09-08",
     status: "live",
     title: "About Chris",
-    detail: "Founder page: 12 years in B2B marketing and the systems behind Teamulate. About now sits in the header.",
+    detail: "Founder page: 12 years in B2B marketing and the systems behind Teamulate. The header gained an About menu.",
     href: "/about-chris/",
   },
   {
@@ -289,7 +289,7 @@ export const SMV1_BUILD_LOG_ENTRIES: BuildLogEntry[] = [
     date: "2026-09-01",
     status: "live",
     title: "Blog: 11 human hires vs 11 AI specialists",
-    detail: "The August 2026 cost report and its article. Public savings copy locked at 90%.",
+    detail: "The August 2026 cost report and its article, with the modeled 90% people-cost comparison.",
     href: "/blog/11-human-hires-vs-11-ai-specialists/",
   },
   {
