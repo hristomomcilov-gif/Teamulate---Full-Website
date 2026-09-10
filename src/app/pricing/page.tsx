@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { COPY } from "@/content/copy";
-import { ALL_PLANS_SHARE, PLANS, SETUP_FEE_COVERS, formatCad } from "@/content/plans";
+import {
+  ALL_PLANS_SHARE,
+  PLANS,
+  SETUP_BILLING_NOTE,
+  SETUP_FEE_COVERS,
+  SETUP_PERIOD_LEDE,
+  formatCad,
+} from "@/content/plans";
 import { absoluteUrl, marketingShareMetadata } from "@/lib/site";
 import { Card, Eyebrow, Section, SectionHeading, StatusChip } from "@/components/ui";
 import { CtaLink } from "@/components/CtaLink";
@@ -117,7 +124,7 @@ export default function PricingPage() {
       </Section>
 
       <Section>
-        <SectionHeading eyebrow="Setup" title="What the setup fee covers" />
+        <SectionHeading eyebrow="Setup" title="What the setup fee covers" lede={SETUP_PERIOD_LEDE} />
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {SETUP_FEE_COVERS.map((item, i) => (
             <li key={item} className="flex items-start gap-3 rounded-(--tm-radius-sm) border border-line bg-surface px-4 py-3 text-sm text-ink">
@@ -128,6 +135,7 @@ export default function PricingPage() {
             </li>
           ))}
         </ol>
+        <p className="mt-6 text-sm text-ink-muted">{SETUP_BILLING_NOTE}</p>
       </Section>
 
       <Section muted>
