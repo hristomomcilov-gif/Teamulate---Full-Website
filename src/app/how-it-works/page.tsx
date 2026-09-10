@@ -12,11 +12,20 @@ export const metadata: Metadata = {
   ...marketingShareMetadata,
 };
 
-const STAGES = [
+type Stage = {
+  n: number;
+  title: string;
+  body: string;
+  /** Quiet follow-on line rendered under the body (Chris lock 2026-09-09: public setup period is 30 days). */
+  note?: string;
+};
+
+const STAGES: Stage[] = [
   {
     n: 1,
     title: "Business context",
-    body: "Onboarding produces the working memory of your department: a Business Context Profile, ICP & Segment Map, Positioning & Message Map, Channel & Funnel Baseline, Integration & Access Plan, Approval & Autonomy Policy, Measurement Plan and First 90-Day Priorities.",
+    body: "Onboarding produces the working memory of your department: a Business Context Profile, ICP & Segment Map, Positioning & Message Map, Channel & Funnel Baseline, Integration & Access Plan, Approval & Autonomy Policy, Measurement Plan and First 30-Day Priorities.",
+    note: "That setup runs over 30 days: nine stages from scope to go-live, including a hypercare period after launch.",
   },
   {
     n: 2,
@@ -85,6 +94,9 @@ export default function HowItWorksPage() {
                   <div>
                     <h2 className="text-base font-semibold text-ink">{stage.title}</h2>
                     <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{stage.body}</p>
+                    {stage.note ? (
+                      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{stage.note}</p>
+                    ) : null}
                   </div>
                 </div>
               </Card>

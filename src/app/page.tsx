@@ -95,7 +95,7 @@ const FAQ_ITEMS = [
   {
     question: "How does onboarding work?",
     answer:
-      "A structured nine-stage process: scope and authority, discovery, environment provisioning, integrations, measurement baseline, policy configuration, staging and QA, go-live, and a hypercare period.",
+      "A structured nine-stage process: scope and authority, discovery, environment provisioning, integrations, measurement baseline, policy configuration, staging and QA, go-live, and a hypercare period. The initial setup period is 30 days — one month to stand up the operating department on your stack, with human approvals where they matter.",
   },
   {
     question: "How do we access the dashboard?",

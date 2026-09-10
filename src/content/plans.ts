@@ -55,6 +55,16 @@ export const ALL_PLANS_SHARE = [
   "Human oversight for strategy, spend, brand and sensitive decisions",
 ];
 
+/**
+ * Chris lock (2026-09-09): the public setup period is 30 days, not 90.
+ * Wordsmith strings - do not paraphrase.
+ */
+export const SETUP_PERIOD_LEDE =
+  "The setup fee covers the initial 30-day setup period — discovery through go-live and hypercare — so the department can run on your stack.";
+
+export const SETUP_BILLING_NOTE =
+  "Monthly plans begin once setup is underway under the signed scope; the setup fee is due at the start of onboarding.";
+
 export const SETUP_FEE_COVERS = [
   "Discovery and business knowledge base construction",
   "Environment provisioning and access scoping",
