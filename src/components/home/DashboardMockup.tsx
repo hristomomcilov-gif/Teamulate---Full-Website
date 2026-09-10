@@ -45,9 +45,19 @@ export function DashboardMockup() {
               </p>
             </div>
 
-            <div className="mb-2.5 grid grid-cols-3 gap-1.5 sm:grid-cols-5">
-              {DEMO_KPIS.map((kpi) => (
-                <div key={kpi.id} className="rounded-md border border-line bg-surface p-2">
+            {/*
+              Phones: two columns (the fifth card spans the row) so every metric
+              fits at ~390px with no clipped right edge. sm+ keeps the five-across
+              row that matches the live /app/ dashboard.
+            */}
+            <div className="mb-2.5 grid grid-cols-2 gap-1.5 sm:grid-cols-5">
+              {DEMO_KPIS.map((kpi, i) => (
+                <div
+                  key={kpi.id}
+                  className={`min-w-0 rounded-md border border-line bg-surface p-2 ${
+                    i === DEMO_KPIS.length - 1 && DEMO_KPIS.length % 2 === 1 ? "col-span-2 sm:col-span-1" : ""
+                  }`}
+                >
                   <p className="truncate text-[9px] font-medium text-ink-muted">{kpi.label}</p>
                   <p className="mt-0.5 text-sm font-bold tabular-nums text-ink">{kpi.display}</p>
                   {kpi.note ? <p className="mt-0.5 text-[8px] text-ink-muted">{kpi.note}</p> : null}
