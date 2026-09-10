@@ -107,21 +107,22 @@ export default function PreviewSiteMessageV1Page() {
       <Section muted className="pt-14 sm:pt-20">
         <div className="mx-auto max-w-3xl text-center lg:max-w-none lg:text-left">
           <div className="grid items-start gap-12 lg:grid-cols-2">
-            <div>
+            <div className="min-w-0">
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand">{SMV1_HERO.eyebrow}</p>
               <h1 className="text-[clamp(1.55rem,6.9vw,3.1rem)] font-bold leading-[1.05] tracking-tight text-ink">
                 {SMV1_HERO.headline}
               </h1>
               <p className="mt-5 text-lg font-medium leading-relaxed text-ink-muted">{SMV1_HERO.dek}</p>
-              <ul className="mt-6 flex flex-nowrap items-center justify-center gap-4 sm:gap-6 lg:justify-start">
+              {/* Wraps on phones (~390px) so the third chip is never clipped at the right edge. */}
+              <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6 lg:justify-start">
                 {SMV1_HERO.proofChips.map((label) => (
-                  <li key={label} className="flex items-center gap-1.5 whitespace-nowrap text-sm font-bold text-ink sm:text-base">
+                  <li key={label} className="flex items-center gap-1.5 text-sm font-bold text-ink sm:text-base">
                     <span aria-hidden className="text-sm font-extrabold text-brand">✓</span>
                     {label}
                   </li>
                 ))}
               </ul>
-              <div className="mt-7 flex flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
                 <CtaLink href={SMV1_CTA.primary.href} ctaId="smv1-hero-primary" kind="primary" className="px-5 py-3 sm:px-7 sm:text-base">
                   {SMV1_CTA.primary.label} →
                 </CtaLink>
