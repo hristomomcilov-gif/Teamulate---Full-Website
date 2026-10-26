@@ -217,4 +217,4 @@ export const SITEMAP_ROUTES = [
 
 /** Locked entity line (27 Aug) - rendered verbatim on every page via the footer. */
 export const ENTITY_LINE =
-  "Teamulate is an autonomous AI marketing department for B2B companies. The department runs the work. Strategos is Head of Marketing. Chris Momchilov is the founder above Teamulate.";
+  "Teamulate is an AI marketing department for B2B companies, autonomous where safe and gated where it matters. The department runs the work. Strategos is Head of Marketing. Chris Momchilov is the founder above Teamulate.";
